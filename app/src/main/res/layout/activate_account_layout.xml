@@ -1,0 +1,83 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="16dp"
+    android:gravity="center|top"
+    android:orientation="vertical"
+    tools:context="com.example.youngyeehomies.hssapp.ActivateAccountActivity">
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="140dp"
+        android:src="@drawable/logo"
+        android:layout_marginTop="15dp"/>
+     <TextView
+         android:layout_width="wrap_content"
+         android:layout_height="wrap_content"
+         android:layout_marginTop="30dp"
+         android:textStyle="bold"
+         android:textSize="23sp"
+         android:text="Account has not been activated"/>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Please enter your NRIC and the token received to activate account."
+        android:gravity="center"
+        android:layout_marginTop="20dp"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="end"
+        android:layout_marginTop="20dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/nric"/>
+
+        <EditText
+            android:layout_width="190dp"
+            android:layout_height="wrap_content"
+            android:id="@+id/nricActivate"
+            android:background="#ffffff"
+            android:layout_marginLeft="30dp"
+            android:layout_marginRight="20dp"
+            android:maxLines="1"
+            android:singleLine="true"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="end"
+        android:layout_marginTop="10dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/token"/>
+
+        <EditText
+            android:layout_width="190dp"
+            android:layout_height="wrap_content"
+            android:id="@+id/tokenActivate"
+            android:background="#ffffff"
+            android:layout_marginLeft="30dp"
+            android:layout_marginRight="20dp"
+            android:maxLines="1"
+            android:singleLine="true"/>
+    </LinearLayout>
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Activate Account"
+        android:id="@+id/btnViewAppts"
+        android:clickable="true"
+        android:onClick="userScreen"
+        android:layout_marginTop="30dp"/>
+
+</LinearLayout>
