@@ -30,7 +30,7 @@
     <string name="title_login_activity">HSS - Login</string>
     <string name="drawer_open">Open Navigation Drawer</string>
     <string name="drawer_close">Close Navigation Drawer</string>
-    <string name="token">Token</string>
+    <string name="token">Security Token:</string>
     <string-array name="left_drawer">
         <item>Create New Appointment</item>
         <item>View All Appointments</item>
