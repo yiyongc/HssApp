@@ -38,4 +38,13 @@
         <item>View Notifications</item>
     </string-array>
 
+    <string-array name="clinics">
+        <item>Gibson Clinic</item>
+        <item>Young Yee Hospital</item>
+        <item>Yi Yong GP</item>
+        <item>Jun Qiu Medical Centre</item>
+        <item>Elton Chinese Physician</item>
+        <item>Unto Pediatrics</item>
+    </string-array>
+
 </resources>

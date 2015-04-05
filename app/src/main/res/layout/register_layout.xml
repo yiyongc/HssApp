@@ -152,9 +152,12 @@
                 android:id="@+id/defaultClinic"
                 android:background="#ffffff"
                 android:layout_marginLeft="10dp"
-                android:maxLines="1"
-                android:singleLine="true"
-                android:entries="@array/left_drawer"/>
+                android:clickable="true"
+                android:entries="@array/clinics"
+                android:dropDownWidth="fill_parent"
+                android:nestedScrollingEnabled="true"
+                android:textAlignment="center" />
+
         </LinearLayout>
 
         <Button

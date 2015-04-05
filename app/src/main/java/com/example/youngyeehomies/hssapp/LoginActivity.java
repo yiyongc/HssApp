@@ -29,7 +29,7 @@ public class LoginActivity extends Activity {
     public void btnLogin(View view) {
 
         Intent loggedInIntent = new Intent(this, ViewApptsActivity.class);
-        Intent activateAccountIntent = new Intent(this, ActivateAccountActivity.class);
+        Intent activateAccountIntent = new Intent(this, ViewApptsActivity.class);
         LoginManager loginManager = new LoginManager();
 
         if (loginManager.verify()) {
