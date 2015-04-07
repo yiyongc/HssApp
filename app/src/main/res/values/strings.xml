@@ -31,11 +31,13 @@
     <string name="drawer_open">Open Navigation Drawer</string>
     <string name="drawer_close">Close Navigation Drawer</string>
     <string name="token">Security Token:</string>
+    <string name="createApptLabel">HSS - Create Appointment</string>
     <string-array name="left_drawer">
         <item>Create New Appointment</item>
         <item>View All Appointments</item>
         <item>View Profile</item>
         <item>View Notifications</item>
+        <item>Log Out</item>
     </string-array>
 
     <string-array name="clinics">

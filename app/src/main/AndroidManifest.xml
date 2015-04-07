@@ -28,13 +28,23 @@
          </activity>
 
         <activity
-            android:name="com.example.youngyeehomies.hssapp.ViewApptsActivity"
+            android:name=".CreateAppointmentActivity"
+            android:label="@string/createApptLabel" >
+        </activity>
+
+        <activity
+            android:name=".ViewAppointmentActivity"
             android:label="@string/title_activity_view_appts" >
         </activity>
 
         <activity
-            android:name=".ActivateAccountActivity"
-            android:label="@string/title_activity_user" >
+            android:name=".EditProfileActivity"
+            android:label="HSS - Edit Profile" >
+        </activity>
+
+        <activity
+            android:name=".ViewNotificationsActivity"
+            android:label="HSS - View Notifications" >
         </activity>
 
     </application>

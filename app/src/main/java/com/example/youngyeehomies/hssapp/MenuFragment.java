@@ -23,7 +23,10 @@ public class MenuFragment extends Fragment {
 
         textView.setText(menuItems[position]);
 
-        getActivity().getActionBar().setTitle(menuItems[position]);
+        try {
+            getActivity().getActionBar().setTitle(menuItems[position]);
+        }
+        catch(Exception e){}
 
         return v;
     }

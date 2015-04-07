@@ -28,15 +28,12 @@ public class LoginActivity extends Activity {
 
     public void btnLogin(View view) {
 
-        Intent loggedInIntent = new Intent(this, ViewApptsActivity.class);
-        Intent activateAccountIntent = new Intent(this, ViewApptsActivity.class);
+        Intent loggedInIntent = new Intent(this, ViewAppointmentActivity.class);
         LoginManager loginManager = new LoginManager();
 
         if (loginManager.verify()) {
-            if (!loginManager.activated())
-                startActivity(activateAccountIntent);
-            else
                 startActivity(loggedInIntent);
+                finish();
         }
         else
             Toast.makeText(LoginActivity.this, "Wrong NRIC/Password", Toast.LENGTH_SHORT).show();
