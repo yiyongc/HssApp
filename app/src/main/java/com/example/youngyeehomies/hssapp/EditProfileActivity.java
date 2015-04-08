@@ -3,7 +3,7 @@ package com.example.youngyeehomies.hssapp;
 import android.os.Bundle;
 
 
-public class EditProfileActivity extends BaseActivity {
+public class EditProfileActivity extends DrawerActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

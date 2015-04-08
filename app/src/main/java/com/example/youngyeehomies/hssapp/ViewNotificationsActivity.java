@@ -8,7 +8,7 @@ import android.widget.ListView;
 import android.widget.Toast;
 
 
-public class ViewNotificationsActivity extends BaseActivity {
+public class ViewNotificationsActivity extends DrawerActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

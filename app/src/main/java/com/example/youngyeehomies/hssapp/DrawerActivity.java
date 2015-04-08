@@ -16,7 +16,7 @@ import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
 
-public class BaseActivity extends ActionBarActivity {
+public class DrawerActivity extends ActionBarActivity {
 
     ListView mDrawerList;
     DrawerLayout mDrawerLayout;

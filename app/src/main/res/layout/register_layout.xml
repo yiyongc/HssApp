@@ -11,8 +11,7 @@
         android:layout_height="140dp"
         android:src="@drawable/logo"
         android:id="@+id/logo"
-        android:layout_marginTop="15dp"
-        />
+        android:layout_marginTop="15dp"/>
 
     <TextView
         android:layout_width="match_parent"

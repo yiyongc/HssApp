@@ -7,7 +7,7 @@ import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.Toast;
 
-public class ViewAppointmentActivity extends BaseActivity {
+public class ViewAppointmentActivity extends DrawerActivity {
 
     ListView listView;
     @Override

@@ -32,6 +32,7 @@
     <string name="drawer_close">Close Navigation Drawer</string>
     <string name="token">Security Token:</string>
     <string name="createApptLabel">HSS - Create Appointment</string>
+
     <string-array name="left_drawer">
         <item>Create New Appointment</item>
         <item>View All Appointments</item>
@@ -47,6 +48,25 @@
         <item>Jun Qiu Medical Centre</item>
         <item>Elton Chinese Physician</item>
         <item>Unto Pediatrics</item>
+    </string-array>
+
+    <string-array name="timeslot">
+
+        <item>1000 HRS</item>
+        <item>1030 HRS</item>
+        <item>1100 HRS</item>
+        <item>1130 HRS</item>
+        <item>1200 HRS</item>
+        <item>1230 HRS</item>
+        <item>1300 HRS</item>
+        <item>1330 HRS</item>
+        <item>1400 HRS</item>
+        <item>1430 HRS</item>
+        <item>1500 HRS</item>
+        <item>1600 HRS</item>
+        <item>1630 HRS</item>
+        <item>1700 HRS</item>
+        <item>1730 HRS</item>
     </string-array>
 
 </resources>
