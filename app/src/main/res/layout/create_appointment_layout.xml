@@ -81,11 +81,10 @@
                         <Button
                             android:layout_width="180dp"
                             android:layout_height="wrap_content"
-                            android:text="hi"
                             android:id="@+id/dateSlotSelection"
                             android:layout_marginLeft="10dp"
                             android:layout_marginRight="10dp"
-                            style="?android:attr/spinnerStyle"
+                            style="?android:spinnerStyle"
                             android:gravity="center"
                             android:textSize="14sp"/>
 
@@ -112,7 +111,9 @@
                         android:layout_marginLeft="10dp"
                         android:layout_marginRight="10dp"
                         android:id="@+id/timeSlotSelection"
-                        android:entries="@array/timeslot">
+                        android:entries="@array/timeslot"
+                        android:dropDownSelector="@null"
+                        >
                     </Spinner>
 
                 </LinearLayout>

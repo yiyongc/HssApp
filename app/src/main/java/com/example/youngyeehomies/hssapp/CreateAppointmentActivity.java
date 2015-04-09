@@ -22,7 +22,6 @@ public class CreateAppointmentActivity extends DrawerActivity {
 
 
     private Button dateSelectorBtn;
-    private String[] radioItems;
     private LinearLayout linearLayout;
     private RadioGroup rg;
 
@@ -51,13 +50,11 @@ public class CreateAppointmentActivity extends DrawerActivity {
         timeSpinner.setAdapter(timeAdapter);
 
 
-        //Populating and adding RadioGroup
-        rg = new RadioGroup(this); //create the RadioGroup
-        rg.setOrientation(RadioGroup.VERTICAL); //layout of RadioGroup
-        radioItems = getResources().getStringArray(R.array.clinics);
+
         linearLayout = (LinearLayout) findViewById(R.id.radioGroupLayout);
-        createRadioButton(rg);
-        linearLayout.addView(rg); //add the whole RadioGroup to the layout
+        PopulateClinicManager pcm = new PopulateClinicManager(this);
+        rg = pcm.addRadioGroup(linearLayout);
+        //rg.check(defaultClinic);
 }
 
 
@@ -84,22 +81,6 @@ public class CreateAppointmentActivity extends DrawerActivity {
         newFragment.show(getFragmentManager(), "datePicker");
 
     }
-
-    private void createRadioButton(RadioGroup rg) {
-
-        final RadioButton[] rb = new RadioButton[5];
-
-        for(int i=0; i<5; i++){
-            rb[i]  = new RadioButton(this);
-            rg.addView(rb[i]); //the RadioButtons are added to the radioGroup
-            rb[i].setText(radioItems[i]);
-            rb[i].setTextSize(14);
-        }
-
-        rb[0].setChecked(true);
-
-    }
-
 
 
     public void createAppointment(View view) {

@@ -56,11 +56,12 @@
                 android:text="@string/nric"/>
 
             <EditText
-                android:layout_width="190dp"
+                android:layout_width="180dp"
                 android:layout_height="wrap_content"
                 android:id="@+id/reg_nric"
                 android:background="#ffffff"
                 android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
                 android:maxLines="1"
                 android:singleLine="true"/>
         </LinearLayout>
@@ -78,11 +79,12 @@
                 android:text="Enter Password:"/>
 
             <EditText
-                android:layout_width="190dp"
+                android:layout_width="180dp"
                 android:layout_height="wrap_content"
                 android:id="@+id/reg_password"
                 android:background="#ffffff"
                 android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
                 android:inputType="textPassword"
                 android:maxLines="1"
                 android:singleLine="true"/>
@@ -101,11 +103,12 @@
                 android:text="Re-enter Password:"/>
 
             <EditText
-                android:layout_width="190dp"
+                android:layout_width="180dp"
                 android:layout_height="wrap_content"
                 android:id="@+id/reg_password2"
                 android:background="#ffffff"
                 android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
                 android:inputType="textPassword"
                 android:maxLines="1"
                 android:singleLine="true"/>
@@ -124,16 +127,18 @@
                 android:text="@string/token"/>
 
             <EditText
-                android:layout_width="190dp"
+                android:layout_width="180dp"
                 android:layout_height="wrap_content"
                 android:id="@+id/tokenActivate"
                 android:background="#ffffff"
                 android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
                 android:maxLines="1"
                 android:singleLine="true"/>
         </LinearLayout>
 
         <LinearLayout
+            android:id="@+id/defaultClinicLayout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
@@ -141,21 +146,12 @@
             android:layout_marginTop="10dp">
 
             <TextView
-                android:layout_width="wrap_content"
+                android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
-                android:text="Default Clinic:"/>
+                android:text="Default Clinic:"
+                android:layout_weight="1"
+                android:gravity="end"/>
 
-            <Spinner
-                android:layout_width="190dp"
-                android:layout_height="wrap_content"
-                android:id="@+id/defaultClinic"
-                android:background="#ffffff"
-                android:layout_marginLeft="10dp"
-                android:clickable="true"
-                android:entries="@array/clinics"
-                android:dropDownWidth="fill_parent"
-                android:nestedScrollingEnabled="true"
-                android:textAlignment="center" />
 
         </LinearLayout>
 
@@ -166,7 +162,7 @@
             android:text="@string/register"
             android:layout_gravity="center"
             android:clickable="true"
-            android:layout_marginTop="30dp"
+            android:layout_marginTop="15dp"
             android:onClick="onSendRegData"/>
 
 

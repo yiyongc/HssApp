@@ -6,14 +6,27 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.ViewGroup;
+import android.widget.LinearLayout;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
 import android.widget.Toast;
 
 public class RegisterActivity extends Activity {
+
+    private LinearLayout linearLayout;
+    private RadioGroup rg;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.register_layout);
+
+        linearLayout = (LinearLayout) findViewById(R.id.defaultClinicLayout);
+
+        PopulateClinicManager pcm = new PopulateClinicManager(this);
+
+        rg = pcm.addRadioGroup(linearLayout);
     }
 
     @Override
@@ -52,5 +65,6 @@ public class RegisterActivity extends Activity {
         startActivity(intent);
 
     }
+
 
 }
