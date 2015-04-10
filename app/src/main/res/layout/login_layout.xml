@@ -12,51 +12,52 @@
         android:id="@+id/title"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:paddingTop="15dp"
+        android:paddingTop="25dp"
         android:paddingBottom="10dp"
         android:gravity="center"
         android:text="@string/title"
-        android:textSize="26sp"/>
+        android:textSize="26sp"
+        android:textStyle="bold"/>
     <ImageView
         android:layout_width="wrap_content"
         android:layout_height="150dp"
         android:src="@drawable/logo"
         android:id="@+id/loginLogo"
         android:layout_below="@+id/title"/>
+
     <TextView
         android:text="@string/loginText"
         android:textSize= "15sp"
-        android:gravity = "center_vertical"
+        android:gravity = "center"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:id="@+id/textView1"
-        android:paddingTop="16dp"
-        android:paddingBottom="20dp"
+        android:textStyle="bold"
         android:layout_centerVertical="true"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true" />
 
-    <AutoCompleteTextView
+    <EditText
         android:id="@+id/usernameBox"
-        android:layout_width="250dp"
-        android:layout_height="22dp"
+        android:layout_width="300dp"
+        android:layout_height="30dp"
         android:layout_gravity="center_vertical"
         android:textSize="13sp"
         android:hint="@string/loginUser"
         android:textColorHint="#cccccc"
         android:background="#FFFFFF"
-        android:inputType="textAutoComplete"
         android:maxLines="1"
         android:singleLine="true"
+        android:inputType="textEmailAddress"
+        android:layout_marginTop="20dp"
         android:layout_below="@+id/textView1"
-        android:layout_alignLeft="@+id/passwordBox"
-        android:layout_alignStart="@+id/passwordBox"
-        android:layout_marginTop="30dp" />
+        android:layout_centerHorizontal="true"
+        android:paddingLeft="10dp"/>
 
     <EditText
         android:id="@+id/passwordBox"
-        android:layout_width="250dp"
-        android:layout_height="22dp"
+        android:layout_width="300dp"
+        android:layout_height="30dp"
         android:textSize="13sp"
         android:hint="@string/loginPassword"
         android:textColorHint="#cccccc"
@@ -65,39 +66,63 @@
         android:inputType="textPassword"
         android:maxLines="1"
         android:singleLine="true"
-        android:layout_marginTop="32dp"
+        android:layout_marginTop="10dp"
+        android:layout_alignLeft="@+id/usernameBox"
         android:layout_below="@+id/usernameBox"
-        android:layout_centerHorizontal="true" />
 
-    <LinearLayout
-        android:layout_width="fill_parent"
+        android:paddingLeft="10dp"/>
+
+    <CheckBox
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:gravity="center"
-        android:paddingTop="20dp"
+        android:text="@string/rememberme"
         android:layout_below="@+id/passwordBox"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_marginTop="20dp">
+        android:layout_alignLeft="@+id/passwordBox"
+        android:layout_alignStart="@+id/passwordBox"
+        android:layout_marginTop="5dp"
+        android:id="@+id/checkBox"/>
 
-    <Button
-        android:id = "@+id/btnReg"
-        android:text = "@string/register"
-        android:layout_width="120dp"
-        android:layout_height="wrap_content"
-        android:clickable="true"
-        android:onClick="btnReg"/>
+
+
 
     <Button
         android:id = "@+id/btnLogin"
         android:text = "@string/login"
-        android:layout_width="120dp"
-        android:layout_height="wrap_content"
+        android:layout_width="300dp"
+        android:layout_height="55dp"
         android:clickable="true"
-        android:onClick="btnLogin"/>
+        android:onClick="btnLogin"
+        android:layout_below="@+id/checkBox"
+        android:layout_alignLeft="@+id/passwordBox"
+        android:layout_alignStart="@+id/passwordBox"/>
 
 
-    </LinearLayout>
+        <TextView
+            android:id="@+id/forgotPassword"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/forgotpassword"
+            android:layout_alignLeft="@+id/btnLogin"
+            android:layout_below="@+id/btnLogin"
+            android:clickable="true"
+            android:textColor="#ffffff"
+            android:onClick="forgotPassword"/>
+
+
+        <TextView
+            android:id="@+id/registerBtn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/registernow"
+            android:layout_alignRight="@+id/btnLogin"
+            android:layout_alignEnd="@+id/btnLogin"
+            android:layout_below="@+id/btnLogin"
+            android:clickable="true"
+            android:onClick="btnReg"
+            android:textColor="#ffffff"
+            android:textStyle="bold"/>
+
+
 
 
 </RelativeLayout>

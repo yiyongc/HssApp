@@ -8,17 +8,18 @@
 
     <string name="login_page">Login</string>
 
-    <string name="loginText">Please login with your username and password</string>
+    <string name="loginText">Please login with your NRIC and Password</string>
 
     <string name="reg_page">Registration</string>
 
-    <string name="loginUser">Username</string>
+    <string name="loginUser">NRIC</string>
 
     <string name="loginPassword">Password (Case Sensitive)</string>
 
     <string name="registration">Registration Page</string>
     <string name="nric">NRIC Number:</string>
     <string name="register">Register</string>
+    <string name="registernow"><u>Register now</u></string>
     <string name="login">Login</string>
     <string name="reg_text">Please fill in all fields.</string>
     <string name="email_add">Email Address:</string>
@@ -32,6 +33,8 @@
     <string name="drawer_close">Close Navigation Drawer</string>
     <string name="token">Security Token:</string>
     <string name="createApptLabel">HSS - Create Appointment</string>
+    <string name="forgotpassword"><u>Forgot your password?</u></string>
+    <string name="rememberme">Remember me</string>
 
     <string-array name="left_drawer">
         <item>Create New Appointment</item>
@@ -52,21 +55,21 @@
 
     <string-array name="timeslot">
 
-        <item>1000 HRS</item>
-        <item>1030 HRS</item>
-        <item>1100 HRS</item>
-        <item>1130 HRS</item>
-        <item>1200 HRS</item>
-        <item>1230 HRS</item>
-        <item>1300 HRS</item>
-        <item>1330 HRS</item>
-        <item>1400 HRS</item>
-        <item>1430 HRS</item>
-        <item>1500 HRS</item>
-        <item>1600 HRS</item>
-        <item>1630 HRS</item>
-        <item>1700 HRS</item>
-        <item>1730 HRS</item>
+        <item>10:00 A.M.</item>
+        <item>10:30 HRS</item>
+        <item>11:00 HRS</item>
+        <item>11:30 HRS</item>
+        <item>12:00 HRS</item>
+        <item>12:30 HRS</item>
+        <item>13:00 HRS</item>
+        <item>13:30 HRS</item>
+        <item>14:00 HRS</item>
+        <item>14:30 HRS</item>
+        <item>15:00 HRS</item>
+        <item>16:00 HRS</item>
+        <item>16:30 HRS</item>
+        <item>17:00 HRS</item>
+        <item>17:30 HRS</item>
     </string-array>
 
 </resources>
