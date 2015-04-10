@@ -61,7 +61,6 @@ public class CreateAppointmentActivity extends DrawerActivity {
 
     public void addListenerOnDateButton() {
 
-        //testing comment commit woohoo
 
         dateSelectorBtn.setOnClickListener(new View.OnClickListener() {
 
