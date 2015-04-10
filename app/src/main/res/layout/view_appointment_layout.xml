@@ -11,14 +11,12 @@
         android:id="@+id/mainContent">
 
             <ListView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="333dp"
+                android:layout_height="518dp"
                 android:id="@+id/AllAppointmentList"
                 android:layout_gravity="center_horizontal|top"
                 android:layout_margin="30dp"
-                android:layout_alignParentTop="true"
-                android:layout_alignParentLeft="true"
-                android:layout_alignParentStart="true" />
+                android:layout_alignParentLeft="true" />
 
      </FrameLayout>
 
