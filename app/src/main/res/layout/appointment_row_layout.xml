@@ -1,14 +1,73 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:weightSum="1">
+    android:layout_width="match_parent" android:layout_height="match_parent"
+    android:padding="16dp"
+    >
 
-    <TextView
-        android:layout_width="289dp"
+    <android.support.v7.widget.CardView
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceMedium"
-        android:text="Medium Text"
-        android:id="@+id/textView"
-        android:layout_weight="0.07" />
+        android:id="@+id/AppointmentCardView"
+        >
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="16dp"
+            >
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/apptTypeIcon"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentTop="true"
+                android:layout_marginRight="16dp"
+                android:src="@drawable/gastro_ic" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/apptTitle"
+                android:layout_alignParentTop="true"
+                android:textSize="16sp"
+                android:text="Gastroenterology Appointment"
+                android:textStyle="bold"
+                android:layout_toRightOf="@+id/apptTypeIcon"
+                android:textIsSelectable="true"
+                android:layout_toLeftOf="@+id/apptDate"
+                android:layout_toStartOf="@+id/apptDate" />
+
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/apptNotes"
+                android:text="You are required to abstain from drinking water 12 hours before this appointment"
+                android:layout_below="@+id/apptTypeIcon"
+                android:layout_alignLeft="@+id/apptTypeIcon"
+                android:layout_alignStart="@+id/apptTypeIcon" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/apptDate"
+                android:text="25 Jun 2014"
+                android:layout_above="@+id/apptTime"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentEnd="true" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/apptTime"
+                android:text="12.30 P.M."
+                android:layout_alignBottom="@+id/apptTitle"
+                android:layout_toRightOf="@+id/apptTitle"
+                android:layout_toEndOf="@+id/apptTitle" />
+
+        </RelativeLayout>
+
+    </android.support.v7.widget.CardView>
+
 </LinearLayout>
