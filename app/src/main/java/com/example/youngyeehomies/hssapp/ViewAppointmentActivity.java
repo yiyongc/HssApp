@@ -16,10 +16,14 @@ public class ViewAppointmentActivity extends DrawerActivity {
         setContentView(R.layout.view_appointment_layout);
         set();
 
+
+
         mDrawerList.setItemChecked(1, true);
         mDrawerList.setSelection(1);
 
+
         listView = (ListView) findViewById(R.id.AllAppointmentList);
+
 
         String[] appointments = {
                 "Dermatology clinic appointment",
