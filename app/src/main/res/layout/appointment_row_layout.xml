@@ -1,8 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent" android:layout_height="match_parent"
     android:padding="16dp"
     >
 
@@ -21,52 +19,28 @@
             <ImageView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:id="@+id/apptTypeIcon"
+                android:id="@+id/person_photo"
                 android:layout_alignParentLeft="true"
                 android:layout_alignParentTop="true"
                 android:layout_marginRight="16dp"
-                android:src="@drawable/gastro_ic" />
+                />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:id="@+id/apptTitle"
+                android:id="@+id/person_name"
+                android:layout_toRightOf="@+id/person_photo"
                 android:layout_alignParentTop="true"
-                android:textSize="16sp"
-                android:text="Gastroenterology Appointment"
-                android:textStyle="bold"
-                android:layout_toRightOf="@+id/apptTypeIcon"
-                android:textIsSelectable="true"
-                android:layout_toLeftOf="@+id/apptDate"
-                android:layout_toStartOf="@+id/apptDate" />
-
+                android:textSize="30sp"
+                />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:id="@+id/apptNotes"
-                android:text="You are required to abstain from drinking water 12 hours before this appointment"
-                android:layout_below="@+id/apptTypeIcon"
-                android:layout_alignLeft="@+id/apptTypeIcon"
-                android:layout_alignStart="@+id/apptTypeIcon" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:id="@+id/apptDate"
-                android:text="25 Jun 2014"
-                android:layout_above="@+id/apptTime"
-                android:layout_alignParentRight="true"
-                android:layout_alignParentEnd="true" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:id="@+id/apptTime"
-                android:text="12.30 P.M."
-                android:layout_alignBottom="@+id/apptTitle"
-                android:layout_toRightOf="@+id/apptTitle"
-                android:layout_toEndOf="@+id/apptTitle" />
+                android:id="@+id/person_age"
+                android:layout_toRightOf="@+id/person_photo"
+                android:layout_below="@+id/person_name"
+                />
 
         </RelativeLayout>
 
