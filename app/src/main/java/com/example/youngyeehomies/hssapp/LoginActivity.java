@@ -77,7 +77,7 @@ public class LoginActivity extends Activity {
 
         if (loginManager.verify()) {
             Intent loggedInIntent = new Intent(this, ViewAppointmentActivity.class);
-            session.createLoginSession("S9214589Z","User001"); //This should be in loginManager when logic is done
+            session.createLoginSession(username, password); //This should be in loginManager when logic is done
             startActivity(loggedInIntent);
             finish();
         }

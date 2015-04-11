@@ -15,7 +15,6 @@ import java.util.Calendar;
 
 public class CreateAppointmentActivity extends DrawerActivity {
 
-
     private Button dateSelectorBtn;
     private LinearLayout linearLayout;
     private RadioGroup rg;

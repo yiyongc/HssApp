@@ -32,9 +32,9 @@ public class PopulateClinicManager {
 
     private void createRadioButton(RadioGroup rg) {
 
-        final RadioButton[] rb = new RadioButton[5];
+        final RadioButton[] rb = new RadioButton[6];
 
-        for(int i=0; i<5; i++){
+        for(int i=0; i<6; i++){
             rb[i]  = new RadioButton(context);
             rg.addView(rb[i]); //the RadioButtons are added to the radioGroup
             rb[i].setText(radioItems[i]);

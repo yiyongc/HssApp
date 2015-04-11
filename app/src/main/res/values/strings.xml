@@ -35,11 +35,13 @@
     <string name="createApptLabel">HSS - Create Appointment</string>
     <string name="forgotpassword"><u>Forgot your password?</u></string>
     <string name="rememberme">Remember me</string>
+    <string name="changePassword"><u>Change Password</u></string>
+    <string name="changedefaultclinic"><u>Change Default Clinic</u></string>
 
     <string-array name="left_drawer">
         <item>Create New Appointment</item>
         <item>View All Appointments</item>
-        <item>View Profile</item>
+        <item>Edit Profile</item>
         <item>View Notifications</item>
         <item>Log Out</item>
     </string-array>
@@ -54,22 +56,22 @@
     </string-array>
 
     <string-array name="timeslot">
-
         <item>10:00 A.M.</item>
-        <item>10:30 HRS</item>
-        <item>11:00 HRS</item>
-        <item>11:30 HRS</item>
-        <item>12:00 HRS</item>
-        <item>12:30 HRS</item>
-        <item>13:00 HRS</item>
-        <item>13:30 HRS</item>
-        <item>14:00 HRS</item>
-        <item>14:30 HRS</item>
-        <item>15:00 HRS</item>
-        <item>16:00 HRS</item>
-        <item>16:30 HRS</item>
-        <item>17:00 HRS</item>
-        <item>17:30 HRS</item>
+        <item>10:30 A.M.</item>
+        <item>11:00 A.M.</item>
+        <item>11:30 A.M.</item>
+        <item>12:00 P.M.</item>
+        <item>12:30 P.M.</item>
+        <item>01:00 P.M.</item>
+        <item>01:30 P.M.</item>
+        <item>02:00 P.M.</item>
+        <item>02:30 P.M.</item>
+        <item>03:00 P.M.</item>
+        <item>03:30 P.M.</item>
+        <item>04:00 P.M.</item>
+        <item>04:30 P.M.</item>
+        <item>05:00 P.M.</item>
+        <item>05:30 P.M.</item>
     </string-array>
 
 </resources>

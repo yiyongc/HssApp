@@ -23,7 +23,7 @@ public class SessionManager {
     // All Shared Preferences Keys
     private static final String IS_LOGIN = "IsLoggedIn";
     // User name (make variable public to access from outside)
-    public static final String KEY_NAME = "name";
+    public static final String KEY_PASSWORD = "password";
     // NRIC (make variable public to access from outside)
     public static final String KEY_NRIC = "nric";
 
@@ -35,11 +35,11 @@ public class SessionManager {
     }
 
     //Create login session
-    public void createLoginSession(String nric, String name) {
+    public void createLoginSession(String nric, String password) {
 
         editor.putBoolean(IS_LOGIN, true);
         editor.putString(KEY_NRIC, nric);
-        editor.putString(KEY_NAME, name);
+        editor.putString(KEY_PASSWORD, password);
 
         editor.commit();
     }
@@ -70,7 +70,7 @@ public class SessionManager {
         // user NRIC
         user.put(KEY_NRIC, pref.getString(KEY_NRIC, null));
         // user name
-        user.put(KEY_NAME, pref.getString(KEY_NAME, null));
+        user.put(KEY_PASSWORD, pref.getString(KEY_PASSWORD, null));
 
         return user;
     }

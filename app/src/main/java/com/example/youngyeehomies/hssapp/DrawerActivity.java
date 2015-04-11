@@ -51,9 +51,9 @@ public class DrawerActivity extends ActionBarActivity {
 
         HashMap<String, String> user = session.getUserDetails();
         final String nric = user.get(SessionManager.KEY_NRIC);
-        final String name = user.get(SessionManager.KEY_NAME);
 
-        sessionTextView.setText(Html.fromHtml("Hello <b>" + name + "</b> <i>(" + nric + ")</i>"));
+
+        sessionTextView.setText(Html.fromHtml("Hello <b>" + nric + "</b>!"));
 
         mDrawerList.setOnItemClickListener(
                 new AdapterView.OnItemClickListener() {
@@ -124,7 +124,6 @@ public class DrawerActivity extends ActionBarActivity {
             case 2:
                 Intent editProfileIntent = new Intent(this,EditProfileActivity.class);
                 startActivity(editProfileIntent);
-                finish();
                 break;
             case 3:
                 Intent viewNotificationsIntent = new Intent(this,ViewNotificationsActivity.class);
