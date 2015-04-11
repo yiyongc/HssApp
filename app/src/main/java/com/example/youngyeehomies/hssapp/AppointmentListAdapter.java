@@ -33,16 +33,21 @@ public class AppointmentListAdapter extends RecyclerView.Adapter<AppointmentList
 
 
         CardView cv;
-        TextView personName;
-        TextView personAge;
-        ImageView personPhoto;
+        TextView ApptCategoryName;
+        TextView ApptNotes;
+        TextView ApptDate;
+        TextView ApptTime;
+
+        ImageView ApptCatIcon;
 
         AppointmentViewHolder(View itemView) {
             super(itemView);
             cv = (CardView)itemView.findViewById(R.id.AppointmentCardView);
-            personName = (TextView)itemView.findViewById(R.id.person_name);
-            personAge = (TextView)itemView.findViewById(R.id.person_age);
-            personPhoto = (ImageView)itemView.findViewById(R.id.person_photo);
+            ApptCategoryName = (TextView)itemView.findViewById(R.id.appointment_cat_name);
+            ApptNotes = (TextView)itemView.findViewById(R.id.appointment_notes);
+            ApptDate =  (TextView)itemView.findViewById(R.id.appointment_date);
+            ApptTime = (TextView)itemView.findViewById(R.id.appointment_time);
+            ApptCatIcon = (ImageView)itemView.findViewById(R.id.appointment_cat_icon);
         }
 
 
@@ -61,9 +66,11 @@ public class AppointmentListAdapter extends RecyclerView.Adapter<AppointmentList
 
     @Override
     public void onBindViewHolder(AppointmentViewHolder appointmentViewHolder, int i) {
-        appointmentViewHolder.personName.setText(appointments.get(i).getApptCategoryName());
-        appointmentViewHolder.personAge.setText(appointments.get(i).getApptNote());
-        appointmentViewHolder.personPhoto.setImageResource(appointments.get(i).getApptSubcategoryID());
+        appointmentViewHolder.ApptCategoryName.setText(appointments.get(i).getApptCategoryName());
+        appointmentViewHolder.ApptNotes.setText(appointments.get(i).getApptNote());
+        appointmentViewHolder.ApptCatIcon.setImageResource(appointments.get(i).getApptSubcategoryID());
+        appointmentViewHolder.ApptDate.setText(appointments.get(i).getApptDate());
+        appointmentViewHolder.ApptTime.setText(appointments.get(i).getApptTime());
     }
 
     public void onAttachedToRecyclerView(RecyclerView recyclerView) {

@@ -1,13 +1,10 @@
 package com.example.youngyeehomies.hssapp;
 
-import android.content.Context;
 import android.os.Bundle;
-import android.support.v7.widget.CardView;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.Toast;
 
@@ -28,12 +25,11 @@ public class ViewAppointmentActivity extends DrawerActivity {
         mDrawerList.setItemChecked(1, true);
         mDrawerList.setSelection(1);
 
-/*TEST new layout code by YOungYee
         List<AppointmentListItem> AppointmentList;
         AppointmentList = new ArrayList<>();
         //This appointment list should be populated by the database. Lets assume that effectively the below code is run
         AppointmentList.add(new AppointmentListItem(R.drawable.gastro_ic,"Gastroenterology clinic appointment","26 Apr 2015","1.00 PM","You are required to abstain from drinking water 12 hours before this appointment"));
-        AppointmentList.add(new AppointmentListItem(R.drawable.gastro_ic,"Gastroenterology clinic appointment","26 Apr 2015","1.00 PM","You are required to abstain from drinking water 12 hours before this appointment"));
+        AppointmentList.add(new AppointmentListItem(R.drawable.gastro_ic,"Gastroenterology clinic appointment","28 Apr 2015","2.30 PM","You are required to abstain from drinking water 12 hours before this appointment"));
         AppointmentList.add(new AppointmentListItem(R.drawable.gastro_ic,"Gastroenterology clinic appointment","26 Apr 2015","1.00 PM","You are required to abstain from drinking water 12 hours before this appointment"));
         AppointmentList.add(new AppointmentListItem(R.drawable.gastro_ic,"Gastroenterology clinic appointment","26 Apr 2015","1.00 PM","You are required to abstain from drinking water 12 hours before this appointment"));
         AppointmentList.add(new AppointmentListItem(R.drawable.gastro_ic,"Gastroenterology clinic appointment","26 Apr 2015","1.00 PM","You are required to abstain from drinking water 12 hours before this appointment"));
@@ -42,7 +38,6 @@ public class ViewAppointmentActivity extends DrawerActivity {
 
 
         RecyclerView rv = (RecyclerView)findViewById(R.id.rv);
-        rv.setHasFixedSize(true);
 
         LinearLayoutManager llm = new LinearLayoutManager(getApplicationContext());
         rv.setLayoutManager(llm);
@@ -52,9 +47,8 @@ public class ViewAppointmentActivity extends DrawerActivity {
         rv.setAdapter(adapter);
 
 
-*/
 
-
+/*
         ListView listView = (ListView) findViewById(R.id.AllAppointmentList);
 
 
@@ -77,7 +71,7 @@ public class ViewAppointmentActivity extends DrawerActivity {
                 Toast.makeText(ViewAppointmentActivity.this, "You clicked Item No. " + i, Toast.LENGTH_SHORT).show();
             }
 
-        });
+        });*/
 
     }
 

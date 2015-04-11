@@ -4,21 +4,14 @@
     android:layout_height="match_parent"
     android:id="@+id/drawerLayout"
     tools:context=".ViewAppointmentActivity">
-    
-    <FrameLayout
+
+
+    <android.support.v7.widget.RecyclerView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:id="@+id/mainContent">
+        android:id="@+id/rv"
+        xmlns:android="http://schemas.android.com/apk/res/android"/>
 
-            <ListView
-                android:layout_width="333dp"
-                android:layout_height="518dp"
-                android:id="@+id/AllAppointmentList"
-                android:layout_gravity="center_horizontal|top"
-                android:layout_margin="30dp"
-                android:layout_alignParentLeft="true" />
-
-     </FrameLayout>
 
     <ListView
         android:id="@+id/left_drawer"
