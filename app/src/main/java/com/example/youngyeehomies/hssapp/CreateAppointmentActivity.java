@@ -7,15 +7,10 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.LinearLayout;
-import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.Spinner;
 import android.widget.Toast;
-
-
-import java.util.Arrays;
 import java.util.Calendar;
-import java.util.Vector;
 
 
 public class CreateAppointmentActivity extends DrawerActivity {

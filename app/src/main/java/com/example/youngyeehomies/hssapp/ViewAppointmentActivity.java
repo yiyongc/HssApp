@@ -22,6 +22,9 @@ public class ViewAppointmentActivity extends DrawerActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.view_appointment_layout);
         set();
+
+
+
         mDrawerList.setItemChecked(1, true);
         mDrawerList.setSelection(1);
 

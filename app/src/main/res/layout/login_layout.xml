@@ -27,7 +27,7 @@
 
     <TextView
         android:text="@string/loginText"
-        android:textSize= "15sp"
+        android:textSize= "17sp"
         android:gravity = "center"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
