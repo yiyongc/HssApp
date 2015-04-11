@@ -23,24 +23,51 @@
                 android:layout_alignParentLeft="true"
                 android:layout_alignParentTop="true"
                 android:layout_marginRight="16dp"
-                />
+                android:src="@drawable/gastro_ic" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:id="@+id/person_name"
-                android:layout_toRightOf="@+id/person_photo"
+                android:textSize="16sp"
+                android:textColor="#222222"
+                android:textStyle="bold"
+                android:text="Consultation"
                 android:layout_alignParentTop="true"
-                android:textSize="30sp"
-                />
+                android:layout_above="@+id/person_age"
+                android:layout_toLeftOf="@+id/person_date"
+                android:layout_toRightOf="@+id/person_photo"
+                android:layout_toEndOf="@+id/person_photo" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:id="@+id/person_age"
+                android:textColor="#888888"
+                android:text="Please abstain from drinking water 2 hours before appointment. Also do note that you cannot eat as well"
+                android:layout_below="@+id/person_photo"
                 android:layout_toRightOf="@+id/person_photo"
-                android:layout_below="@+id/person_name"
-                />
+                android:layout_toEndOf="@+id/person_photo" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/person_date"
+                android:textColor="#777777"
+                android:text="27 Jun 2015"
+                android:layout_below="@+id/person_time"
+                android:layout_alignRight="@+id/person_time"
+                android:layout_alignEnd="@+id/person_time" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/person_time"
+                android:textColor="#777777"
+                android:text="2.30 P.M."
+                android:layout_alignTop="@+id/person_name"
+                android:layout_alignRight="@+id/person_age"
+                android:layout_alignEnd="@+id/person_age" />
 
         </RelativeLayout>
 

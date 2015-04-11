@@ -23,21 +23,12 @@ public class ViewAppointmentActivity extends DrawerActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.view_appointment_layout2);
+        setContentView(R.layout.view_appointment_layout);
         set();
         mDrawerList.setItemChecked(1, true);
         mDrawerList.setSelection(1);
 
-
-        String[] appointments = {
-                "Dermatology clinic appointment",
-                "Gastroenterology clinic appointment",
-                "General Consultation appointment",
-                "Cardiology clinic appointment",
-                "Physiotherapy appointment",
-                "Annual Checkup",
-                "Nasal Surgery"};
-
+/*TEST new layout code by YOungYee
         List<AppointmentListItem> AppointmentList;
         AppointmentList = new ArrayList<>();
         //This appointment list should be populated by the database. Lets assume that effectively the below code is run
@@ -61,22 +52,32 @@ public class ViewAppointmentActivity extends DrawerActivity {
         rv.setAdapter(adapter);
 
 
+*/
 
 
+        ListView listView = (ListView) findViewById(R.id.AllAppointmentList);
 
-        //     ArrayAdapter<String> apptListAdapter = new ArrayAdapter<String>(this,android.R.layout.simple_list_item_1, appointments);
 
-/*
-        AppointmentListAdapter apptListAdapter = new AppointmentListAdapter(this,android.R.layout.simple_list_item_1,AppointmentList);
-        allAppointmentListView.setAdapter(apptListAdapter);*/
-/*
-        allAppointmentListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+        String[] appointments = {
+                "Dermatology clinic appointment",
+                "Gastroenterology clinic appointment",
+                "General Consultation appointment",
+                "Cardiology clinic appointment",
+                "Physiotherapy appointment",
+                "Annual Checkup",
+                "Nasal Surgery"};
+
+        ArrayAdapter<String> apptListAdapter = new ArrayAdapter<String>(this,android.R.layout.simple_list_item_1, appointments);
+
+        listView.setAdapter(apptListAdapter);
+
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             public void onItemClick(AdapterView<?> av, View view, int i, long l) {
                 //This is where the onCLick action goes.
                 Toast.makeText(ViewAppointmentActivity.this, "You clicked Item No. " + i, Toast.LENGTH_SHORT).show();
             }
 
-        });*/
+        });
 
     }
 
