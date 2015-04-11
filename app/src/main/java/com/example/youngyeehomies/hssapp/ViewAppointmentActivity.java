@@ -1,7 +1,10 @@
 package com.example.youngyeehomies.hssapp;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.support.v7.widget.CardView;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -26,8 +29,6 @@ public class ViewAppointmentActivity extends DrawerActivity {
         mDrawerList.setSelection(1);
 
 
-        ListView allAppointmentListView = (ListView) findViewById(R.id.allAppointmentListView);
-
         String[] appointments = {
                 "Dermatology clinic appointment",
                 "Gastroenterology clinic appointment",
@@ -48,10 +49,26 @@ public class ViewAppointmentActivity extends DrawerActivity {
 
         //end of appointment list data add
 
-   //     ArrayAdapter<String> apptListAdapter = new ArrayAdapter<String>(this,android.R.layout.simple_list_item_1, appointments);
 
+        RecyclerView rv = (RecyclerView)findViewById(R.id.rv);
+        rv.setHasFixedSize(true);
+
+        LinearLayoutManager llm = new LinearLayoutManager(getApplicationContext());
+        rv.setLayoutManager(llm);
+
+
+        AppointmentListAdapter adapter = new AppointmentListAdapter(AppointmentList);
+        rv.setAdapter(adapter);
+
+
+
+
+
+        //     ArrayAdapter<String> apptListAdapter = new ArrayAdapter<String>(this,android.R.layout.simple_list_item_1, appointments);
+
+/*
         AppointmentListAdapter apptListAdapter = new AppointmentListAdapter(this,android.R.layout.simple_list_item_1,AppointmentList);
-        allAppointmentListView.setAdapter(apptListAdapter);
+        allAppointmentListView.setAdapter(apptListAdapter);*/
 /*
         allAppointmentListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             public void onItemClick(AdapterView<?> av, View view, int i, long l) {

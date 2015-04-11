@@ -26,8 +26,27 @@ public class AppointmentListItem {
 
     }
 
+    public int getApptSubcategoryID() {
+        return ApptSubcategoryID;
+    }
 
-/* If the above code works, remove this
+    public String getApptCategoryName() {
+        return ApptCategoryName;
+    }
+
+    public String getApptDate() {
+        return ApptDate;
+    }
+
+    public String getApptNote() {
+        return ApptNote;
+    }
+
+    public String getApptTime() {
+        return ApptTime;
+    }
+
+    /* If the above code works, remove this
     private int DoctorID;
     private int PatientID;
     private int ClinicID;
