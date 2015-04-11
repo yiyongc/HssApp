@@ -1,44 +1,59 @@
 package com.example.youngyeehomies.hssapp;
 
-import android.app.Fragment;
-import android.app.FragmentTransaction;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarActivity;
-import android.util.Log;
+import android.text.Html;
+import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.LinearLayout;
 import android.widget.ListView;
+import android.widget.TextView;
+import android.widget.Toast;
+
+import java.util.HashMap;
 
 
 public class DrawerActivity extends ActionBarActivity {
 
     ListView mDrawerList;
     DrawerLayout mDrawerLayout;
+    LinearLayout linearDrawer;
     ActionBarDrawerToggle mDrawerToggle;
     String mTitle = "";
 
+    TextView sessionTextView;
+    SessionManager session;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.view_appointment_layout);
-
     }
 
     public void set() {
-
+        session = new SessionManager(getApplicationContext());
+        session.checkLogin();
         mTitle = (String) getTitle();
         mDrawerLayout = (DrawerLayout) findViewById(R.id.drawerLayout);
-        mDrawerList = (ListView) findViewById(R.id.left_drawer);
+        mDrawerList = (ListView) findViewById(R.id.drawerList);
+        linearDrawer = (LinearLayout) findViewById(R.id.leftDrawer);
+        sessionTextView = (TextView) findViewById(R.id.session_user);
 
 
+
+        HashMap<String, String> user = session.getUserDetails();
+        final String nric = user.get(SessionManager.KEY_NRIC);
+        final String name = user.get(SessionManager.KEY_NAME);
+
+        sessionTextView.setText(Html.fromHtml("Hello <b>" + name + "</b> <i>(" + nric + ")</i>"));
 
         mDrawerList.setOnItemClickListener(
                 new AdapterView.OnItemClickListener() {
@@ -59,16 +74,14 @@ public class DrawerActivity extends ActionBarActivity {
 
                         selectDrawerItem(position);
 
-                        mDrawerLayout.closeDrawer(mDrawerList);
+                        mDrawerLayout.closeDrawer(linearDrawer);
                     }
                 });
 
 
         mDrawerLayout.setDrawerListener(mDrawerToggle);
 
-        //ArrayAdapter<String> adapter = new ArrayAdapter<String>(getBaseContext(), R.layout.drawer_list_item, getResources().getStringArray(R.array.left_drawer));
-        //DrawerListAdapter adapter = new DrawerListAdapter(getBaseContext(), R.layout.drawer_list_item, getResources().getStringArray(R.array.left_drawer));
-        ArrayAdapter<String> adapter = new ArrayAdapter<String>(getBaseContext(), R.layout.drawer_list_item, getResources().getStringArray(R.array.left_drawer));
+        ArrayAdapter<String> adapter = new ArrayAdapter<>(getBaseContext(), R.layout.drawer_list_item, getResources().getStringArray(R.array.left_drawer));
         mDrawerList.setAdapter(adapter);
 
         getSupportActionBar().setHomeButtonEnabled(true);
@@ -119,9 +132,8 @@ public class DrawerActivity extends ActionBarActivity {
                 finish();
                 break;
             case 4:
-                Intent logOutIntent = new Intent(this, LoginActivity.class);
-                //process log out
-                startActivity(logOutIntent);
+                session.logoutUser();
+                Toast.makeText(this, "Logout Successful!", Toast.LENGTH_SHORT).show();
                 finish();
                 break;
             default:
@@ -159,7 +171,7 @@ public class DrawerActivity extends ActionBarActivity {
 
     @Override
     public boolean onPrepareOptionsMenu(Menu menu) {
-        boolean drawerOpen = mDrawerLayout.isDrawerOpen(mDrawerList);
+        boolean drawerOpen = mDrawerLayout.isDrawerOpen(linearDrawer);
         menu.findItem(R.id.action_settings).setVisible(!drawerOpen);
         return super.onPrepareOptionsMenu(menu);
     }

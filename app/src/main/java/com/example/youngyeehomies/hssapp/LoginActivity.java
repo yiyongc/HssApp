@@ -14,11 +14,15 @@ import android.widget.Toast;
 public class LoginActivity extends Activity {
 
     EditText usernameBox, passwordBox;
+    AlertDialogManager alert = new AlertDialogManager();
+    SessionManager session;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.login_layout);
+
+        session = new SessionManager(getApplicationContext());
 
         usernameBox = (EditText) findViewById(R.id.usernameBox);
         passwordBox = (EditText) findViewById(R.id.passwordBox);
@@ -59,8 +63,12 @@ public class LoginActivity extends Activity {
         String username = usernameBox.getText()+"";
         String password = passwordBox.getText()+"";
 
-        if (username.length() < 8 || password.length() < 8) {
-            Toast.makeText(LoginActivity.this, "Please input valid Username/Password!", Toast.LENGTH_SHORT).show();
+        if (username.length() == 0 || password.length() == 0) {
+            alert.showAlertDialog(LoginActivity.this, "Login Failed!", "Please enter NRIC and Password.", false);
+            return;
+        }
+        if (username.length() < 9 || password.length() < 8) {
+            alert.showAlertDialog(LoginActivity.this, "Login Failed!", "Please input valid Username/Password.", false);
             return;
         }
 
@@ -69,13 +77,16 @@ public class LoginActivity extends Activity {
 
         if (loginManager.verify()) {
             Intent loggedInIntent = new Intent(this, ViewAppointmentActivity.class);
+            session.createLoginSession("S9214589Z","User001"); //This should be in loginManager when logic is done
             startActivity(loggedInIntent);
             finish();
         }
         else
-            Toast.makeText(LoginActivity.this, "Wrong NRIC/Password", Toast.LENGTH_SHORT).show();
+            alert.showAlertDialog(LoginActivity.this, "Login Failed!", "Please input valid Username/Password.", false);
     }
 
     public void forgotPassword(View view) {
+        Intent intent = new Intent(this, ViewAppointmentActivity.class);
+        startActivity(intent);
     }
 }
