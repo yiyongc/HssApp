@@ -1,7 +1,6 @@
 package com.example.youngyeehomies.hssapp.Entities;
 
-import java.sql.Date;
-import java.sql.Time;
+
 
 /**
  * Created by Er Young Yee on 11/4/2015.
@@ -98,3 +97,5 @@ public class AppointmentListItem {
     }
 */
 }
+
+

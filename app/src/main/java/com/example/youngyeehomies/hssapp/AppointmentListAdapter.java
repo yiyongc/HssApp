@@ -1,14 +1,11 @@
 package com.example.youngyeehomies.hssapp;
 
-import android.content.Context;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
 import android.widget.ImageView;
-import android.widget.ListView;
 import android.widget.TextView;
 
 import com.example.youngyeehomies.hssapp.Entities.AppointmentListItem;
@@ -19,7 +16,7 @@ import java.util.List;
 /**
  * Created by Young Yee on 11/4/2015.
  *
- * This class allows CardViews to be populated into a ListView
+ * This class allows CardViews to be populated into a RecyclerView
  */
 
 
