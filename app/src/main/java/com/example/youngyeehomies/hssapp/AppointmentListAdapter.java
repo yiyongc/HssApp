@@ -20,7 +20,7 @@ import java.util.List;
  */
 
 
-public class AppointmentListAdapter extends RecyclerView.Adapter<AppointmentListAdapter.AppointmentViewHolder>{
+public class AppointmentListAdapter extends RecyclerView.Adapter<AppointmentListAdapter.AppointmentViewHolder> implements View.OnClickListener{
 
     List<AppointmentListItem> appointments;
 
@@ -76,6 +76,13 @@ public class AppointmentListAdapter extends RecyclerView.Adapter<AppointmentList
     public void onAttachedToRecyclerView(RecyclerView recyclerView) {
         super.onAttachedToRecyclerView(recyclerView);
     }
+
+    @Override
+    public void onClick(View v) {
+
+    }
+
+
 
 
 
