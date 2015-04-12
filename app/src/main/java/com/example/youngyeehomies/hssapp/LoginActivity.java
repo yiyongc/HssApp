@@ -85,7 +85,7 @@ public class LoginActivity extends Activity{
 
         //AUTO SUCCESS LOGIN; DELETE WHEN SUBMITTING
         Intent loggedInIntent = new Intent(this, ViewAppointmentActivity.class);
-        session.createLoginSession("",""); //This should be in loginManager when logic is done
+        session.createLoginSession(username, password); //This should be in loginManager when logic is done
         startActivity(loggedInIntent);
         finish();
         //AUTO SUCCESS LOGIN; DELETE WHEN SUBMITTING

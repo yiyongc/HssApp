@@ -71,10 +71,10 @@ public class DrawerActivity extends ActionBarActivity {
 
                         mFragment.setArguments(data);
 
-                        if(!mDrawerList.isItemChecked(Globals.drawerPosition))
+                        if(!mDrawerList.isItemChecked(Globals.drawerPosition)) {
                             selectDrawerItem(position);
-
-                        mDrawerLayout.closeDrawer(linearDrawer);
+                            mDrawerLayout.closeDrawer(linearDrawer);
+                        }
                     }
                 });
 
