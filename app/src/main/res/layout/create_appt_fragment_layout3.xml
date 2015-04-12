@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/selectavailabletimeslot"
+            android:textColor="#325b56"
+            android:id="@+id/createApptTitle3"
+            android:textSize="17sp"
+            android:layout_alignParentTop="true"
+            android:layout_centerHorizontal="true" />
+
+            <TextView
+                android:id="@+id/textView_selectedApptType"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Appointment Type:"
+                android:textColor="#325b56"
+                android:layout_below="@+id/createApptTitle3"
+                android:layout_alignLeft="@+id/createApptTitle3"
+                android:layout_marginTop="20dp"
+                android:layout_marginRight="10dp"
+                android:textStyle="bold"/>
+
+            <TextView
+                android:layout_width="180dp"
+                android:layout_height="wrap_content"
+                android:id="@+id/apptTypeSelected"
+                android:layout_below="@+id/createApptTitle3"
+                android:layout_marginTop="20dp"
+                android:layout_toRightOf="@+id/textView_selectedApptType"
+                android:textColor="#325b56"/>
+
+            <TextView
+                android:id="@+id/textView_selectedClinic"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Selected Clinic:"
+                android:gravity="end"
+                android:textColor="#325b56"
+                android:layout_gravity="center_vertical"
+                android:layout_below="@+id/textView_selectedApptType"
+                android:layout_alignRight="@+id/textView_selectedApptType"
+                android:layout_alignEnd="@+id/textView_selectedApptType"
+                android:layout_marginTop="20dp"
+                android:textStyle="bold"/>
+
+            <TextView
+                android:layout_width="180dp"
+                android:layout_height="wrap_content"
+                android:id="@+id/clinicSelected"
+                android:layout_below="@+id/textView_selectedApptType"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="20dp"
+                android:textColor="#325b56"
+                android:layout_toRightOf="@+id/textView_selectedClinic"/>
+
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Selected Date:"
+                android:gravity="end"
+                android:textColor="#325b56"
+                android:id="@+id/textView_selectedDate"
+                android:layout_marginTop="20dp"
+                android:layout_below="@+id/textView_selectedClinic"
+                android:layout_alignRight="@+id/textView_selectedClinic"
+                android:layout_alignEnd="@+id/textView_selectedClinic"
+                android:textStyle="bold"/>
+
+            <TextView
+                android:layout_width="180dp"
+                android:layout_height="wrap_content"
+                android:id="@+id/dateSelected"
+                android:textSize="14sp"
+                android:layout_below="@+id/textView_selectedClinic"
+                android:layout_alignLeft="@+id/clinicSelected"
+                android:layout_alignStart="@+id/clinicSelected"
+                android:layout_toRightOf="@+id/textView_selectedDate"
+                android:layout_marginTop="20dp"
+                android:textColor="#325b56"/>
+
+
+                <TextView
+                    android:id="@+id/textView_availableTime"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Available Time Slots:"
+                    android:layout_below="@+id/textView_selectedDate"
+                    android:textColor="#325b56"
+                    android:gravity="end"
+                    android:layout_alignRight="@+id/textView_selectedDate"
+                    android:layout_alignEnd="@+id/textView_selectedDate"
+                    android:layout_marginTop="20dp"
+                    android:textStyle="bold"/>
+
+                <Spinner
+                    android:layout_width="150dp"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/timeSlotSelection"
+                    android:layout_below="@+id/textView_selectedDate"
+                    android:layout_toRightOf="@+id/textView_availableTime"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginTop="15dp"
+                    android:textColor="#325b56"/>
+
+
+
+            <Button
+                android:gravity="center"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Confirm"
+                android:layout_alignParentBottom="true"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentEnd="true"
+                android:onClick="createAppointment"/>
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/previous"
+                android:layout_alignParentBottom="true"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                android:onClick="btnPrev"/>
+
+
+
+    </RelativeLayout>
+
+
+
+</LinearLayout>

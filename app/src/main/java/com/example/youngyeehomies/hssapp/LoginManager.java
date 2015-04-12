@@ -20,8 +20,6 @@ import java.util.jar.Attributes;
 public class LoginManager {
 
 
-
-
     public boolean verify(/*JSONObject a*/) {
         return true;
     }

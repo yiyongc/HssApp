@@ -10,10 +10,10 @@ import android.widget.TextView;
 
 
 
-public class TimeSpinnerAdapter extends ArrayAdapter<String> {
+public class CustomSpinnerAdapter extends ArrayAdapter<String> {
 
 
-    public TimeSpinnerAdapter(Context context, int resource, String[] objects) {
+    public CustomSpinnerAdapter(Context context, int resource, String[] objects) {
         super(context, resource, objects);
     }
 

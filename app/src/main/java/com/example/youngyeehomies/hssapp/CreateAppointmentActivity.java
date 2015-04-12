@@ -2,6 +2,8 @@ package com.example.youngyeehomies.hssapp;
 
 
 import android.app.DialogFragment;
+import android.app.Fragment;
+import android.app.FragmentTransaction;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -15,9 +17,13 @@ import java.util.Calendar;
 
 public class CreateAppointmentActivity extends DrawerActivity {
 
-    private Button dateSelectorBtn;
-    private LinearLayout linearLayout;
-    private RadioGroup rg;
+    FragmentTransaction fTrans;
+    android.app.FragmentManager fragmentManager;
+
+    Spinner typeSpinner, clinicSpinner;
+    int typeID;
+    String apptType, clinic, date;
+    int day, month, year;
 
     @Override
     protected void onResume() {
@@ -36,58 +42,32 @@ public class CreateAppointmentActivity extends DrawerActivity {
         mDrawerList.setItemChecked(Globals.drawerPosition, true);
         mDrawerList.setSelection(Globals.drawerPosition);
 
-        //Initialize current date value on button
-        final Calendar c = Calendar.getInstance();
-        int year = c.get(Calendar.YEAR);
-        int month = c.get(Calendar.MONTH);
-        int day = c.get(Calendar.DAY_OF_MONTH);
-        dateSelectorBtn = (Button) findViewById(R.id.dateSlotSelection);
-        dateSelectorBtn.setText(new StringBuilder().append(day).append("-").append(month + 1).append("-").append(year).append(" "));
+        fragmentManager = getFragmentManager();
 
-        addListenerOnDateButton();
-
-        Spinner timeSpinner = (Spinner) findViewById(R.id.timeSlotSelection);
-
-        //timeSpinner Configurations
-        TimeSpinnerAdapter timeAdapter = new TimeSpinnerAdapter(getApplicationContext(), R.layout.custom_spinner_layout, getResources().getStringArray(R.array.timeslot));
-        timeSpinner.setAdapter(timeAdapter);
+        fTrans = fragmentManager.beginTransaction();
 
 
 
-        linearLayout = (LinearLayout) findViewById(R.id.radioGroupLayout);
-        PopulateClinicManager pcm = new PopulateClinicManager(this);
-        rg = pcm.addRadioGroup(linearLayout);
-        //rg.check(defaultClinic);
+        if (savedInstanceState == null) {
+
+            Fragment fragment1 = new CreateAppointmentFragment();
+            fTrans.add(R.id.createApptSpace, fragment1);
+            fTrans.commit();
+
+        }
+
+
+
 }
 
 
 
-    public void addListenerOnDateButton() {
 
-
-        dateSelectorBtn.setOnClickListener(new View.OnClickListener() {
-
-            @Override
-            public void onClick(View v) {
-
-                showDatePickerDialog(v);
-            }
-
-        });
-
-    }
-
-    public void showDatePickerDialog(View v) {
-
-        DialogFragment newFragment = new DatePickerFragment();
-        newFragment.show(getFragmentManager(), "datePicker");
-
-    }
 
 
     public void createAppointment(View view) {
 
-        int selectedId = rg.getCheckedRadioButtonId(); //the index of the item in the RadioGroup
+        //int selectedId = rg.getCheckedRadioButtonId(); //the index of the item in the RadioGroup
         //getDate and timeSlot and create the JSON object
 
         Intent completedCreationIntent = new Intent(this, ViewAppointmentActivity.class);
@@ -100,5 +80,48 @@ public class CreateAppointmentActivity extends DrawerActivity {
         else {
             Toast.makeText(CreateAppointmentActivity.this, "Appointment Creation Failed.", Toast.LENGTH_SHORT).show();
         }
+    }
+
+
+    public void btnNext1(View view) {
+
+        typeSpinner = (Spinner) findViewById(R.id.apptTypeSpinner);
+        typeID = typeSpinner.getSelectedItemPosition();
+        apptType = typeSpinner.getSelectedItem().toString();
+
+        Bundle args = new Bundle();
+        args.putInt("typeID", typeID);
+        Fragment fragment2 = new CreateAppointmentFragment2();
+        fragment2.setArguments(args);
+
+        FragmentTransaction fTrans2 = fragmentManager.beginTransaction();
+        fTrans2.replace(R.id.createApptSpace, fragment2);
+        fTrans2.addToBackStack(null);
+        fTrans2.commit();
+    }
+
+    public void btnNext2(View view) {
+        Button dateSelectorBtn = (Button) findViewById(R.id.dateSlotSelection);
+        clinicSpinner = (Spinner) findViewById(R.id.clinicSelection);
+        clinic = clinicSpinner.getSelectedItem().toString();
+        date = dateSelectorBtn.getText()+"";
+
+        Bundle args = new Bundle();
+        args.putInt("typeID", typeID);
+        args.putString("selectedApptType", apptType);
+        args.putString("selectedClinic", clinic);
+        args.putString("selectedDate", date);
+
+        Fragment fragment3 = new CreateAppointmentFragment3();
+        fragment3.setArguments(args);
+
+        FragmentTransaction fTrans3 = fragmentManager.beginTransaction();
+        fTrans3.replace(R.id.createApptSpace, fragment3);
+        fTrans3.addToBackStack(null);
+        fTrans3.commit();
+    }
+
+    public void btnPrev(View view) {
+        fragmentManager.popBackStackImmediate();
     }
 }

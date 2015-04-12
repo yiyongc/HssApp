@@ -37,6 +37,12 @@
     <string name="rememberme">Remember me</string>
     <string name="changePassword"><u>Change Password</u></string>
     <string name="changedefaultclinic"><u>Change Default Clinic</u></string>
+    <string name="selecttypeappt"><b><u>Select Type of Appointment</u></b></string>
+    <string name="previous"><![CDATA[<< Prev]]></string>
+    <string name="next"><![CDATA[Next >>]]></string>
+    <string name="selectclinicdate"><b><u>Select Clinic and Date of Appointment</u></b></string>
+    <string name="selectavailabletimeslot"><b><u>Select Available Appointment Time Slot</u></b></string>
+    <string name="apptbookingnotice"><i>Note: You may only book an appointment up to 3 months in advance.</i></string>
 
     <string-array name="left_drawer">
         <item>Create New Appointment</item>
@@ -44,6 +50,15 @@
         <item>Edit Profile</item>
         <item>View Notifications</item>
         <item>Log Out</item>
+    </string-array>
+
+    <string-array name="appointmentTypes">
+        <item>General Check-up</item>
+        <item>General Dental Check-up</item>
+        <item>Baby Check up</item>
+        <item>Preliminary Ear Check</item>
+        <item>MRI Ear Check</item>
+        <item>Breast Screening</item>
     </string-array>
 
     <string-array name="clinics">
