@@ -11,13 +11,21 @@ import android.widget.Toast;
 public class ViewNotificationsActivity extends DrawerActivity {
 
     @Override
+    protected void onResume() {
+        super.onResume();
+        Globals.drawerPosition = 3;
+        mDrawerList.setItemChecked(Globals.drawerPosition, true);
+        mDrawerList.setSelection(Globals.drawerPosition);
+    }
+
+    @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.view_notifications_layout);
         set();
-        mDrawerList.setItemChecked(3, true);
-        mDrawerList.setSelection(3);
-        mDrawerList.invalidate();
+        Globals.drawerPosition = 3;
+        mDrawerList.setItemChecked(Globals.drawerPosition, true);
+        mDrawerList.setSelection(Globals.drawerPosition);
 
         String[] notifications = {
                 "Reminder: Medical Checkup at North Spine",

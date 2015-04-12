@@ -20,12 +20,21 @@ public class CreateAppointmentActivity extends DrawerActivity {
     private RadioGroup rg;
 
     @Override
+    protected void onResume() {
+        super.onResume();
+        Globals.drawerPosition = 0;
+        mDrawerList.setItemChecked(Globals.drawerPosition, true);
+        mDrawerList.setSelection(Globals.drawerPosition);
+    }
+
+    @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.create_appointment_layout);
         set();
-        mDrawerList.setItemChecked(0, true);
-        mDrawerList.setSelection(0);
+        Globals.drawerPosition = 0;
+        mDrawerList.setItemChecked(Globals.drawerPosition, true);
+        mDrawerList.setSelection(Globals.drawerPosition);
 
         //Initialize current date value on button
         final Calendar c = Calendar.getInstance();

@@ -18,11 +18,17 @@ public class EditProfileActivity extends DrawerActivity {
     private RadioGroup rg;
     EditText currentPasswordBox, newPasswordBox, newPasswordBox2;
 
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.edit_profile_layout);
         set();
+        Globals.drawerPosition = 2;
+        mDrawerList.setItemChecked(Globals.drawerPosition, true);
+        mDrawerList.setSelection(Globals.drawerPosition);
+
         session = new SessionManager(this);
 
 

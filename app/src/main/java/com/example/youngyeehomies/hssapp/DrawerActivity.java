@@ -39,6 +39,7 @@ public class DrawerActivity extends ActionBarActivity {
     }
 
     public void set() {
+
         session = new SessionManager(getApplicationContext());
         session.checkLogin();
         mTitle = (String) getTitle();
@@ -47,7 +48,8 @@ public class DrawerActivity extends ActionBarActivity {
         linearDrawer = (LinearLayout) findViewById(R.id.leftDrawer);
         sessionTextView = (TextView) findViewById(R.id.session_user);
 
-
+        mDrawerList.setItemChecked(1, true);
+        mDrawerList.setSelection(1);
 
         HashMap<String, String> user = session.getUserDetails();
         final String nric = user.get(SessionManager.KEY_NRIC);
@@ -72,7 +74,8 @@ public class DrawerActivity extends ActionBarActivity {
 
                         mFragment.setArguments(data);
 
-                        selectDrawerItem(position);
+                        if(!mDrawerList.isItemChecked(Globals.drawerPosition))
+                            selectDrawerItem(position);
 
                         mDrawerLayout.closeDrawer(linearDrawer);
                     }

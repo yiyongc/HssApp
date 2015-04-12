@@ -13,6 +13,7 @@ import android.widget.Toast;
 
 public class LoginActivity extends Activity {
 
+    private static int mCurrentSelectionIndex = 0;
     EditText usernameBox, passwordBox;
     AlertDialogManager alert = new AlertDialogManager();
     SessionManager session;

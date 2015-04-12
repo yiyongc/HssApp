@@ -16,14 +16,27 @@ import java.util.List;
 
 public class ViewAppointmentActivity extends DrawerActivity {
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+        Globals.drawerPosition = 1;
+        mDrawerList.setItemChecked(Globals.drawerPosition, true);
+        mDrawerList.setSelection(Globals.drawerPosition);
+    }
+
+    @Override
+    public void setContentView(int layoutResID) {
+        super.setContentView(layoutResID);
+        set();
+        Globals.drawerPosition = 1;
+        mDrawerList.setItemChecked(Globals.drawerPosition, true);
+        mDrawerList.setSelection(Globals.drawerPosition);
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.view_appointment_layout);
-        set();
-        mDrawerList.setItemChecked(1, true);
-        mDrawerList.setSelection(1);
 
         List<AppointmentListItem> AppointmentList;
         AppointmentList = new ArrayList<>();
