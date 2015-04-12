@@ -20,7 +20,7 @@ import java.util.List;
 import java.util.Locale;
 
 public class ViewAppointmentActivity extends DrawerActivity implements AppointmentListAdapter.OnItemClickListener{
- 
+
     SessionManager session;
     RecyclerView rv;
 
