@@ -1,17 +1,14 @@
 package com.example.youngyeehomies.hssapp;
 
-import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarActivity;
 import android.text.Html;
-import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.LinearLayout;
@@ -74,10 +71,10 @@ public class DrawerActivity extends ActionBarActivity {
 
                         mFragment.setArguments(data);
 
-                        if(!mDrawerList.isItemChecked(Globals.drawerPosition))
+                        if(!mDrawerList.isItemChecked(Globals.drawerPosition)) {
                             selectDrawerItem(position);
-
-                        mDrawerLayout.closeDrawer(linearDrawer);
+                            mDrawerLayout.closeDrawer(linearDrawer);
+                        }
                     }
                 });
 

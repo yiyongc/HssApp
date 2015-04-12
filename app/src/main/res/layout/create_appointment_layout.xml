@@ -10,6 +10,8 @@
         android:layout_height="match_parent"
         android:id="@+id/mainContent">
 
+
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
@@ -32,106 +34,23 @@
                 android:text="Create New Appointment"
                 android:textSize="24sp"
                 android:textStyle="bold"
-                android:layout_marginTop="5dp"
+                android:layout_marginTop="20dp"
                 android:layout_marginBottom="15dp"
                 android:textColor="#325b56"/>
 
 
-            <ScrollView
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_gravity="center_horizontal">
 
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:orientation="vertical"
-                    android:gravity="center">
 
-                    <LinearLayout
-                        android:id="@+id/radioGroupLayout"
+
+                    <FrameLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:gravity="end">
+                        android:orientation="vertical"
+                        android:gravity="center"
+                        android:id="@+id/createApptSpace">
 
-                        <TextView
-                            android:layout_width="fill_parent"
-                            android:layout_height="wrap_content"
-                            android:text="Select Clinic of Visit:"
-                            android:layout_weight="1"
-                            android:gravity="end"
-                            android:textColor="#325b56"/>
+                    </FrameLayout>
 
-
-
-                </LinearLayout>
-
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:orientation="horizontal"
-                        android:gravity="end">
-
-                        <TextView
-                            android:layout_width="fill_parent"
-                            android:layout_height="wrap_content"
-                            android:text="Select Date:"
-                            android:layout_weight="1"
-                            android:gravity="end"
-                            android:textColor="#325b56"/>
-
-                        <Button
-                            android:layout_width="180dp"
-                            android:layout_height="wrap_content"
-                            android:id="@+id/dateSlotSelection"
-                            android:layout_marginLeft="10dp"
-                            android:layout_marginRight="10dp"
-                            style="?android:spinnerStyle"
-                            android:gravity="center"
-                            android:textSize="14sp"/>
-
-                    </LinearLayout>
-
-
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:orientation="horizontal"
-                    android:gravity="end">
-
-                    <TextView
-                        android:layout_width="fill_parent"
-                        android:layout_height="wrap_content"
-                        android:text="Select Time:"
-                        android:layout_weight="1"
-                        android:gravity="end"
-                        android:textColor="#325b56"/>
-
-                    <Spinner
-                        android:layout_width="180dp"
-                        android:layout_height="wrap_content"
-                        android:layout_marginLeft="10dp"
-                        android:layout_marginRight="10dp"
-                        android:id="@+id/timeSlotSelection"
-                        android:entries="@array/timeslot"
-                        android:dropDownSelector="@null"
-                        >
-                    </Spinner>
-
-                </LinearLayout>
-
-                <Button
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Create Appointment"
-                    android:onClick="createAppointment"
-                    android:layout_marginTop="15dp"
-                />
-
-            </LinearLayout>
-        </ScrollView>
         </LinearLayout>
 
 

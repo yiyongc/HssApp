@@ -6,6 +6,7 @@ import android.app.DialogFragment;
 import android.os.Bundle;
 import android.widget.Button;
 import android.widget.DatePicker;
+import android.widget.Toast;
 
 
 import java.util.Calendar;
@@ -31,12 +32,17 @@ public class DatePickerFragment extends DialogFragment
 
         Button activityButton = (Button) getActivity().findViewById(R.id.dateSlotSelection);
 
-        year = selectedYear;
-        month = selectedMonth;
-        day = selectedDay;
+        if(selectedYear < year || selectedMonth < month || ((selectedYear == year) && (selectedMonth == month) && (selectedDay < day)))
+            Toast.makeText(getActivity().getApplicationContext(), "Unable to create appointments before current date!", Toast.LENGTH_LONG).show();
+        else if(selectedYear > year || selectedMonth > (month+3) ||((selectedMonth == (month+3)) && (selectedDay > day)))
+            Toast.makeText(getActivity().getApplicationContext(), "Appointments can only be made up to 3 months in advance!", Toast.LENGTH_LONG).show();
+        else {
+            year = selectedYear;
+            month = selectedMonth;
+            day = selectedDay;
 
-        activityButton.setText(new StringBuilder().append(day).append("-").append(month + 1).append("-").append(year).append(" "));
-
+            activityButton.setText(new StringBuilder().append(day).append("-").append(month + 1).append("-").append(year).append(" "));
+        }
     }
 
 }
