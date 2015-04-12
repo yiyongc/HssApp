@@ -1,35 +1,38 @@
 package com.example.youngyeehomies.hssapp;
 
-import android.os.AsyncTask;
-
-import org.apache.http.HttpResponse;
-import org.apache.http.NameValuePair;
-import org.apache.http.client.HttpClient;
-import org.apache.http.client.entity.UrlEncodedFormEntity;
-import org.apache.http.client.methods.HttpPost;
-import org.apache.http.impl.client.DefaultHttpClient;
-import org.apache.http.message.BasicNameValuePair;
 import org.json.JSONObject;
-
-import java.io.BufferedReader;
-import java.io.InputStreamReader;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.jar.Attributes;
 
 public class LoginManager {
 
+    private LoginActivity ref;
 
+    public LoginManager(LoginActivity ref){
+        this.ref = ref;
+    }
 
+    public boolean tryLogin(String nric, String password) {
 
-    public boolean verify(/*JSONObject a*/) {
+        JSONObject obj = new JSONObject();
+        try {
+            obj.put("nric", nric);
+            obj.put("password", password);
+        } catch (Exception e) {
+
+        }
+
+        WebServiceClass svc = new WebServiceClass(){
+            @Override
+            protected void onPostExecute(Object o){
+                //To Override
+                JSONObject jsonobj = (JSONObject)o;
+                ref.btnLoginReturn(jsonobj);
+            }
+        };
+        svc.setServiceLink("authenticateAccount.php");
+        svc.execute(obj.toString());
+
         return true;
     }
-
-    public boolean activated(/*JSONObject b*/) {
-        return false;
-    }
-
 
 }
 

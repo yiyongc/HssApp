@@ -6,17 +6,18 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.AutoCompleteTextView;
+import android.widget.Button;
 import android.widget.EditText;
-import android.widget.Toast;
+
+import org.json.JSONObject;
 
 
-public class LoginActivity extends Activity {
+public class LoginActivity extends Activity{
 
-    private static int mCurrentSelectionIndex = 0;
     EditText usernameBox, passwordBox;
     AlertDialogManager alert = new AlertDialogManager();
     SessionManager session;
+    Button loginButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,6 +28,7 @@ public class LoginActivity extends Activity {
 
         usernameBox = (EditText) findViewById(R.id.usernameBox);
         passwordBox = (EditText) findViewById(R.id.passwordBox);
+        loginButton = (Button) findViewById(R.id.btnLogin);
     }
 
     @Override
@@ -60,30 +62,50 @@ public class LoginActivity extends Activity {
     }
 
     public void btnLogin(View view) {
+        loginButton.setEnabled(false);
 
         String username = usernameBox.getText()+"";
         String password = passwordBox.getText()+"";
 
         if (username.length() == 0 || password.length() == 0) {
             alert.showAlertDialog(LoginActivity.this, "Login Failed!", "Please enter NRIC and Password.", false);
+            loginButton.setEnabled(true);
             return;
         }
         if (username.length() < 9 || password.length() < 8) {
             alert.showAlertDialog(LoginActivity.this, "Login Failed!", "Please input valid Username/Password.", false);
+            loginButton.setEnabled(true);
             return;
         }
 
-        LoginManager loginManager = new LoginManager();
+        LoginManager loginManager = new LoginManager(this);
         //loginManager.execute("url", loginManager.NETWORK_STATE_LOGIN);
 
-        if (loginManager.verify()) {
-            Intent loggedInIntent = new Intent(this, ViewAppointmentActivity.class);
-            session.createLoginSession(username, password); //This should be in loginManager when logic is done
-            startActivity(loggedInIntent);
-            finish();
-        }
-        else
-            alert.showAlertDialog(LoginActivity.this, "Login Failed!", "Please input valid Username/Password.", false);
+        //AUTO SUCCESS LOGIN; DELETE WHEN SUBMITTING
+        Intent loggedInIntent = new Intent(this, ViewAppointmentActivity.class);
+        session.createLoginSession("",""); //This should be in loginManager when logic is done
+        startActivity(loggedInIntent);
+        finish();
+        //AUTO SUCCESS LOGIN; DELETE WHEN SUBMITTING
+
+        //Attempts to login
+        //UNCOMMENT WHEN SUBMITTING
+        //loginManager.tryLogin(username,password);
+
+    }
+
+    public void btnLoginReturn(JSONObject obj){
+        try{
+            if(obj.getInt("errorCode")==0){
+                Intent loggedInIntent = new Intent(this, ViewAppointmentActivity.class);
+                session.createLoginSession("",""); //This should be in loginManager when logic is done
+                startActivity(loggedInIntent);
+                finish();
+            } else {
+                alert.showAlertDialog(LoginActivity.this, "Login Failed!", "Please input valid Username/Password.", false);
+            }
+        } catch (Exception e) {}
+        loginButton.setEnabled(true);
     }
 
     public void forgotPassword(View view) {
