@@ -20,16 +20,16 @@ import java.util.List;
  */
 
 
-public class AppointmentListAdapter extends RecyclerView.Adapter<AppointmentListAdapter.AppointmentViewHolder> implements View.OnClickListener{
+public class AppointmentListAdapter extends RecyclerView.Adapter<AppointmentListAdapter.AppointmentViewHolder> {
 
     List<AppointmentListItem> appointments;
-
+    private OnItemClickListener mItemClickListener;
     AppointmentListAdapter(List<AppointmentListItem> appointments){
         this.appointments = appointments;
     }
 
 
-    public static class AppointmentViewHolder extends RecyclerView.ViewHolder {
+    public class AppointmentViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
 
 
         CardView cv;
@@ -40,8 +40,9 @@ public class AppointmentListAdapter extends RecyclerView.Adapter<AppointmentList
 
         ImageView ApptCatIcon;
 
-        AppointmentViewHolder(View itemView) {
+        public AppointmentViewHolder(View itemView) {
             super(itemView);
+            itemView.setOnClickListener(this);
             cv = (CardView)itemView.findViewById(R.id.AppointmentCardView);
             ApptCategoryName = (TextView)itemView.findViewById(R.id.appointment_cat_name);
             ApptNotes = (TextView)itemView.findViewById(R.id.appointment_notes);
@@ -50,7 +51,12 @@ public class AppointmentListAdapter extends RecyclerView.Adapter<AppointmentList
             ApptCatIcon = (ImageView)itemView.findViewById(R.id.appointment_cat_icon);
         }
 
+        public void onClick(View v) {
+            if (mItemClickListener != null) {
+                mItemClickListener.onItemClick(v,getPosition());
+            }
 
+        }
 
     }
     @Override
@@ -77,13 +83,15 @@ public class AppointmentListAdapter extends RecyclerView.Adapter<AppointmentList
         super.onAttachedToRecyclerView(recyclerView);
     }
 
-    @Override
-    public void onClick(View v) {
 
+
+    public void SetOnItemClickListener(OnItemClickListener mItemClickListener) {
+        this.mItemClickListener = mItemClickListener;
     }
 
 
-
-
+    public interface OnItemClickListener {
+        public void onItemClick(View view , int position);
+    }
 
 }

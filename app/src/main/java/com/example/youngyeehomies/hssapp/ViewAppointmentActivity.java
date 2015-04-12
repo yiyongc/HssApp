@@ -1,8 +1,11 @@
 package com.example.youngyeehomies.hssapp;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.view.View;
+import android.widget.Toast;
 
 import com.example.youngyeehomies.hssapp.Entities.AppointmentListItem;
 
@@ -15,7 +18,7 @@ import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 
-public class ViewAppointmentActivity extends DrawerActivity {
+public class ViewAppointmentActivity extends DrawerActivity implements AppointmentListAdapter.OnItemClickListener{
 
     SessionManager session;
     RecyclerView rv;
@@ -50,7 +53,9 @@ public class ViewAppointmentActivity extends DrawerActivity {
         List<AppointmentListItem> AppointmentList = new ArrayList<>();
         AppointmentList.add(new AppointmentListItem(R.drawable.gastro_ic,"Gastroenterology clinic appointment","26 Apr 2015","1.00 PM","You are required to abstain from drinking water 12 hours before this appointment"));
         AppointmentListAdapter adapter = new AppointmentListAdapter(AppointmentList);
-        //rv.setAdapter(adapter);
+        adapter.SetOnItemClickListener(this);
+        rv.setAdapter(adapter);
+
 
         session = new SessionManager(getApplicationContext());
 
@@ -59,7 +64,7 @@ public class ViewAppointmentActivity extends DrawerActivity {
     }
 
     public void getAppointments(String accountToken){
-        JSONObject obj = new JSONObject();
+     /*   JSONObject obj = new JSONObject();
         try {
             obj.put("accountToken", accountToken);
         } catch (Exception e) {
@@ -75,16 +80,16 @@ public class ViewAppointmentActivity extends DrawerActivity {
             }
         };
         svc.setServiceLink("viewAppointments.php");
-        svc.execute(obj.toString());
+        svc.execute(obj.toString());*/
     }
 
     public void getAppointmentsAysncReturn(JSONObject jsonobj){
         List<AppointmentListItem> AppointmentList = new ArrayList<>();
 
-        //dummy
-        //AppointmentList.add(new AppointmentListItem(R.drawable.gastro_ic,"Gastroenterology clinic appointment","26 Apr 2015","1.00 PM","You are required to abstain from drinking water 12 hours before this appointment"));
 
-        try{
+        AppointmentList.add(new AppointmentListItem(R.drawable.gastro_ic,"Gastroenterology clinic appointment","26 Apr 2015","1.00 PM","You are required to abstain from drinking water 12 hours before this appointment"));
+
+        /*try{
             JSONArray jArray = jsonobj.getJSONArray("list");
             for(int i=0;i<jArray.length();i++){
 
@@ -112,10 +117,17 @@ public class ViewAppointmentActivity extends DrawerActivity {
         } catch (Exception e){
 
         }
-
-        AppointmentListAdapter adapter = new AppointmentListAdapter(AppointmentList);
-        rv.setAdapter(adapter);
+*/
+      //  AppointmentListAdapter adapter = new AppointmentListAdapter(AppointmentList);
+      //  rv.setAdapter(adapter);
 
     }
 
+    @Override
+    public void onItemClick(View view, int position) {
+        Toast.makeText(ViewAppointmentActivity.this, "You clicked Item No. " + position, Toast.LENGTH_SHORT).show();
+        Intent viewDetailsIntent = new Intent(this, ViewAppointmentDetailsActivity.class);
+        //TODO pass in the appointmentID to be displayede
+        startActivity(viewDetailsIntent);
+    }
 }
