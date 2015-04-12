@@ -1,5 +1,6 @@
 package com.example.youngyeehomies.hssapp;
 
+
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
@@ -129,5 +130,7 @@ public class ViewAppointmentActivity extends DrawerActivity implements Appointme
         Intent viewDetailsIntent = new Intent(this, ViewAppointmentDetailsActivity.class);
         //TODO pass in the appointmentID to be displayede
         startActivity(viewDetailsIntent);
+        overridePendingTransition(R.anim.pull_in_right, R.anim.push_out_left);
+
     }
 }

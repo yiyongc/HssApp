@@ -1,12 +1,12 @@
 package com.example.youngyeehomies.hssapp;
 
-import android.support.v7.app.ActionBarActivity;
+import android.app.Activity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 
 
-public class ViewAppointmentDetailsActivity extends ActionBarActivity {
+public class ViewAppointmentDetailsActivity extends Activity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,5 +35,10 @@ public class ViewAppointmentDetailsActivity extends ActionBarActivity {
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    public void onBackPressed() {
+        super.onBackPressed();
+        overridePendingTransition(R.anim.pull_in_left, R.anim.push_out_right);
     }
 }

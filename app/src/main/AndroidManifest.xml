@@ -43,7 +43,8 @@
         </activity>
         <activity
             android:name=".ViewAppointmentActivity"
-            android:label="@string/title_activity_view_appts" >
+            android:label="@string/title_activity_view_appts"
+            android:theme="@style/AppTheme">
         </activity>
         <activity
             android:name=".EditProfileActivity"
@@ -59,7 +60,9 @@
         </activity>
         <activity
             android:name=".ViewAppointmentDetailsActivity"
-            android:label="@string/title_activity_view_appointment_details" >
+            android:label="HSS - View Appointment Details" >
+
+
         </activity>
     </application>
 
