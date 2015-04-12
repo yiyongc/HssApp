@@ -27,6 +27,8 @@ public class SessionManager {
     // NRIC (make variable public to access from outside)
     public static final String KEY_NRIC = "nric";
 
+    public static final String KEY_TOKEN = "token";
+
     // Constructor
     public SessionManager(Context c){
         this.context = c;
@@ -40,6 +42,14 @@ public class SessionManager {
         editor.putBoolean(IS_LOGIN, true);
         editor.putString(KEY_NRIC, nric);
         editor.putString(KEY_PASSWORD, password);
+
+        editor.commit();
+    }
+
+    public void createLoginSession(String token) {
+
+        editor.putBoolean(IS_LOGIN, true);
+        editor.putString(KEY_TOKEN, token);
 
         editor.commit();
     }
@@ -73,6 +83,11 @@ public class SessionManager {
         user.put(KEY_PASSWORD, pref.getString(KEY_PASSWORD, null));
 
         return user;
+    }
+
+    //Get stored session token
+    public String getUserToken(){
+        return KEY_TOKEN;
     }
 
     //Clear session details

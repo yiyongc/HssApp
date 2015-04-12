@@ -9,6 +9,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
+import org.json.JSONArray;
 import org.json.JSONObject;
 
 
@@ -29,6 +30,7 @@ public class LoginActivity extends Activity{
         usernameBox = (EditText) findViewById(R.id.usernameBox);
         passwordBox = (EditText) findViewById(R.id.passwordBox);
         loginButton = (Button) findViewById(R.id.btnLogin);
+
     }
 
     @Override
@@ -98,7 +100,8 @@ public class LoginActivity extends Activity{
         try{
             if(obj.getInt("errorCode")==0){
                 Intent loggedInIntent = new Intent(this, ViewAppointmentActivity.class);
-                session.createLoginSession("",""); //This should be in loginManager when logic is done
+                session.createLoginSession(obj.getString("accountToken")); //This should be in loginManager when logic is done
+                //session.createLoginSession("",""); //This should be in loginManager when logic is done
                 startActivity(loggedInIntent);
                 finish();
             } else {
