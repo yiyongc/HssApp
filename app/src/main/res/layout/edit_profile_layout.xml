@@ -10,27 +10,37 @@
         android:layout_height="match_parent"
         android:id="@+id/mainContent">
 
+
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            android:background="#d3d3d3">
 
-            <ImageView
-                android:layout_width="40dp"
-                android:layout_height="40dp"
-                android:src="@drawable/backarrow"
-                android:onClick="btnReturn"
-                android:adjustViewBounds="false"
-                android:clickable="true"
-                android:layout_marginTop="6dp"
-                android:layout_marginLeft="16dp"
-                />
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="#d3d3d3">
+
+                <ImageView
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:src="@drawable/backarrow"
+                    android:onClick="btnReturn"
+                    android:adjustViewBounds="false"
+                    android:clickable="true"
+                    android:cropToPadding="true"
+                    android:paddingTop="6dp"
+                    />
+            </LinearLayout>
 
             <ImageView
                 android:layout_width="wrap_content"
                 android:layout_height="140dp"
-                android:src="@drawable/logo"
-                android:id="@+id/logo"/>
+                android:src="@drawable/logo2"
+                android:id="@+id/logo"
+                android:layout_gravity="center"/>
 
             <TextView
                 android:layout_width="match_parent"
@@ -39,7 +49,8 @@
                 android:text="Edit Profile"
                 android:textSize="24sp"
                 android:textStyle="bold"
-                android:layout_marginTop="20dp"/>
+                android:layout_marginTop="20dp"
+                android:textColor="#325b56"/>
             <ScrollView
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
@@ -57,20 +68,25 @@
                         android:text="@string/changePassword"
                         android:layout_marginLeft="10dp"
                         android:textSize="16sp"
-                        android:textStyle="bold"/>
+                        android:textStyle="bold"
+                        android:textColor="#325b56"/>
 
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:orientation="horizontal"
-                        android:gravity="end"
+                        android:gravity="end|center_vertical"
                         android:layout_marginTop="10dp"
                         android:layout_marginRight="10dp">
 
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="Enter Current Password:"/>
+                            android:text="Enter Current Password:"
+                            android:textColor="#325b56"
+                            android:layout_weight="1"
+                            android:maxLines="100"
+                            android:gravity="end"/>
 
                         <EditText
                             android:layout_width="170dp"
@@ -87,13 +103,17 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:orientation="horizontal"
-                        android:gravity="end"
+                        android:gravity="end|center_vertical"
                         android:layout_marginTop="10dp">
 
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="Enter New Password:"/>
+                            android:text="Enter New Password:"
+                            android:textColor="#325b56"
+                            android:layout_weight="1"
+                            android:maxLines="100"
+                            android:gravity="end"/>
 
                         <EditText
                             android:layout_width="170dp"
@@ -111,13 +131,17 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:orientation="horizontal"
-                        android:gravity="end"
+                        android:gravity="end|center_vertical"
                         android:layout_marginTop="10dp">
 
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="Re-Enter New Password:"/>
+                            android:text="Re-Enter New Password:"
+                            android:textColor="#325b56"
+                            android:layout_weight="1"
+                            android:maxLines="100"
+                            android:gravity="end"/>
 
                         <EditText
                             android:layout_width="170dp"
@@ -151,7 +175,8 @@
                             android:text="@string/changedefaultclinic"
                             android:layout_marginLeft="10dp"
                             android:textSize="16sp"
-                            android:textStyle="bold"/>
+                            android:textStyle="bold"
+                            android:textColor="#325b56"/>
 
                         <LinearLayout
                             android:layout_width="match_parent"
@@ -167,7 +192,9 @@
                                 android:layout_height="wrap_content"
                                 android:text="New Default Clinic:"
                                 android:layout_weight="1"
-                                android:gravity="end"/>
+                                android:maxLines="100"
+                                android:gravity="end"
+                                android:textColor="#325b56"/>
 
                         </LinearLayout>
 

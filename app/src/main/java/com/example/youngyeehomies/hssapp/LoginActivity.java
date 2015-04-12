@@ -86,7 +86,7 @@ public class LoginActivity extends Activity {
     }
 
     public void forgotPassword(View view) {
-        Intent intent = new Intent(this, ViewAppointmentActivity.class);
+        Intent intent = new Intent(this, ForgotPasswordActivity.class);
         startActivity(intent);
     }
 }

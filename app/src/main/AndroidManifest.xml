@@ -47,6 +47,11 @@
             android:label="HSS - View Notifications" >
         </activity>
 
+        <activity
+            android:name=".ForgotPasswordActivity"
+            android:label="HSS - View Notifications" >
+        </activity>
+
     </application>
 
 </manifest>

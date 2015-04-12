@@ -23,7 +23,8 @@
         android:layout_height="150dp"
         android:src="@drawable/logo"
         android:id="@+id/loginLogo"
-        android:layout_below="@+id/title"/>
+        android:layout_below="@+id/title"
+        android:layout_centerHorizontal="true" />
 
     <TextView
         android:text="@string/loginText"
@@ -33,7 +34,7 @@
         android:layout_height="wrap_content"
         android:id="@+id/textView1"
         android:textStyle="bold"
-        android:layout_centerVertical="true"
+        android:layout_below="@+id/loginLogo"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true" />
 

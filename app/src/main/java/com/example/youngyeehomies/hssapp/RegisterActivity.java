@@ -70,14 +70,26 @@ public class RegisterActivity extends Activity {
             Toast.makeText(RegisterActivity.this, "Please fill in all fields!", Toast.LENGTH_SHORT).show();
             return;
         }
+        if (password.length() < 8 || password2.length() < 8) {
+            Toast.makeText(RegisterActivity.this, "Password must contain a minimum of 8 characters!", Toast.LENGTH_SHORT).show();
+            return;
+        }
         if (!password.equals(password2)) {
             Toast.makeText(RegisterActivity.this, "Passwords do not match!", Toast.LENGTH_SHORT).show();
             return;
         }
-        if (password.length() < 8) {
-            Toast.makeText(RegisterActivity.this, "Password must contain a minimum of 8 characters!", Toast.LENGTH_SHORT).show();
+
+        //Server checking
+        /*
+        if (!nric.equals("S9292929Z")nric is not in database) {
+            alert.showAlertDialog(ForgotPasswordActivity.this,"Reset Password Failed!", "Your NRIC is not in our database. Please register at a clinic before using the app!", false);
             return;
         }
+        if (!token.equals("12345")check token fail) {
+            alert.showAlertDialog(ForgotPasswordActivity.this,"Reset Password Failed!", "You have provided an incorrect security token.", false);
+            return;
+        }
+        */
 
         RegistrationManager regManager = new RegistrationManager(username, password, token, defaultClinic);
         //regManager.execute("url", regManager.NETWORK_STATE_REGISTER);

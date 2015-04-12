@@ -2,6 +2,7 @@ package com.example.youngyeehomies.hssapp;
 
 
 import android.content.Context;
+import android.graphics.Color;
 import android.widget.LinearLayout;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
@@ -39,6 +40,7 @@ public class PopulateClinicManager {
             rg.addView(rb[i]); //the RadioButtons are added to the radioGroup
             rb[i].setText(radioItems[i]);
             rb[i].setTextSize(14);
+            rb[i].setTextColor(Color.parseColor("#325b56"));
             rb[i].setPadding(10, 0, 26, 0);
         }
 
