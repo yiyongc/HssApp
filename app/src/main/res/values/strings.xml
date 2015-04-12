@@ -1,21 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
 
     <string name="app_name">HSS</string>
-
     <string name="title">Hospital Scheduling System</string>
-
     <string name="action_settings">Settings</string>
-
     <string name="login_page">Login</string>
-
     <string name="loginText">Please login with your NRIC and Password</string>
-
     <string name="reg_page">Registration</string>
-
     <string name="loginUser">NRIC</string>
-
     <string name="loginPassword">Password (Case Sensitive)</string>
-
     <string name="registration">Registration Page</string>
     <string name="nric">NRIC Number:</string>
     <string name="register">Register</string>
@@ -24,8 +17,6 @@
     <string name="reg_text">Please fill in all fields.</string>
     <string name="email_add">Email Address:</string>
     <string name="title_activity_view_appts">HSS - View Appointments</string>
-
-
     <string name="title_activity_user">HSS - Home</string>
     <string name="view_appts">View Appointments</string>
     <string name="title_login_activity">HSS - Login</string>
@@ -60,7 +51,6 @@
         <item>MRI Ear Check</item>
         <item>Breast Screening</item>
     </string-array>
-
     <string-array name="clinics">
         <item>Gibson Clinic</item>
         <item>Young Yee Hospital</item>
@@ -69,7 +59,6 @@
         <item>Elton Chinese Physician</item>
         <item>Unto Pediatrics</item>
     </string-array>
-
     <string-array name="timeslot">
         <item>10:00 A.M.</item>
         <item>10:30 A.M.</item>
@@ -88,5 +77,7 @@
         <item>05:00 P.M.</item>
         <item>05:30 P.M.</item>
     </string-array>
+
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 
 </resources>

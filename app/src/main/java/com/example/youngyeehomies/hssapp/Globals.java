@@ -5,4 +5,7 @@ package com.example.youngyeehomies.hssapp;
  */
 public class Globals {
     public static int drawerPosition=1;
+
+    //replace IP with relevant server hosting web services
+    public static final String serverURL = "http://192.168.0.108/xampp/testwebservice/";
 }
