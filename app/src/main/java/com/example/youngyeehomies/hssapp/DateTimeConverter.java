@@ -69,4 +69,13 @@ public class DateTimeConverter {
 
         return returnedDate;
     }
+
+
+    public String convertDate (String date) {
+        String convertedDate;
+
+        convertedDate = date.substring(6, 10) + "-" + date.substring(3, 5) + "-" + date.substring(0, 2);
+
+        return convertedDate;
+    }
 }

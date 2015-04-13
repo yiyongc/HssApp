@@ -42,22 +42,24 @@
         <item>View Notifications</item>
         <item>Log Out</item>
     </string-array>
+
     <string-array name="appointmentTypes">
-        <item>General Check-up</item>
-        <item>General Dental Check-up</item>
-        <item>Baby Check up</item>
         <item>Preliminary Ear Check</item>
         <item>MRI Ear Check</item>
+        <item>Baby Check-up</item>
+        <item>General Check-up</item>
+        <item>General Dental Checkup</item>
         <item>Breast Screening</item>
     </string-array>
+
     <string-array name="clinics">
-        <item>Gibson Clinic</item>
-        <item>Young Yee Hospital</item>
-        <item>Yi Yong GP</item>
-        <item>Jun Qiu Medical Centre</item>
-        <item>Elton Chinese Physician</item>
-        <item>Unto Pediatrics</item>
+        <item>Potong Pasir Clinic</item>
+        <item>City Hall Clinic</item>
+        <item>Jurong Point Clinic</item>
+        <item>NTU Clinic</item>
+        <item>Sengkang Clinic</item>
     </string-array>
+
     <string-array name="timeslot">
         <item>10:00 A.M.</item>
         <item>10:30 A.M.</item>
