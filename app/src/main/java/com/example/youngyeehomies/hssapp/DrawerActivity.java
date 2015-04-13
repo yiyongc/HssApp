@@ -108,8 +108,6 @@ public class DrawerActivity extends ActionBarActivity {
 
     private void selectDrawerItem(int position) {
 
-        //Fragment fragment = null;
-
         switch (position) {
             case 0:
                 Intent createApptIntent = new Intent(this,CreateAppointmentActivity.class);
@@ -122,13 +120,13 @@ public class DrawerActivity extends ActionBarActivity {
                 finish();
                 break;
             case 2:
-                Intent editProfileIntent = new Intent(this,EditProfileActivity.class);
-                startActivity(editProfileIntent);
+                Intent viewOldApptIntent = new Intent(this,ViewOldAppointmentsActivity.class);
+                startActivity(viewOldApptIntent);
+                finish();
                 break;
             case 3:
-                Intent viewNotificationsIntent = new Intent(this,ViewNotificationsActivity.class);
-                startActivity(viewNotificationsIntent);
-                finish();
+                Intent editProfileIntent = new Intent(this,EditProfileActivity.class);
+                startActivity(editProfileIntent);
                 break;
             case 4:
                 session.logoutUser();
@@ -139,20 +137,6 @@ public class DrawerActivity extends ActionBarActivity {
                 break;
         }
 
-        /*if (fragment != null) {
-            android.app.FragmentManager fragmentManager = getFragmentManager();
-
-            FragmentTransaction fTrans = fragmentManager.beginTransaction();
-
-            fTrans.replace(R.id.mainContent, fragment);
-
-            fTrans.commit();
-
-            mDrawerList.setItemChecked(position, true);
-            mDrawerList.setSelection(position);
-            mDrawerLayout.closeDrawer(mDrawerList);
-
-        }*/
     }
 
     @Override

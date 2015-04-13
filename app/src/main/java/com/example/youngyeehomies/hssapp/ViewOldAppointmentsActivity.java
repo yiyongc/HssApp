@@ -28,7 +28,7 @@ public class ViewOldAppointmentsActivity extends DrawerActivity implements Appoi
     @Override
     protected void onResume() {
         super.onResume();
-        Globals.drawerPosition = 1;
+        Globals.drawerPosition = 2;
         mDrawerList.setItemChecked(Globals.drawerPosition, true);
         mDrawerList.setSelection(Globals.drawerPosition);
     }
@@ -37,7 +37,7 @@ public class ViewOldAppointmentsActivity extends DrawerActivity implements Appoi
     public void setContentView(int layoutResID) {
         super.setContentView(layoutResID);
         set();
-        Globals.drawerPosition = 1;
+        Globals.drawerPosition = 2;
         mDrawerList.setItemChecked(Globals.drawerPosition, true);
         mDrawerList.setSelection(Globals.drawerPosition);
     }

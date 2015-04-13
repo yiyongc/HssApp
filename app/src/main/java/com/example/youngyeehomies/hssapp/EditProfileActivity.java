@@ -23,15 +23,11 @@ public class EditProfileActivity extends DrawerActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.edit_profile_layout);
         set();
-        Globals.drawerPosition = 2;
+        Globals.drawerPosition = 3;
         mDrawerList.setItemChecked(Globals.drawerPosition, true);
         mDrawerList.setSelection(Globals.drawerPosition);
 
         session = new SessionManager(this);
-
-
-        mDrawerList.setItemChecked(2, true);
-        mDrawerList.setSelection(2);
 
         currentPasswordBox = (EditText) findViewById(R.id.change_current);
         newPasswordBox = (EditText) findViewById(R.id.change_new);

@@ -37,9 +37,9 @@
 
     <string-array name="left_drawer">
         <item>Create New Appointment</item>
-        <item>View All Appointments</item>
+        <item>Upcoming Appointments</item>
+        <item>Appointment History</item>
         <item>Edit Profile</item>
-        <item>View Notifications</item>
         <item>Log Out</item>
     </string-array>
 
