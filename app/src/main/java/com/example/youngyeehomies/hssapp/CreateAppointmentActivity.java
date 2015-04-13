@@ -89,7 +89,7 @@ public class CreateAppointmentActivity extends DrawerActivity {
         try {
             //YIYONG PUT YOUR ITEMS HEREEEEE
             obj.put("accountToken", accountToken);
-            obj.put("clinicID", clinic);
+            obj.put("clinicID", (1+clinicSpinner.getSelectedItemPosition()));
             obj.put("apptSubcategoryID", typeID);
             obj.put("dateTime", dateTimeObject);
             obj.put("isReferral", referralValue);
@@ -160,11 +160,11 @@ public class CreateAppointmentActivity extends DrawerActivity {
             protected void onPostExecute(Object o){
                 //To Override
                 JSONObject jsonobj = (JSONObject)o;
-                createAppointmentAsyncReturn(jsonobj);
+                getWebSvcClinicsAsyncReturn(jsonobj);
             }
         };
         svc.setServiceLink("createAppt.php");
-        svc.execute(obj.toString());
+        //svc.execute(obj.toString());
     }
 
     public void getWebSvcClinicsAsyncReturn(JSONObject jsonobj){
@@ -218,7 +218,7 @@ public class CreateAppointmentActivity extends DrawerActivity {
             //YIYONG PUT YOUR ITEMS HEREEEEE
             obj.put("accountToken", accountToken);
             obj.put("ApptSubcategoryID" , typeID);
-            obj.put("ClinicID" , clinic);
+            obj.put("ClinicID" , (1+clinicSpinner.getSelectedItemPosition()));
             obj.put("Date" , new DateTimeConverter().convertDate(date));
         } catch (Exception e) {
 
@@ -229,11 +229,11 @@ public class CreateAppointmentActivity extends DrawerActivity {
             protected void onPostExecute(Object o){
                 //To Override
                 JSONObject jsonobj = (JSONObject)o;
-                createAppointmentAsyncReturn(jsonobj);
+                getWebSvcTimeslotsAsyncReturn(jsonobj);
             }
         };
         svc.setServiceLink("createAppt.php");
-        svc.execute(obj.toString());
+        //svc.execute(obj.toString());
     }
 
     public void getWebSvcTimeslotsAsyncReturn(JSONObject jsonobj){
