@@ -16,14 +16,15 @@ public class AppointmentListItem {
     private String ApptDate;
     private String ApptTime;
     private String ApptNote;
+    private int ApptID;
 
-    public AppointmentListItem(Drawable ApptSubcatID, String ApptCategoryName, String ApptDate, String ApptTime, String ApptNote){
+    public AppointmentListItem(Drawable ApptSubcatID, String ApptCategoryName, String ApptDate, String ApptTime, String ApptNote, int ApptID){
         this.ApptCatIcon = ApptSubcatID;
         this.ApptCategoryName = ApptCategoryName;
         this.ApptDate = ApptDate;
         this.ApptTime = ApptTime;
         this.ApptNote = ApptNote;
-
+        this.ApptID = ApptID;
     }
 
     public Drawable getApptCatIcon() {      return ApptCatIcon;}
@@ -44,6 +45,9 @@ public class AppointmentListItem {
         return ApptTime;
     }
 
+    public int getApptID() {
+        return ApptID;
+    }
 }
 
 

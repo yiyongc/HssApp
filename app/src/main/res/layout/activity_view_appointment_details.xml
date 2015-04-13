@@ -38,7 +38,7 @@
                 android:layout_alignParentLeft="true"
                 android:layout_alignParentTop="true"
                 android:layout_marginRight="16dp"
-                android:src="@drawable/general_ic" />
+                />
 
             <TextView
                 android:layout_width="wrap_content"
@@ -47,7 +47,7 @@
                 android:textSize="22sp"
                 android:textColor="#ff222222"
                 android:textStyle="bold"
-                android:text="Consultation"
+
                 android:paddingRight="6dp"
                 android:layout_alignParentTop="true"
                 android:layout_toRightOf="@+id/appointment_details_cat_icon" />
@@ -57,7 +57,7 @@
                 android:layout_height="wrap_content"
                 android:id="@+id/appointment_details_date"
                 android:textColor="#777777"
-                android:text="27 Jun 2015"
+
                 android:layout_below="@+id/appointment_details_date_title"
                 android:layout_alignLeft="@+id/appointment_details_date_title"
                 android:layout_alignStart="@+id/appointment_details_date_title" />
@@ -67,7 +67,7 @@
                 android:layout_height="wrap_content"
                 android:id="@+id/appointment_details_time"
                 android:textColor="#777777"
-                android:text="2.30 P.M."
+
                 android:layout_below="@+id/appointment_details_time_title"
                 android:layout_alignParentLeft="true"
                 android:layout_alignParentStart="true" />
@@ -121,7 +121,7 @@
                 android:layout_height="wrap_content"
                 android:id="@+id/appointment_details_clinic"
                 android:textColor="#777777"
-                android:text="Gibson Clinic"
+
                 android:layout_below="@+id/appointment_details_clinic_title" />
 
             <TextView
@@ -131,7 +131,7 @@
                 android:textSize="15sp"
                 android:textColor="#444444"
                 android:textStyle="bold"
-                android:text="Consultation"
+
                 android:paddingRight="6dp"
                 android:layout_below="@+id/appointment_details_cat_name"
                 android:layout_alignLeft="@+id/appointment_details_cat_name"
@@ -142,7 +142,7 @@
                 android:layout_height="wrap_content"
                 android:id="@+id/appointment_details_notes"
                 android:textColor="#888888"
-                android:text="Consultation"
+
 
                 android:layout_below="@+id/appointment_details_notes_title"
                 android:layout_alignParentLeft="true"

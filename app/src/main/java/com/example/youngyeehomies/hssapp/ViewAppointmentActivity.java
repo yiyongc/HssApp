@@ -8,6 +8,7 @@ import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
 
@@ -27,7 +28,7 @@ public class ViewAppointmentActivity extends DrawerActivity implements Appointme
     SessionManager session;
     RecyclerView rv;
     View clickedItem;
-    IconManager icon;
+    List<AppointmentListItem> AppointmentList;
 
     @Override
     protected void onResume() {
@@ -37,7 +38,7 @@ public class ViewAppointmentActivity extends DrawerActivity implements Appointme
         mDrawerList.setSelection(Globals.drawerPosition);
         if (clickedItem!=null)
          clickedItem.setEnabled(true);
-
+        getAppointments();
     }
 
     @Override
@@ -59,29 +60,26 @@ public class ViewAppointmentActivity extends DrawerActivity implements Appointme
 
         LinearLayoutManager llm = new LinearLayoutManager(getApplicationContext());
         rv.setLayoutManager(llm);
-//Static AppointmentView Code
-
-        List<AppointmentListItem> AppointmentList = new ArrayList<>();
 
         Resources res = getResources();
         TypedArray icons = res.obtainTypedArray(R.array.cat_icons);
         Drawable catIcon = icons.getDrawable(3);
 
-
-        AppointmentList.add(new AppointmentListItem(catIcon,"Dental clinic appointment","26 Apr 2015","1.00 PM","You are required to abstain from drinking water 12 hours before this appointment"));
+        AppointmentList = new ArrayList<>();
+        //AppointmentList.add(new AppointmentListItem(catIcon,"Dental clinic appointment","26 Apr 2015","1.00 PM","You are required to abstain from drinking water 12 hours before this appointment"));
         AppointmentListAdapter adapter = new AppointmentListAdapter(AppointmentList);
         adapter.SetOnItemClickListener(this);
         rv.setAdapter(adapter);
 
-
         session = new SessionManager(getApplicationContext());
 
-        getAppointments(session.getUserToken());
+        getAppointments();
 
     }
 
-    public void getAppointments(String accountToken){
-     /*   JSONObject obj = new JSONObject();
+    public void getAppointments(){
+        String accountToken = session.getUserToken();
+        JSONObject obj = new JSONObject();
         try {
             obj.put("accountToken", accountToken);
         } catch (Exception e) {
@@ -96,47 +94,48 @@ public class ViewAppointmentActivity extends DrawerActivity implements Appointme
                 getAppointmentsAysncReturn(jsonobj);
             }
         };
-        svc.setServiceLink("viewAppointments.php");
-        svc.execute(obj.toString());*/
+        svc.setServiceLink("viewAppts.php");
+        svc.execute(obj.toString());
     }
 
     public void getAppointmentsAysncReturn(JSONObject jsonobj){
-        List<AppointmentListItem> AppointmentList = new ArrayList<>();
+        AppointmentList = new ArrayList<>();
 
+        try{
+            SimpleDateFormat dateParser = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.ENGLISH);
 
-     //dont know why this is here   AppointmentList.add(new AppointmentListItem("Gastroenterology clinic appointment","26 Apr 2015","1.00 PM","You are required to abstain from drinking water 12 hours before this appointment"));
+            Resources res = getResources();
+            TypedArray icons = res.obtainTypedArray(R.array.cat_icons);
 
-        /*try{
             JSONArray jArray = jsonobj.getJSONArray("list");
             for(int i=0;i<jArray.length();i++){
-
                 JSONObject intO = jArray.getJSONObject(i);
 
                 //datetime formatter
                 String dateTime = intO.getString("DateTime");
-                SimpleDateFormat dateParser = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.ENGLISH);
                 Date date = dateParser.parse(dateTime);
 
                 String day = new SimpleDateFormat("dd MMM yyyy").format(date);
                 String time = new SimpleDateFormat("hh:mm a").format(date);
 
-                //stores symbol id
-                int symbolInt = R.drawable.gastro_ic;
+                Drawable catIcon = icons.getDrawable(intO.getInt("Category ID") - 20);
 
                 AppointmentList.add(new AppointmentListItem(
-                        symbolInt,
+                        catIcon,
                         intO.getString("Appointment Subcategory"),
                         day,
                         time,
-                        intO.getString("Instructions")
+                        intO.getString("Instructions"),
+                        intO.getInt("ID")
                 ));
             }
         } catch (Exception e){
-
+            Log.e("tagtag",e.toString());
         }
-*/
-      //  AppointmentListAdapter adapter = new AppointmentListAdapter(AppointmentList);
-      //  rv.setAdapter(adapter);
+
+        AppointmentListAdapter adapter = new AppointmentListAdapter(AppointmentList);
+        adapter.SetOnItemClickListener(this);
+        rv.setAdapter(adapter);
 
     }
 
@@ -146,8 +145,8 @@ public class ViewAppointmentActivity extends DrawerActivity implements Appointme
         view.setEnabled(false);
         Toast.makeText(ViewAppointmentActivity.this, "You clicked Item No. " + position, Toast.LENGTH_SHORT).show();
         Intent viewDetailsIntent = new Intent(this, ViewAppointmentDetailsActivity.class);
-        //TODO pass in the appointmentID to be displayede
-        viewDetailsIntent.putExtra("AppointmentID", 12098133); //Replace weird integer with Appointment ID from json object.
+        //TODO pass in the appointmentID to be displayed
+        viewDetailsIntent.putExtra("AppointmentID", AppointmentList.get(position).getApptID()); //Replace weird integer with Appointment ID from json object.  AppointmentList.get(position).getApptID()
         startActivity(viewDetailsIntent);
         overridePendingTransition(R.anim.pull_in_right, R.anim.push_out_left);
 

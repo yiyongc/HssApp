@@ -1,6 +1,7 @@
 package com.example.youngyeehomies.hssapp.Entities;
 
 
+import android.graphics.drawable.Drawable;
 
 /**
  * Created by Er Young Yee on 13/4/2015.
@@ -9,7 +10,7 @@ package com.example.youngyeehomies.hssapp.Entities;
  */
 public class AppointmentDetailsItem{
 
-    private int ApptCatID;
+    private Drawable ApptCatIcon;
     private String ApptCategoryName;
     private String ApptSubCategory;
     private String ApptClinic;
@@ -17,8 +18,8 @@ public class AppointmentDetailsItem{
     private String ApptTime;
     private String ApptNote;
 
-    public AppointmentDetailsItem(int ApptCatID, String ApptCategoryName, String ApptSubCategory,String ApptClinic, String ApptDate, String ApptTime, String ApptNote){
-        this.ApptCatID = ApptCatID;
+    public AppointmentDetailsItem(Drawable ApptCatIcon, String ApptCategoryName, String ApptSubCategory,String ApptClinic, String ApptDate, String ApptTime, String ApptNote){
+        this.ApptCatIcon = ApptCatIcon;
         this.ApptCategoryName = ApptCategoryName;
         this.ApptSubCategory = ApptSubCategory;
         this.ApptClinic = ApptClinic;
@@ -31,8 +32,8 @@ public class AppointmentDetailsItem{
     public String getApptClinic() { return ApptClinic;    }
 
     public String getApptSubCategory() {  return ApptSubCategory;   }
-    public int getApptCatID() {
-        return ApptCatID;
+    public Drawable getApptCatIcon() {
+        return ApptCatIcon;
     }
 
     public String getApptCategoryName() {

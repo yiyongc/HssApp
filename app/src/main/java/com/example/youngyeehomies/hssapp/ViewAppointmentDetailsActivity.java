@@ -1,6 +1,9 @@
 package com.example.youngyeehomies.hssapp;
 
 import android.app.Activity;
+import android.content.res.Resources;
+import android.content.res.TypedArray;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.v7.internal.view.menu.MenuView;
 import android.util.Log;
@@ -64,8 +67,7 @@ public class ViewAppointmentDetailsActivity extends Activity {
 
     public void populateAppointmentDetails(int value){
         //test item, to add Json Object code when working
-        String i = Integer.toString(value); // just to see if APpointmentID passes in
-        appointmentDetails = new AppointmentDetailsItem(R.drawable.women_ic,"Women's Clinic" + i, "Breast Scan", "Gibson Gynaecology","89 Feb 2035","1.00 PM","You are required to abstain from drinking water 12 hours before this appointment");
+     //   appointmentDetails = new AppointmentDetailsItem(R.drawable.women_ic,"Women's Clinic" + i, "Breast Scan", "Gibson Gynaecology","89 Feb 2035","1.00 PM","You are required to abstain from drinking water 12 hours before this appointment");
 
     }
 
@@ -80,7 +82,7 @@ public class ViewAppointmentDetailsActivity extends Activity {
         AppointmentDetailsClinic = (TextView) findViewById(R.id.appointment_details_clinic);
 
         if (appointmentDetails != null) {
-            AppointmentCatIcon.setImageResource(appointmentDetails.getApptCatID());
+            AppointmentCatIcon.setImageDrawable(appointmentDetails.getApptCatIcon());
             AppointmentDetailsNote.setText(appointmentDetails.getApptNote());
             AppointmentDetailsCatName.setText(appointmentDetails.getApptCategoryName());
             AppointmentDetailsSubCat.setText(appointmentDetails.getApptSubCategory());
@@ -116,20 +118,22 @@ public class ViewAppointmentDetailsActivity extends Activity {
     public void getAppointmentAsyncReturn(JSONObject jsonobj){
 
         try{
-            Log.e("tagtag",jsonobj.toString());
+
             if(jsonobj.getInt("errorCode")==0){
-                Log.e("tagtag","heretodo");
+
                 String dateTime = jsonobj.getString("DateTime");
                 SimpleDateFormat dateParser = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.ENGLISH);
                 Date date = dateParser.parse(dateTime);
+                Resources res = getResources();
+                TypedArray icons = res.obtainTypedArray(R.array.cat_icons);
 
                 String day = new SimpleDateFormat("dd MMM yyyy").format(date);
                 String time = new SimpleDateFormat("hh:mm a").format(date);
 
-                //TODO drawable
-                Log.e("tagtag","heretodo");
+                Drawable catIcon = icons.getDrawable(jsonobj.getInt("Category ID") - 20);
+
                 appointmentDetails = new AppointmentDetailsItem(
-                        R.drawable.women_ic,
+                        catIcon,
                         jsonobj.getString("Appointment Category"),
                         jsonobj.getString("Appointment Subcategory"),
                         jsonobj.getString("Clinic Name"),
@@ -137,7 +141,7 @@ public class ViewAppointmentDetailsActivity extends Activity {
                         time,
                         jsonobj.getString("Instructions")
                 );
-                Log.e("tagtag",jsonobj.getString("Instructions"));
+
                 displayAppointmentDetails();
             } else {
 
