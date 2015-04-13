@@ -14,8 +14,6 @@ import java.util.HashMap;
 public class EditProfileActivity extends DrawerActivity {
 
     SessionManager session;
-    private LinearLayout linearLayout;
-    private RadioGroup rg;
     EditText currentPasswordBox, newPasswordBox, newPasswordBox2;
 
 
@@ -39,10 +37,6 @@ public class EditProfileActivity extends DrawerActivity {
         newPasswordBox = (EditText) findViewById(R.id.change_new);
         newPasswordBox2 = (EditText) findViewById(R.id.change_new2);
 
-        //Populate RadioGroup
-        linearLayout = (LinearLayout) findViewById(R.id.changelinear);
-        PopulateClinicManager pcm = new PopulateClinicManager(this);
-        rg = pcm.addRadioGroup(linearLayout);
     }
 
     public void btnUpdatePassword(View view) {
@@ -75,8 +69,7 @@ public class EditProfileActivity extends DrawerActivity {
     }
 
     public void btnUpdateClinic(View view) {
-        int newDefaultClinicID = rg.getCheckedRadioButtonId();
-        //update new clinic
+
         Toast.makeText(EditProfileActivity.this, "New default clinic updated!", Toast.LENGTH_SHORT).show();
         finish();
     }

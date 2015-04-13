@@ -11,6 +11,7 @@ import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.RadioGroup;
 import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.Toast;
 import java.util.Calendar;
 
@@ -67,15 +68,25 @@ public class CreateAppointmentActivity extends DrawerActivity {
 
     public void createAppointment(View view) {
 
-        //int selectedId = rg.getCheckedRadioButtonId(); //the index of the item in the RadioGroup
-        //getDate and timeSlot and create the JSON object
+        String dateTimeObject, selectedDate, selectedTime;
+        TextView selectedDateTV = (TextView) findViewById(R.id.dateSelected);
+        Spinner selectedTimeSpinner = (Spinner) findViewById(R.id.timeSlotSelection);
+        selectedDate = selectedDateTV.getText().toString();
+        selectedTime = selectedTimeSpinner.getSelectedItem().toString();
+
+        dateTimeObject = new DateTimeConverter().convertDateAndTime(selectedDate, selectedTime);
+        
+        TextView test = (TextView) findViewById(R.id.textView33);
+        test.setText(dateTimeObject);
+
 
         Intent completedCreationIntent = new Intent(this, ViewAppointmentActivity.class);
 
         if(true) {
             Toast.makeText(CreateAppointmentActivity.this, "Appointment has been created! A reminder notification will be sent one day before the day of the appointment!", Toast.LENGTH_LONG).show();
-            startActivity(completedCreationIntent);
-            finish();
+            //startActivity(completedCreationIntent);
+            //finish();
+
         }
         else {
             Toast.makeText(CreateAppointmentActivity.this, "Appointment Creation Failed.", Toast.LENGTH_SHORT).show();

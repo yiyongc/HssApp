@@ -18,16 +18,16 @@ import java.util.Calendar;
 
 public class CreateAppointmentFragment3 extends Fragment {
 
-    Button dateSelectorBtn;
     String[] timeSlotsAvailable;
     Spinner timeSlotSpinner;
+    String selectedDate, selectedClinic, selectedApptType;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
-        String selectedClinic = getArguments().getString("selectedClinic");
-        String selectedDate = getArguments().getString("selectedDate");
-        String selectedApptType = getArguments().getString("selectedApptType");
+        selectedClinic = getArguments().getString("selectedClinic");
+        selectedDate = getArguments().getString("selectedDate");
+        selectedApptType = getArguments().getString("selectedApptType");
 
         timeSlotsAvailable = getResources().getStringArray(R.array.timeslot);
 
@@ -49,7 +49,6 @@ public class CreateAppointmentFragment3 extends Fragment {
         timeSlotSpinner = (Spinner) v.findViewById(R.id.timeSlotSelection);
         CustomSpinnerAdapter customAdapter = new CustomSpinnerAdapter(v.getContext(), R.layout.custom_spinner_layout, timeSlotsAvailable);
         timeSlotSpinner.setAdapter(customAdapter);
-
 
         return v;
     }
