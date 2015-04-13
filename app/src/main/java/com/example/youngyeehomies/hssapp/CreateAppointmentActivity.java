@@ -8,6 +8,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.LinearLayout;
 import android.widget.RadioGroup;
 import android.widget.Spinner;
@@ -31,6 +32,7 @@ public class CreateAppointmentActivity extends DrawerActivity {
     int typeID;
     String apptType, clinic, date;
     int day, month, year;
+    String[] clinics;
 
     @Override
     protected void onResume() {
@@ -79,17 +81,18 @@ public class CreateAppointmentActivity extends DrawerActivity {
         test.setText(dateTimeObject);
 
         Intent completedCreationIntent = new Intent(this, ViewAppointmentActivity.class);
-
-        //Declare and trigger web serice
+        CheckBox referralCheckBox = (CheckBox) findViewById(R.id.referralCheckBox);
+        int referralValue = (referralCheckBox.isChecked() ? 1:0);
+        //Declare and trigger web service
         String accountToken = session.getUserToken();
         JSONObject obj = new JSONObject();
         try {
             //YIYONG PUT YOUR ITEMS HEREEEEE
             obj.put("accountToken", accountToken);
-            obj.put("clinicID", );
-            obj.put("apptSubcategoryID", );
-            obj.put("dateTime", );
-            obj.put("isReferral", );
+            obj.put("clinicID", clinic);
+            obj.put("apptSubcategoryID", typeID);
+            obj.put("dateTime", dateTimeObject);
+            obj.put("isReferral", referralValue);
         } catch (Exception e) {
 
         }
@@ -127,7 +130,7 @@ public class CreateAppointmentActivity extends DrawerActivity {
     public void btnNext1(View view) {
 
         typeSpinner = (Spinner) findViewById(R.id.apptTypeSpinner);
-        typeID = typeSpinner.getSelectedItemPosition();
+        typeID = typeSpinner.getSelectedItemPosition()+1;
         apptType = typeSpinner.getSelectedItem().toString();
 
         Bundle args = new Bundle();
@@ -146,7 +149,7 @@ public class CreateAppointmentActivity extends DrawerActivity {
         try {
             //YIYONG PUT YOUR ITEMS HEREEEEE
             obj.put("accountToken", accountToken);
-            obj.put("ID", );
+            obj.put("ID", typeID);
             //this id is the apptsubcategoryid
         } catch (Exception e) {
 
@@ -214,9 +217,9 @@ public class CreateAppointmentActivity extends DrawerActivity {
         try {
             //YIYONG PUT YOUR ITEMS HEREEEEE
             obj.put("accountToken", accountToken);
-            obj.put("ApptSubcategoryID" , );
-            obj.put("ClinicID" , );
-            obj.put("Date" , );
+            obj.put("ApptSubcategoryID" , typeID);
+            obj.put("ClinicID" , clinic);
+            obj.put("Date" , new DateTimeConverter().convertDate(date));
         } catch (Exception e) {
 
         }
