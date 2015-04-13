@@ -7,5 +7,5 @@ public class Globals {
     public static int drawerPosition=1;
 
     //replace IP with relevant server hosting web services
-    public static final String serverURL = "http://192.168.0.108/xampp/testwebservice/";
+    public static final String serverURL = "http://10.27.254.15/xampp/testwebservice/";
 }
