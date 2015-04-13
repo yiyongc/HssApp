@@ -14,6 +14,9 @@ import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.Toast;
 
+import org.json.JSONArray;
+import org.json.JSONObject;
+
 public class RegisterActivity extends Activity {
 
     //private LinearLayout linearLayout;
@@ -93,17 +96,24 @@ public class RegisterActivity extends Activity {
         }
         */
 
-        RegistrationManager regManager = new RegistrationManager(username, password, token);
-        //regManager.execute("url", regManager.NETWORK_STATE_REGISTER);
-        Intent intent = new Intent(this,LoginActivity.class);
+        RegistrationManager regManager = new RegistrationManager(this);
+        regManager.tryRegister(username, password, token);
 
-        //Send json object
-        //if accepted
-        Toast.makeText(RegisterActivity.this, "Account has been registered successfully!", Toast.LENGTH_SHORT).show();
-        finish();
-        //else
-        //Toast.makeText(RegisterActivity.this, "Registration Failed", Toast.LENGTH_SHORT).show();
+    }
 
+    public void onSendRegDataAsyncReturn(JSONObject jsonobj){
+        try{
+            if(jsonobj.getInt("errorCode")==0) {
+                Toast.makeText(RegisterActivity.this, "Account has been registered successfully!", Toast.LENGTH_SHORT).show();
+                finish();
+            }
+            else {
+                Toast.makeText(this, "Appointment Creation Failed.", Toast.LENGTH_SHORT).show();
+            }
+
+        } catch (Exception e){
+
+        }
     }
 
 
