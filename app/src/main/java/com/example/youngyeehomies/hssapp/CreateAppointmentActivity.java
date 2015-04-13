@@ -251,6 +251,7 @@ public class CreateAppointmentActivity extends DrawerActivity {
                 intObj.getString("timeslot");
                 //Populate list
             }
+            
 
             //set spinner contents
 
