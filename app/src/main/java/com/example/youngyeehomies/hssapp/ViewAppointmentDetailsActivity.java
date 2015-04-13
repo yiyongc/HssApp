@@ -50,7 +50,7 @@ public class ViewAppointmentDetailsActivity extends Activity {
     public void populateAppointmentDetails(int value){
         //test item, to add Json Object code when working
         String i = Integer.toString(value); // just to see if APpointmentID passes in
-        appointmentDetails = new AppointmentDetailsItem(R.drawable.gastro_ic,"Women's Clinic" + i, "Breast Scan", "Gibson Gynaecology","89 Feb 2035","1.00 PM","You are required to abstain from drinking water 12 hours before this appointment");
+        appointmentDetails = new AppointmentDetailsItem(R.drawable.women_ic,"Women's Clinic" + i, "Breast Scan", "Gibson Gynaecology","89 Feb 2035","1.00 PM","You are required to abstain from drinking water 12 hours before this appointment");
 
     }
 

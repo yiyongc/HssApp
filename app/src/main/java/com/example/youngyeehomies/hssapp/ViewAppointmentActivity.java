@@ -128,6 +128,7 @@ public class ViewAppointmentActivity extends DrawerActivity implements Appointme
 
     @Override
     public void onItemClick(View view, int position) {
+        view.setEnabled(false);
         Toast.makeText(ViewAppointmentActivity.this, "You clicked Item No. " + position, Toast.LENGTH_SHORT).show();
         Intent viewDetailsIntent = new Intent(this, ViewAppointmentDetailsActivity.class);
         //TODO pass in the appointmentID to be displayede

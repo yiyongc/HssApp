@@ -40,7 +40,6 @@
                 android:text="Consultation"
                 android:paddingRight="6dp"
                 android:layout_alignParentTop="true"
-                android:layout_above="@+id/appointment_details_notes"
                 android:layout_toLeftOf="@+id/appointment_date"
                 android:layout_toRightOf="@+id/appointment_cat_icon"
                 android:layout_toEndOf="@+id/appointment_cat_icon" />
@@ -50,10 +49,11 @@
                 android:layout_height="wrap_content"
                 android:id="@+id/appointment_notes"
                 android:textColor="#888888"
-                android:text="Please abstain from drinking water 2 hours before appointment. Also do note that you cannot eat as well"
-                android:layout_below="@+id/appointment_cat_icon"
-                android:layout_toRightOf="@+id/appointment_cat_icon"
-                android:layout_toEndOf="@+id/appointment_cat_icon" />
+                android:text="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. "
+                android:layout_below="@+id/appointment_cat_name"
+                android:layout_alignStart="@+id/appointment_cat_name"
+                android:layout_alignLeft="@+id/appointment_cat_name"
+                android:layout_marginTop="10dp"/>
 
             <TextView
                 android:layout_width="wrap_content"
