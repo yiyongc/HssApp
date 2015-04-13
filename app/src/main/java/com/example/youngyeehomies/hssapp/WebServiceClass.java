@@ -34,7 +34,7 @@ public class WebServiceClass extends AsyncTask<String, Void, Object> {
             InputStream inputstream = resultentity.getContent();
             String resultstring = convertStreamToString(inputstream);
             inputstream.close();
-            //Log.e("Web Service Output",resultstring);
+            Log.e("Web Service Output",resultstring);
             JSONObject recvdjson = new JSONObject(resultstring);
             return recvdjson;
         } catch (Exception e) {

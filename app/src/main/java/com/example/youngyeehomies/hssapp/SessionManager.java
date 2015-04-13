@@ -27,7 +27,7 @@ public class SessionManager {
     // NRIC (make variable public to access from outside)
     public static final String KEY_NRIC = "nric";
 
-    public static final String KEY_TOKEN = "token";
+    public static String KEY_TOKEN = "token";
 
     // Constructor
     public SessionManager(Context c){
@@ -47,7 +47,7 @@ public class SessionManager {
     }
 
     public void createLoginSession(String token) {
-
+        KEY_TOKEN = token;
         editor.putBoolean(IS_LOGIN, true);
         editor.putString(KEY_TOKEN, token);
 

@@ -184,7 +184,7 @@ public class CreateAppointmentActivity extends DrawerActivity {
                 //Populate list
             }
 
-            //set spinner contents
+            //Populate Spinner
 
         } catch (Exception e){
 

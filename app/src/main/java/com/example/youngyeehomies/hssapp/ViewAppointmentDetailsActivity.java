@@ -3,6 +3,7 @@ package com.example.youngyeehomies.hssapp;
 import android.app.Activity;
 import android.os.Bundle;
 import android.support.v7.internal.view.menu.MenuView;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -13,8 +14,16 @@ import android.widget.Toast;
 
 import com.example.youngyeehomies.hssapp.Entities.AppointmentDetailsItem;
 
+import org.json.JSONObject;
+
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.Locale;
+
 
 public class ViewAppointmentDetailsActivity extends Activity {
+
+    SessionManager session;
 
     AppointmentDetailsItem appointmentDetails;
     int AppointmentID;
@@ -31,13 +40,19 @@ public class ViewAppointmentDetailsActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_view_appointment_details);
+
+        session = new SessionManager(getApplicationContext());
+
         Bundle extras = getIntent().getExtras();
         if(extras !=null) {
-            int value = extras.getInt("AppointmentID");
+            AppointmentID = extras.getInt("AppointmentID");
+            //Log.e("tagtag",""+ AppointmentID);
             //populate text views and image views with data method
-            populateAppointmentDetails(value);
-            displayAppointmentDetails();
 
+            getAppointment(session.getUserToken());
+
+            //populateAppointmentDetails(value);
+            //displayAppointmentDetails();
 
         }
         else{
@@ -76,6 +91,63 @@ public class ViewAppointmentDetailsActivity extends Activity {
         }
 
     }
+
+    public void getAppointment(String accountToken){
+        JSONObject obj = new JSONObject();
+        try {
+            obj.put("accountToken", accountToken);
+            obj.put("ID", AppointmentID);
+        } catch (Exception e) {
+
+        }
+
+        WebServiceClass svc = new WebServiceClass(){
+            @Override
+            protected void onPostExecute(Object o){
+                //To Override
+                JSONObject jsonobj = (JSONObject)o;
+                getAppointmentAsyncReturn(jsonobj);
+            }
+        };
+        svc.setServiceLink("viewAppt.php");
+        svc.execute(obj.toString());
+    }
+
+    public void getAppointmentAsyncReturn(JSONObject jsonobj){
+
+        try{
+            Log.e("tagtag",jsonobj.toString());
+            if(jsonobj.getInt("errorCode")==0){
+                Log.e("tagtag","heretodo");
+                String dateTime = jsonobj.getString("DateTime");
+                SimpleDateFormat dateParser = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.ENGLISH);
+                Date date = dateParser.parse(dateTime);
+
+                String day = new SimpleDateFormat("dd MMM yyyy").format(date);
+                String time = new SimpleDateFormat("hh:mm a").format(date);
+
+                //TODO drawable
+                Log.e("tagtag","heretodo");
+                appointmentDetails = new AppointmentDetailsItem(
+                        R.drawable.women_ic,
+                        jsonobj.getString("Appointment Category"),
+                        jsonobj.getString("Appointment Subcategory"),
+                        jsonobj.getString("Clinic Name"),
+                        day,
+                        time,
+                        jsonobj.getString("Instructions")
+                );
+                Log.e("tagtag",jsonobj.getString("Instructions"));
+                displayAppointmentDetails();
+            } else {
+
+            }
+        } catch (Exception e){
+            Log.e("tagtag",e.toString());
+        }
+    }
+
+
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
@@ -107,13 +179,42 @@ public class ViewAppointmentDetailsActivity extends Activity {
         //TODO Delete Appointment JSON
         ImageButton deleteButton = (ImageButton)findViewById(R.id.delete_appointment_button);
         deleteButton.setEnabled(false);
-        if (true) {
-            Toast.makeText(this, "Deleted Appointment Object", Toast.LENGTH_SHORT).show();
-            finish();
+
+        //TWeb Service
+        String accountToken = session.getUserToken();
+        JSONObject obj = new JSONObject();
+        try {
+            obj.put("accountToken", accountToken);
+            obj.put("ID", AppointmentID);
+        } catch (Exception e) {
 
         }
-        else {
-            deleteButton.setEnabled(true);
-        }
+
+        WebServiceClass svc = new WebServiceClass(){
+            @Override
+            protected void onPostExecute(Object o){
+                //To Override
+                JSONObject jsonobj = (JSONObject)o;
+                deleteAppointmentAsyncReturn(jsonobj);
+            }
+        };
+        svc.setServiceLink("deleteAppt.php");
+        svc.execute(obj.toString());
+
+    }
+
+    public void deleteAppointmentAsyncReturn(JSONObject jsonobj){
+        try{
+            if (jsonobj.getInt("errorCode")==0) {
+                Toast.makeText(this, "Deleted Appointment Object", Toast.LENGTH_SHORT).show();
+                finish();
+            }
+            else {
+                ImageButton deleteButton = (ImageButton)findViewById(R.id.delete_appointment_button);
+                deleteButton.setEnabled(true);
+            }
+        } catch (Exception e) {}
+
+
     }
 }
