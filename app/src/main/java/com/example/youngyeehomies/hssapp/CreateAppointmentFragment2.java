@@ -12,6 +12,7 @@ import android.widget.Button;
 import android.widget.Spinner;
 import android.widget.TextView;
 
+import java.text.DecimalFormat;
 import java.util.Calendar;
 
 public class CreateAppointmentFragment2 extends Fragment {
@@ -42,9 +43,11 @@ public class CreateAppointmentFragment2 extends Fragment {
         int year = c.get(Calendar.YEAR);
         int month = c.get(Calendar.MONTH);
         int day = c.get(Calendar.DAY_OF_MONTH);
+        DecimalFormat twoFormat = new DecimalFormat("00");
 
         dateSelectorBtn = (Button) v.findViewById(R.id.dateSlotSelection);
-        dateSelectorBtn.setText(new StringBuilder().append(day).append("-").append(month + 1).append("-").append(year).append(" "));
+        dateSelectorBtn.setText(new StringBuilder().append(twoFormat.format(day)).append("-").append(twoFormat.format(month + 1))
+                .append("-").append(new DecimalFormat("0000").format(year)).append(" "));
 
         addListenerOnDateButton();
 

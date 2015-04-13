@@ -19,13 +19,12 @@ import java.util.List;
 public class RegistrationManager extends AsyncTask {
 
     public static final int NETWORK_STATE_REGISTER = 1;
-    String username, password, token, defaultClinic;
+    String username, password, token;
 
-    public RegistrationManager(String user, String pass, String t, String defaultclinic) {
+    public RegistrationManager(String user, String pass, String t) {
         username = user;
         password = pass;
         token = t;
-        defaultClinic = defaultclinic;
     }
 
     @Override
@@ -49,7 +48,7 @@ public class RegistrationManager extends AsyncTask {
                 postParameters.add(new BasicNameValuePair("userName", username));
                 postParameters.add(new BasicNameValuePair("password", password));
                 postParameters.add(new BasicNameValuePair("token", token));
-                postParameters.add(new BasicNameValuePair("defaultClinic", defaultClinic));
+                //postParameters.add(new BasicNameValuePair("defaultClinic", defaultClinic));
                 valid = true;
                 break;
             default:

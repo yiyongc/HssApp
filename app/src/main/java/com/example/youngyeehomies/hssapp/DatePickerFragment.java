@@ -9,6 +9,7 @@ import android.widget.DatePicker;
 import android.widget.Toast;
 
 
+import java.text.DecimalFormat;
 import java.util.Calendar;
 
 public class DatePickerFragment extends DialogFragment
@@ -41,7 +42,9 @@ public class DatePickerFragment extends DialogFragment
             month = selectedMonth;
             day = selectedDay;
 
-            activityButton.setText(new StringBuilder().append(day).append("-").append(month + 1).append("-").append(year).append(" "));
+            DecimalFormat twoFormat = new DecimalFormat("00");
+
+            activityButton.setText(new StringBuilder().append(twoFormat.format(day)).append("-").append(twoFormat.format(month + 1)).append("-").append(year).append(" "));
         }
     }
 

@@ -7,6 +7,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.RadioButton;
@@ -15,9 +16,10 @@ import android.widget.Toast;
 
 public class RegisterActivity extends Activity {
 
-    private LinearLayout linearLayout;
-    private RadioGroup rg;
+    //private LinearLayout linearLayout;
+    //private RadioGroup rg;
     EditText usernameBox, passwordBox, passwordBox2, tokenBox;
+    CheckBox email, sms;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,10 +31,10 @@ public class RegisterActivity extends Activity {
         passwordBox2 = (EditText) findViewById(R.id.reg_password2);
         tokenBox = (EditText) findViewById(R.id.reg_token);
 
-        //Populate RadioGroup
+        /*Populate RadioGroup
         linearLayout = (LinearLayout) findViewById(R.id.defaultClinicLayout);
         PopulateClinicManager pcm = new PopulateClinicManager(this);
-        rg = pcm.addRadioGroup(linearLayout);
+        rg = pcm.addRadioGroup(linearLayout);*/
     }
 
     @Override
@@ -63,7 +65,7 @@ public class RegisterActivity extends Activity {
         String password = passwordBox.getText()+"";
         String password2 = passwordBox2.getText()+"";
         String token = tokenBox.getText()+"";
-        String defaultClinic = rg.getCheckedRadioButtonId()+"";
+        //String defaultClinic = rg.getCheckedRadioButtonId()+"";
 
         //Field checking
         if (username.length() == 0 || password.length() == 0 || password2.length() == 0 || token.length() == 0) {
@@ -91,7 +93,7 @@ public class RegisterActivity extends Activity {
         }
         */
 
-        RegistrationManager regManager = new RegistrationManager(username, password, token, defaultClinic);
+        RegistrationManager regManager = new RegistrationManager(username, password, token);
         //regManager.execute("url", regManager.NETWORK_STATE_REGISTER);
         Intent intent = new Intent(this,LoginActivity.class);
 

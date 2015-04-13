@@ -27,7 +27,7 @@
     <string name="forgotpassword"><u>Forgot your password?</u></string>
     <string name="rememberme">Remember me</string>
     <string name="changePassword"><u>Change Password</u></string>
-    <string name="changedefaultclinic"><u>Change Default Clinic</u></string>
+    <string name="changenotification"><u>Change Notification Type</u></string>
     <string name="selecttypeappt"><b><u>Select Type of Appointment</u></b></string>
     <string name="previous"><![CDATA[<< Prev]]></string>
     <string name="next"><![CDATA[Next >>]]></string>
