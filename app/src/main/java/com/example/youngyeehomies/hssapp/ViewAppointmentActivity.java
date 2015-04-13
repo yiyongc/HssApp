@@ -23,6 +23,7 @@ public class ViewAppointmentActivity extends DrawerActivity implements Appointme
 
     SessionManager session;
     RecyclerView rv;
+    View clickedItem;
 
     @Override
     protected void onResume() {
@@ -30,6 +31,9 @@ public class ViewAppointmentActivity extends DrawerActivity implements Appointme
         Globals.drawerPosition = 1;
         mDrawerList.setItemChecked(Globals.drawerPosition, true);
         mDrawerList.setSelection(Globals.drawerPosition);
+        if (clickedItem!=null)
+         clickedItem.setEnabled(true);
+
     }
 
     @Override
@@ -128,6 +132,7 @@ public class ViewAppointmentActivity extends DrawerActivity implements Appointme
 
     @Override
     public void onItemClick(View view, int position) {
+        clickedItem = view;
         view.setEnabled(false);
         Toast.makeText(ViewAppointmentActivity.this, "You clicked Item No. " + position, Toast.LENGTH_SHORT).show();
         Intent viewDetailsIntent = new Intent(this, ViewAppointmentDetailsActivity.class);
@@ -137,4 +142,6 @@ public class ViewAppointmentActivity extends DrawerActivity implements Appointme
         overridePendingTransition(R.anim.pull_in_right, R.anim.push_out_left);
 
     }
+
+
 }

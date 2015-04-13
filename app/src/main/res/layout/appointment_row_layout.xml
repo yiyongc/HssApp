@@ -37,7 +37,7 @@
                 android:textSize="16sp"
                 android:textColor="#222222"
                 android:textStyle="bold"
-                android:text="Consultation"
+                android:text="ConsultationConsultationConsultationConsultation"
                 android:paddingRight="6dp"
                 android:layout_alignParentTop="true"
                 android:layout_toLeftOf="@+id/appointment_date"
@@ -53,7 +53,7 @@
                 android:layout_below="@+id/appointment_cat_name"
                 android:layout_alignStart="@+id/appointment_cat_name"
                 android:layout_alignLeft="@+id/appointment_cat_name"
-                android:layout_marginTop="10dp"/>
+                android:layout_marginTop="15dp"/>
 
             <TextView
                 android:layout_width="wrap_content"
