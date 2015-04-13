@@ -71,6 +71,7 @@ public class GcmIntentService extends IntentService {
                 // If it's a regular GCM message, do some work.
             } else if (GoogleCloudMessaging.MESSAGE_TYPE_MESSAGE.equals(messageType)) {
                 // This loop represents the service doing some work.
+                /*
                 for (int i = 0; i < 5; i++) {
                     Log.i(TAG, "Working... " + (i + 1)
                             + "/5 @ " + SystemClock.elapsedRealtime());
@@ -80,6 +81,7 @@ public class GcmIntentService extends IntentService {
                     }
                 }
                 Log.i(TAG, "Completed work @ " + SystemClock.elapsedRealtime());
+                */
                 // Post notification of received message.
                 //sendNotification("Received: " + extras.toString());
                 sendNotification("You have a new appointment instruction to check!");

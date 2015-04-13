@@ -399,12 +399,14 @@ public class LoginActivity extends Activity{
         try{
             if(jsonobj.getInt("errorCode")==0) {
                 Log.e(TAG, "GCM registered!");
-                Toast.makeText(LoginActivity.this, "GCM registered!", Toast.LENGTH_LONG).show();
+                if(jsonobj.getInt("success")==1) {
+                    Toast.makeText(LoginActivity.this, "Subscribed to notifications!", Toast.LENGTH_LONG).show();
+                }
             }
             else {
                 Log.e(TAG, "GCM not registered :(");
                 Log.e(TAG, "errorCode: " + jsonobj.getInt("errorCode") + " errorMsg: " + jsonobj.getString("errorMsg"));
-                Toast.makeText(LoginActivity.this, "GCM not registered :(", Toast.LENGTH_SHORT).show();
+                //Toast.makeText(LoginActivity.this, "GCM not registered :(", Toast.LENGTH_SHORT).show();
             }
         } catch (Exception e){
             Log.e(TAG, "registerGCMAsyncReturn exception");
