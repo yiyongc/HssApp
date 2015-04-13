@@ -40,7 +40,7 @@
                 android:text="Consultation"
                 android:paddingRight="6dp"
                 android:layout_alignParentTop="true"
-                android:layout_above="@+id/appointment_notes"
+                android:layout_above="@+id/appointment_details_notes"
                 android:layout_toLeftOf="@+id/appointment_date"
                 android:layout_toRightOf="@+id/appointment_cat_icon"
                 android:layout_toEndOf="@+id/appointment_cat_icon" />

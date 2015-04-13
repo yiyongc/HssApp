@@ -42,7 +42,6 @@
         <item>View Notifications</item>
         <item>Log Out</item>
     </string-array>
-
     <string-array name="appointmentTypes">
         <item>General Check-up</item>
         <item>General Dental Check-up</item>
@@ -78,8 +77,8 @@
         <item>05:30 P.M.</item>
     </string-array>
 
-    <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="title_activity_view_appointment_details">ViewAppointmentDetailsActivity</string>
+    <string name="title_activity_view_old_appointments">ViewOldAppointmentsActivity</string>
     <string name="hello_world">Hello world!</string>
 
 </resources>

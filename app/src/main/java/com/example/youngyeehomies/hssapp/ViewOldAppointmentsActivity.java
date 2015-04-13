@@ -13,13 +13,14 @@ import com.example.youngyeehomies.hssapp.Entities.AppointmentListItem;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
+import java.io.Serializable;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 
-public class ViewAppointmentActivity extends DrawerActivity implements AppointmentListAdapter.OnItemClickListener{
+public class ViewOldAppointmentsActivity extends DrawerActivity implements AppointmentListAdapter.OnItemClickListener{
 
     SessionManager session;
     RecyclerView rv;
@@ -45,13 +46,11 @@ public class ViewAppointmentActivity extends DrawerActivity implements Appointme
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        setContentView(R.layout.view_appointment_layout);
-
+        setContentView(R.layout.activity_view_old_appointments);
         rv = (RecyclerView)findViewById(R.id.rv);
 
         LinearLayoutManager llm = new LinearLayoutManager(getApplicationContext());
         rv.setLayoutManager(llm);
-//Static AppointmentView Code
 
         List<AppointmentListItem> AppointmentList = new ArrayList<>();
         AppointmentList.add(new AppointmentListItem(R.drawable.gastro_ic,"Gastroenterology clinic appointment","26 Apr 2015","1.00 PM","You are required to abstain from drinking water 12 hours before this appointment"));
@@ -121,18 +120,20 @@ public class ViewAppointmentActivity extends DrawerActivity implements Appointme
 
         }
 */
-      //  AppointmentListAdapter adapter = new AppointmentListAdapter(AppointmentList);
-      //  rv.setAdapter(adapter);
+        //  AppointmentListAdapter adapter = new AppointmentListAdapter(AppointmentList);
+        //  rv.setAdapter(adapter);
 
     }
 
     @Override
     public void onItemClick(View view, int position) {
-        Toast.makeText(ViewAppointmentActivity.this, "You clicked Item No. " + position, Toast.LENGTH_SHORT).show();
+        //TODO remove once this part is fully working
+        Toast.makeText(ViewOldAppointmentsActivity.this, "You clicked Item No. " + position, Toast.LENGTH_SHORT).show();
         Intent viewDetailsIntent = new Intent(this, ViewAppointmentDetailsActivity.class);
-        //TODO pass in the appointmentID to be displayede
-        viewDetailsIntent.putExtra("AppointmentID", 12098133); //Replace weird integer with Appointment ID from json object.
+        //TODO pass in the appointmentID to be displayed
+        viewDetailsIntent.putExtra("AppointmentID",13129); //Replace weird integer with Appointment ID from json object.
         startActivity(viewDetailsIntent);
+
         overridePendingTransition(R.anim.pull_in_right, R.anim.push_out_left);
 
     }

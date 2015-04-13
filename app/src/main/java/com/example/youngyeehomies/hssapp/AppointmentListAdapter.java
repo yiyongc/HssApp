@@ -74,7 +74,7 @@ public class AppointmentListAdapter extends RecyclerView.Adapter<AppointmentList
     public void onBindViewHolder(AppointmentViewHolder appointmentViewHolder, int i) {
         appointmentViewHolder.ApptCategoryName.setText(appointments.get(i).getApptCategoryName());
         appointmentViewHolder.ApptNotes.setText(appointments.get(i).getApptNote());
-        appointmentViewHolder.ApptCatIcon.setImageResource(appointments.get(i).getApptSubcategoryID());
+        appointmentViewHolder.ApptCatIcon.setImageResource(appointments.get(i).getApptCatID());
         appointmentViewHolder.ApptDate.setText(appointments.get(i).getApptDate());
         appointmentViewHolder.ApptTime.setText(appointments.get(i).getApptTime());
     }
