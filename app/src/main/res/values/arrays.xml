@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+
+    <array name="cat_icons">
+        <item>@drawable/general_ic</item>
+        <item>@drawable/baby_ic</item>
+        <item>@drawable/ent_ic</item>
+        <item>@drawable/dental_ic</item>
+        <item>@drawable/women_ic</item>
+
+    </array>
+</resources>

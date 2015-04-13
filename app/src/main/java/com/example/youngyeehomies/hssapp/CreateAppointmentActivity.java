@@ -85,11 +85,11 @@ public class CreateAppointmentActivity extends DrawerActivity {
         JSONObject obj = new JSONObject();
         try {
             //YIYONG PUT YOUR ITEMS HEREEEEE
-            obj.put("accountToken", accountToken);
+          /*  obj.put("accountToken", accountToken);
             obj.put("clinicID", );
             obj.put("apptSubcategoryID", );
             obj.put("dateTime", );
-            obj.put("isReferral", );
+            obj.put("isReferral", );*/
         } catch (Exception e) {
 
         }
@@ -144,9 +144,9 @@ public class CreateAppointmentActivity extends DrawerActivity {
         String accountToken = session.getUserToken();
         JSONObject obj = new JSONObject();
         try {
-            //YIYONG PUT YOUR ITEMS HEREEEEE
+          /*  //YIYONG PUT YOUR ITEMS HEREEEEE
             obj.put("accountToken", accountToken);
-            obj.put("ID", );
+            obj.put("ID", );*/
             //this id is the apptsubcategoryid
         } catch (Exception e) {
 
@@ -212,11 +212,11 @@ public class CreateAppointmentActivity extends DrawerActivity {
         String accountToken = session.getUserToken();
         JSONObject obj = new JSONObject();
         try {
-            //YIYONG PUT YOUR ITEMS HEREEEEE
+           /* //YIYONG PUT YOUR ITEMS HEREEEEE
             obj.put("accountToken", accountToken);
             obj.put("ApptSubcategoryID" , );
             obj.put("ClinicID" , );
-            obj.put("Date" , );
+            obj.put("Date" , );*/
         } catch (Exception e) {
 
         }

@@ -38,7 +38,7 @@
                 android:layout_alignParentLeft="true"
                 android:layout_alignParentTop="true"
                 android:layout_marginRight="16dp"
-                android:src="@drawable/consultation_ic" />
+                android:src="@drawable/general_ic" />
 
             <TextView
                 android:layout_width="wrap_content"

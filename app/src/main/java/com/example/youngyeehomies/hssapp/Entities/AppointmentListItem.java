@@ -1,6 +1,7 @@
 package com.example.youngyeehomies.hssapp.Entities;
 
 
+import android.graphics.drawable.Drawable;
 
 /**
  * Created by Er Young Yee on 11/4/2015.
@@ -10,14 +11,14 @@ package com.example.youngyeehomies.hssapp.Entities;
 public class AppointmentListItem {
 
     //probably have to add more variables?
-    private int ApptCatID;
+    private Drawable ApptCatIcon;
     private String ApptCategoryName;
     private String ApptDate;
     private String ApptTime;
     private String ApptNote;
 
-    public AppointmentListItem(int ApptSubcatID, String ApptCategoryName, String ApptDate, String ApptTime, String ApptNote){
-        this.ApptCatID = ApptSubcatID;
+    public AppointmentListItem(Drawable ApptSubcatID, String ApptCategoryName, String ApptDate, String ApptTime, String ApptNote){
+        this.ApptCatIcon = ApptSubcatID;
         this.ApptCategoryName = ApptCategoryName;
         this.ApptDate = ApptDate;
         this.ApptTime = ApptTime;
@@ -25,7 +26,7 @@ public class AppointmentListItem {
 
     }
 
-    public int getApptCatID() {      return ApptCatID;}
+    public Drawable getApptCatIcon() {      return ApptCatIcon;}
 
     public String getApptCategoryName() {
         return ApptCategoryName;

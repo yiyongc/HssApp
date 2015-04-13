@@ -53,7 +53,7 @@ public class ViewOldAppointmentsActivity extends DrawerActivity implements Appoi
         rv.setLayoutManager(llm);
 
         List<AppointmentListItem> AppointmentList = new ArrayList<>();
-        AppointmentList.add(new AppointmentListItem(R.drawable.gastro_ic,"Gastroenterology clinic appointment","26 Apr 2015","1.00 PM","You are required to abstain from drinking water 12 hours before this appointment"));
+      //  AppointmentList.add(new AppointmentListItem(R.drawable.gastro_ic,"Gastroenterology clinic appointment","26 Apr 2015","1.00 PM","You are required to abstain from drinking water 12 hours before this appointment"));
         AppointmentListAdapter adapter = new AppointmentListAdapter(AppointmentList);
         adapter.SetOnItemClickListener(this);
         rv.setAdapter(adapter);
@@ -89,7 +89,7 @@ public class ViewOldAppointmentsActivity extends DrawerActivity implements Appoi
         List<AppointmentListItem> AppointmentList = new ArrayList<>();
 
 
-        AppointmentList.add(new AppointmentListItem(R.drawable.gastro_ic,"Gastroenterology clinic appointment","26 Apr 2015","1.00 PM","You are required to abstain from drinking water 12 hours before this appointment"));
+      //  AppointmentList.add(new AppointmentListItem(R.drawable.gastro_ic,"Gastroenterology clinic appointment","26 Apr 2015","1.00 PM","You are required to abstain from drinking water 12 hours before this appointment"));
 
         /*try{
             JSONArray jArray = jsonobj.getJSONArray("list");

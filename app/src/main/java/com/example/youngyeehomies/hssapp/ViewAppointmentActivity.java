@@ -2,6 +2,9 @@ package com.example.youngyeehomies.hssapp;
 
 
 import android.content.Intent;
+import android.content.res.Resources;
+import android.content.res.TypedArray;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -24,6 +27,7 @@ public class ViewAppointmentActivity extends DrawerActivity implements Appointme
     SessionManager session;
     RecyclerView rv;
     View clickedItem;
+    IconManager icon;
 
     @Override
     protected void onResume() {
@@ -58,7 +62,13 @@ public class ViewAppointmentActivity extends DrawerActivity implements Appointme
 //Static AppointmentView Code
 
         List<AppointmentListItem> AppointmentList = new ArrayList<>();
-        AppointmentList.add(new AppointmentListItem(R.drawable.gastro_ic,"Gastroenterology clinic appointment","26 Apr 2015","1.00 PM","You are required to abstain from drinking water 12 hours before this appointment"));
+
+        Resources res = getResources();
+        TypedArray icons = res.obtainTypedArray(R.array.cat_icons);
+        Drawable catIcon = icons.getDrawable(3);
+
+
+        AppointmentList.add(new AppointmentListItem(catIcon,"Dental clinic appointment","26 Apr 2015","1.00 PM","You are required to abstain from drinking water 12 hours before this appointment"));
         AppointmentListAdapter adapter = new AppointmentListAdapter(AppointmentList);
         adapter.SetOnItemClickListener(this);
         rv.setAdapter(adapter);
@@ -94,7 +104,7 @@ public class ViewAppointmentActivity extends DrawerActivity implements Appointme
         List<AppointmentListItem> AppointmentList = new ArrayList<>();
 
 
-        AppointmentList.add(new AppointmentListItem(R.drawable.gastro_ic,"Gastroenterology clinic appointment","26 Apr 2015","1.00 PM","You are required to abstain from drinking water 12 hours before this appointment"));
+     //dont know why this is here   AppointmentList.add(new AppointmentListItem("Gastroenterology clinic appointment","26 Apr 2015","1.00 PM","You are required to abstain from drinking water 12 hours before this appointment"));
 
         /*try{
             JSONArray jArray = jsonobj.getJSONArray("list");
