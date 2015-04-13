@@ -13,10 +13,16 @@ import android.widget.RadioGroup;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import org.json.JSONArray;
+import org.json.JSONObject;
+
 import java.util.Calendar;
 
 
 public class CreateAppointmentActivity extends DrawerActivity {
+
+    SessionManager session;
 
     FragmentTransaction fTrans;
     android.app.FragmentManager fragmentManager;
@@ -43,11 +49,11 @@ public class CreateAppointmentActivity extends DrawerActivity {
         mDrawerList.setItemChecked(Globals.drawerPosition, true);
         mDrawerList.setSelection(Globals.drawerPosition);
 
+        session = new SessionManager(getApplicationContext());
+
         fragmentManager = getFragmentManager();
 
         fTrans = fragmentManager.beginTransaction();
-
-
 
         if (savedInstanceState == null) {
 
@@ -57,14 +63,7 @@ public class CreateAppointmentActivity extends DrawerActivity {
 
         }
 
-
-
 }
-
-
-
-
-
 
     public void createAppointment(View view) {
 
@@ -79,17 +78,48 @@ public class CreateAppointmentActivity extends DrawerActivity {
         TextView test = (TextView) findViewById(R.id.textView33);
         test.setText(dateTimeObject);
 
-
         Intent completedCreationIntent = new Intent(this, ViewAppointmentActivity.class);
 
-        if(true) {
-            Toast.makeText(CreateAppointmentActivity.this, "Appointment has been created! A reminder notification will be sent one day before the day of the appointment!", Toast.LENGTH_LONG).show();
-            //startActivity(completedCreationIntent);
-            //finish();
+        //Declare and trigger web serice
+        String accountToken = session.getUserToken();
+        JSONObject obj = new JSONObject();
+        try {
+            //YIYONG PUT YOUR ITEMS HEREEEEE
+            obj.put("accountToken", accountToken);
+            obj.put("clinicID", );
+            obj.put("apptSubcategoryID", );
+            obj.put("dateTime", );
+            obj.put("isReferral", );
+        } catch (Exception e) {
 
         }
-        else {
-            Toast.makeText(CreateAppointmentActivity.this, "Appointment Creation Failed.", Toast.LENGTH_SHORT).show();
+
+        WebServiceClass svc = new WebServiceClass(){
+            @Override
+            protected void onPostExecute(Object o){
+                //To Override
+                JSONObject jsonobj = (JSONObject)o;
+                createAppointmentAsyncReturn(jsonobj);
+            }
+        };
+        svc.setServiceLink("createAppt.php");
+        svc.execute(obj.toString());
+
+
+    }
+
+    public void createAppointmentAsyncReturn(JSONObject jsonobj){
+        try{
+            if(jsonobj.getInt("errorCode")==0) {
+                Toast.makeText(CreateAppointmentActivity.this, "Appointment has been created! A reminder notification will be sent one day before the day of the appointment!", Toast.LENGTH_LONG).show();
+                //startActivity(completedCreationIntent);
+                //finish();
+            }
+            else {
+                Toast.makeText(CreateAppointmentActivity.this, "Appointment Creation Failed.", Toast.LENGTH_SHORT).show();
+            }
+        } catch (Exception e){
+
         }
     }
 
@@ -109,6 +139,53 @@ public class CreateAppointmentActivity extends DrawerActivity {
         fTrans2.replace(R.id.createApptSpace, fragment2);
         fTrans2.addToBackStack(null);
         fTrans2.commit();
+
+        //Web Service to retrieve Clinics
+        String accountToken = session.getUserToken();
+        JSONObject obj = new JSONObject();
+        try {
+            //YIYONG PUT YOUR ITEMS HEREEEEE
+            obj.put("accountToken", accountToken);
+            obj.put("ID", );
+            //this id is the apptsubcategoryid
+        } catch (Exception e) {
+
+        }
+
+        WebServiceClass svc = new WebServiceClass(){
+            @Override
+            protected void onPostExecute(Object o){
+                //To Override
+                JSONObject jsonobj = (JSONObject)o;
+                createAppointmentAsyncReturn(jsonobj);
+            }
+        };
+        svc.setServiceLink("createAppt.php");
+        svc.execute(obj.toString());
+    }
+
+    public void getWebSvcClinicsAsyncReturn(JSONObject jsonobj){
+        try{
+            if(jsonobj.getInt("errorCode")!=0){
+               Toast.makeText(CreateAppointmentActivity.this, jsonobj.getString("errorMsg"), Toast.LENGTH_SHORT).show();
+               return;
+            }
+
+            //Set spinner content with return results
+            JSONArray jArray = jsonobj.getJSONArray("list");
+            for(int i=0;i<jArray.length();i++){
+                JSONObject intObj = jArray.getJSONObject(i);
+
+                intObj.getString("ID");
+                intObj.getString("Name");
+                //Populate list
+            }
+
+            //set spinner contents
+
+        } catch (Exception e){
+
+        }
     }
 
     public void btnNext2(View view) {
@@ -130,6 +207,53 @@ public class CreateAppointmentActivity extends DrawerActivity {
         fTrans3.replace(R.id.createApptSpace, fragment3);
         fTrans3.addToBackStack(null);
         fTrans3.commit();
+
+        //Web Service to retrieve Clinics
+        String accountToken = session.getUserToken();
+        JSONObject obj = new JSONObject();
+        try {
+            //YIYONG PUT YOUR ITEMS HEREEEEE
+            obj.put("accountToken", accountToken);
+            obj.put("ApptSubcategoryID" , );
+            obj.put("ClinicID" , );
+            obj.put("Date" , );
+        } catch (Exception e) {
+
+        }
+
+        WebServiceClass svc = new WebServiceClass(){
+            @Override
+            protected void onPostExecute(Object o){
+                //To Override
+                JSONObject jsonobj = (JSONObject)o;
+                createAppointmentAsyncReturn(jsonobj);
+            }
+        };
+        svc.setServiceLink("createAppt.php");
+        svc.execute(obj.toString());
+    }
+
+    public void getWebSvcTimeslotsAsyncReturn(JSONObject jsonobj){
+        try{
+            if(jsonobj.getInt("errorCode")!=0){
+                Toast.makeText(CreateAppointmentActivity.this, jsonobj.getString("errorMsg"), Toast.LENGTH_SHORT).show();
+                return;
+            }
+
+            //Set spinner content with return results
+            JSONArray jArray = jsonobj.getJSONArray("list");
+            for(int i=0;i<jArray.length();i++){
+                JSONObject intObj = jArray.getJSONObject(i);
+
+                intObj.getString("timeslot");
+                //Populate list
+            }
+
+            //set spinner contents
+
+        } catch (Exception e){
+
+        }
     }
 
     public void btnPrev(View view) {
