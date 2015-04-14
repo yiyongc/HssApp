@@ -105,7 +105,7 @@ public class ViewAppointmentActivity extends DrawerActivity implements Appointme
             @Override
             protected void onPostExecute(Object o){
                 //To Override
-                getAppointmentsAysncReturn((String)o);
+                getAppointmentsAysncReturn(o.toString());
             }
         };
         svc.setServiceLink("viewAppts.php");

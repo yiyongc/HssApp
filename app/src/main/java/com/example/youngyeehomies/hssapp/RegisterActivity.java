@@ -98,7 +98,7 @@ public class RegisterActivity extends Activity {
         */
 
         RegistrationManager regManager = new RegistrationManager(this);
-        regManager.tryRegister(username, password, token);
+        regManager.tryRegister(username, password, password2, token);
 
     }
 
@@ -110,7 +110,7 @@ public class RegisterActivity extends Activity {
                 finish();
             }
             else {
-                Toast.makeText(this, "Appointment Creation Failed.", Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, "Activation Failed.", Toast.LENGTH_SHORT).show();
             }
 
         } catch (Exception e){

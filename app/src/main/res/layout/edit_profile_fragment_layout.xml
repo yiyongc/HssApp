@@ -22,7 +22,7 @@
             android:layout_alignTop="@+id/editTextEmail"
             android:layout_alignRight="@+id/notificationTV"
             android:layout_alignEnd="@+id/notificationTV"
-            android:layout_marginTop="10dp"/>
+            android:layout_marginTop="5dp"/>
 
         <EditText
             android:id="@+id/editTextEmail"
@@ -32,7 +32,8 @@
             android:layout_marginLeft="10dp"
             android:layout_toRightOf="@+id/emailTV"
             android:layout_below="@+id/nameTV"
-            android:layout_marginTop="10dp"/>
+            android:layout_marginTop="10dp"
+            android:background="#ffffff"/>
 
 
 
@@ -45,7 +46,7 @@
             android:layout_alignTop="@+id/editTextPhone"
             android:layout_alignRight="@+id/addressTV"
             android:layout_alignEnd="@+id/addressTV"
-            android:layout_marginTop="10dp"/>
+            android:layout_marginTop="5dp"/>
 
         <EditText
             android:id="@+id/editTextPhone"
@@ -55,7 +56,9 @@
             android:layout_marginLeft="10dp"
             android:layout_toRightOf="@+id/emailTV"
             android:layout_below="@+id/editTextEmail"
-            android:layout_marginTop="10dp"/>
+            android:layout_marginTop="10dp"
+            android:background="#ffffff"/>
+
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -64,7 +67,7 @@
             android:layout_alignTop="@+id/editTextAddress"
             android:layout_alignRight="@+id/notificationTV"
             android:layout_alignEnd="@+id/notificationTV"
-            android:layout_marginTop="10dp"/>
+            android:layout_marginTop="5dp"/>
 
         <EditText
             android:id="@+id/editTextAddress"
@@ -75,7 +78,9 @@
             android:layout_toRightOf="@+id/emailTV"
             android:layout_below="@+id/editTextPhone"
             android:layout_marginTop="10dp"
-            android:lines="3"/>
+            android:background="#ffffff"
+            android:minLines="3"
+            android:gravity="top"/>
 
         <TextView
             android:layout_width="wrap_content"
@@ -114,7 +119,8 @@
             android:id="@+id/button2"
             android:layout_below="@+id/editEmailCheckBox"
             android:layout_centerHorizontal="true"
-            android:layout_marginTop="20dp" />
+            android:layout_marginTop="20dp"
+            android:onClick="btnUpdateProfile"/>
     </RelativeLayout>
 
 
