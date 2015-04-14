@@ -8,6 +8,7 @@
         <item>@drawable/ent_ic</item>
         <item>@drawable/dental_ic</item>
         <item>@drawable/women_ic</item>
+        <item>@drawable/default_cat_icon</item>
 
     </array>
 </resources>

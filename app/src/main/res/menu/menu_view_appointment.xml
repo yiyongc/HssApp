@@ -1,0 +1,9 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context="com.example.youngyeehomies.hssapp.ViewAppointmentActivity">
+    <item android:id="@+id/set_upcoming" android:title="Upcoming Appointments"
+        android:orderInCategory="100" app:showAsAction="never" />
+    <item android:id="@+id/set_history" android:title="Appointments History"
+        android:orderInCategory="100" app:showAsAction="never" />
+</menu>
