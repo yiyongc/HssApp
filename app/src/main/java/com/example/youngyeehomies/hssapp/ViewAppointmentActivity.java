@@ -29,7 +29,6 @@ public class ViewAppointmentActivity extends DrawerActivity implements Appointme
     RecyclerView rv;
     View clickedItem;
     List<AppointmentListItem> appointmentList;
-    boolean isUpcoming = true;
 
     @Override
     protected void onResume() {
@@ -106,7 +105,7 @@ public class ViewAppointmentActivity extends DrawerActivity implements Appointme
             @Override
             protected void onPostExecute(Object o){
                 //To Override
-                getAppointmentsAysncReturn((String)o);
+                getAppointmentsAysncReturn(o.toString());
             }
         };
         svc.setServiceLink("viewAppts.php");
@@ -115,10 +114,10 @@ public class ViewAppointmentActivity extends DrawerActivity implements Appointme
 
 
 
-    public void getAppointmentsAysncReturn(String webResponse){
+    public void getAppointmentsAysncReturn(String webResponse) {
         appointmentList = new ArrayList<>();
 
-        try{
+        try {
             JSONObject jsonobj = new JSONObject(webResponse);
             SimpleDateFormat dateParser = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.ENGLISH);
 
@@ -127,7 +126,7 @@ public class ViewAppointmentActivity extends DrawerActivity implements Appointme
 
             JSONArray jArray = jsonobj.getJSONArray("list");
 
-            for(int i=0;i<jArray.length();i++){
+            for (int i = 0; i < jArray.length(); i++) {
                 JSONObject intO = jArray.getJSONObject(i);
 
                 //datetime formatter
@@ -141,35 +140,16 @@ public class ViewAppointmentActivity extends DrawerActivity implements Appointme
                 Drawable catIcon = icons.getDrawable(intO.getInt("Category ID") - 20);
 
 
-                if (isUpcoming == false ) {
-                    if (date.compareTo(nowDate) < 0) { //date is before currentDate
-                        appointmentList.add(new AppointmentListItem(
-                                catIcon,
-                                intO.getString("Appointment Subcategory"),
-                                day,
-                                time,
-                                intO.getString("Instructions"),
-                                intO.getInt("ID")
-                        ));
-                    }
+                if (date.compareTo(nowDate) >= 0) { //date is after currentDate
+                    appointmentList.add(new AppointmentListItem(
+                            catIcon,
+                            intO.getString("Appointment Subcategory"),
+                            day,
+                            time,
+                            intO.getString("Instructions"),
+                            intO.getInt("ID")));
                 }
-                else {
-                    if (date.compareTo(nowDate) >= 0) { //date is after currentDate
-                        appointmentList.add(new AppointmentListItem(
-                                catIcon,
-                                intO.getString("Appointment Subcategory"),
-                                day,
-                                time,
-                                intO.getString("Instructions"),
-                                intO.getInt("ID")
-                        ));
-                    }
-                }
-
-
             }
-
-
             if (appointmentList.size() == 0) {
                 AppointmentListAdapter adapter = new AppointmentListAdapter(appointmentList);
                 Drawable catIcon = icons.getDrawable(5);
@@ -184,16 +164,11 @@ public class ViewAppointmentActivity extends DrawerActivity implements Appointme
                 rv.setAdapter(adapter);
 
             }
-
-
-
-        } catch (Exception e){
+        }
+         catch (Exception e){
             Toast.makeText(ViewAppointmentActivity.this, "Web Service Error", Toast.LENGTH_SHORT).show();
             Log.e("Web Service Error",webResponse);
         }
-
-
-
 
     }
 

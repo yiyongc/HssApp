@@ -85,7 +85,7 @@ public class ViewOldAppointmentsActivity extends DrawerActivity implements Appoi
             @Override
             protected void onPostExecute(Object o) {
                 //To Override
-                getAppointmentsAysncReturn((String) o);
+                getAppointmentsAysncReturn(o.toString());
             }
         };
         svc.setServiceLink("viewAppts.php");

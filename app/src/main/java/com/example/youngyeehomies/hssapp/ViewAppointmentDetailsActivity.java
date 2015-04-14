@@ -121,7 +121,7 @@ public class ViewAppointmentDetailsActivity extends Activity {
             @Override
             protected void onPostExecute(Object o){
                 //To Override
-                getAppointmentAsyncReturn((String)o);
+                getAppointmentAsyncReturn(o.toString());
             }
         };
         svc.setServiceLink("viewAppt.php");
@@ -210,7 +210,7 @@ public class ViewAppointmentDetailsActivity extends Activity {
             @Override
             protected void onPostExecute(Object o){
                 //To Override
-                deleteAppointmentAsyncReturn((String)o);
+                deleteAppointmentAsyncReturn(o.toString());
             }
         };
         svc.setServiceLink("deleteAppt.php");

@@ -25,12 +25,13 @@ public class RegistrationManager{
         this.ref = ref;
     }
 
-    public void tryRegister(String nric, String password, String token) {
+    public void tryRegister(String nric, String password, String password2, String token) {
 
         JSONObject obj = new JSONObject();
         try {
             obj.put("nric", nric);
             obj.put("password", password);
+            obj.put("password2", password2);
             obj.put("token", token);
         } catch (Exception e) {
 
@@ -40,7 +41,7 @@ public class RegistrationManager{
             @Override
             protected void onPostExecute(Object o) {
                 //To Override
-                ref.onSendRegDataAsyncReturn((String)o);
+                ref.onSendRegDataAsyncReturn(o.toString());
             }
         };
         svc.setServiceLink("activateAccount.php");

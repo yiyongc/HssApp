@@ -102,7 +102,7 @@ public class CreateAppointmentActivity extends DrawerActivity {
             @Override
             protected void onPostExecute(Object o){
                 //To Override
-                createAppointmentAsyncReturn((String)o);
+                createAppointmentAsyncReturn(o.toString());
             }
         };
         svc.setServiceLink("createAppt.php");
@@ -177,7 +177,7 @@ public class CreateAppointmentActivity extends DrawerActivity {
             @Override
             protected void onPostExecute(Object o){
                 //To Override
-                getWebSvcClinicsAsyncReturn((String)o);
+                getWebSvcClinicsAsyncReturn(o.toString());
             }
         };
         svc.setServiceLink("getApptClinics.php");
@@ -261,7 +261,7 @@ public class CreateAppointmentActivity extends DrawerActivity {
             @Override
             protected void onPostExecute(Object o){
                 //To Override
-                getWebSvcTimeslotsAsyncReturn((String)o);
+                getWebSvcTimeslotsAsyncReturn(o.toString());
             }
         };
         svc.setServiceLink("getApptTimeSlots.php");
