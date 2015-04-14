@@ -101,7 +101,7 @@
             android:layout_marginTop="10dp"/>
 
         <CheckBox
-            android:id="@+id/editPushCheckBox"
+            android:id="@+id/pushCheckBox"
             android:layout_width="200dp"
             android:layout_height="wrap_content"
             android:text="Push Notifications"
@@ -110,12 +110,12 @@
             android:layout_marginLeft="10dp"/>
 
         <CheckBox
-            android:id="@+id/editEmailCheckBox"
+            android:id="@+id/emailCheckBox"
             android:layout_width="200dp"
             android:layout_height="wrap_content"
             android:text="Email Notifications"
             android:layout_toRightOf="@+id/notificationTV"
-            android:layout_below="@id/editPushCheckBox"
+            android:layout_below="@+id/pushCheckBox"
             android:layout_marginLeft="10dp"/>
 
 
@@ -124,7 +124,7 @@
             android:layout_width="200dp"
             android:layout_height="wrap_content"
             android:text="Edit Profile"
-            android:layout_below="@+id/editEmailCheckBox"
+            android:layout_below="@+id/emailCheckBox"
             android:layout_centerHorizontal="true"
             android:layout_marginTop="30dp"
             android:onClick="toEditProfile"/>

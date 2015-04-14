@@ -1,8 +1,10 @@
 package com.example.youngyeehomies.hssapp;
 
 
+import android.app.AlertDialog;
 import android.app.Fragment;
 import android.app.FragmentTransaction;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -113,10 +115,22 @@ public class CreateAppointmentActivity extends DrawerActivity {
         try{
             JSONObject jsonobj = new JSONObject(webResponse);
             if(jsonobj.getInt("errorCode")==0) {
-                Toast.makeText(CreateAppointmentActivity.this, "Appointment has been created! A reminder notification will be sent one day before the day of the appointment!", Toast.LENGTH_LONG).show();
-                completedCreationIntent = new Intent(this, ViewAppointmentActivity.class);
-                startActivity(completedCreationIntent);
-                finish();
+                //Toast.makeText(CreateAppointmentActivity.this, "Appointment has been created! A reminder notification will be sent one day before the day of the appointment!", Toast.LENGTH_LONG).show();
+                AlertDialog.Builder alertDialog = new AlertDialog.Builder(this);
+                alertDialog.setTitle("Appointment Created");
+                alertDialog.setMessage("Appointment Created!");
+                alertDialog.setIcon(R.drawable.success);
+                alertDialog.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int id) {
+                        Intent completedCreationIntent = new Intent(getApplicationContext(), ViewAppointmentActivity.class);
+                        startActivity(completedCreationIntent);
+                        dialog.cancel();
+                        finish();
+                    }
+                });
+                alertDialog.setCancelable(false);
+                AlertDialog alert = alertDialog.create();
+                alert.show();
             }
             else {
                 Toast.makeText(CreateAppointmentActivity.this, jsonobj.getString("errorMsg"), Toast.LENGTH_SHORT).show();
@@ -136,6 +150,9 @@ public class CreateAppointmentActivity extends DrawerActivity {
 
         Bundle args = new Bundle();
         args.putInt("typeID", typeID);
+
+        if(typeID == 2)
+            new AlertDialogManager().showAlertDialog(this, "Pre-requisite Required", "You require a preliminary ear check up for creation of this appointment.", null);
         Fragment fragment2 = new CreateAppointmentFragment2();
         fragment2.setArguments(args);
 

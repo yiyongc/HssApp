@@ -231,7 +231,8 @@ public class ViewAppointmentDetailsActivity extends Activity {
         final AlertDialog.Builder confirmDialog = new AlertDialog.Builder(this);
         confirmDialog.setMessage("Do you really want to delete this appointment?");
         confirmDialog.setCancelable(false);
-
+        confirmDialog.setTitle("Confirm Delete?");
+        confirmDialog.setIcon(R.drawable.warning);
         confirmDialog.setNegativeButton("Yes",new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {

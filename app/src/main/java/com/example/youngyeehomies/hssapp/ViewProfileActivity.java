@@ -3,12 +3,25 @@ package com.example.youngyeehomies.hssapp;
 import android.app.Fragment;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
+import android.content.res.Resources;
+import android.content.res.TypedArray;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.example.youngyeehomies.hssapp.Entities.AppointmentListItem;
+
+import org.json.JSONArray;
+import org.json.JSONObject;
+
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.Locale;
 
 
 public class ViewProfileActivity extends DrawerActivity {
@@ -43,29 +56,52 @@ public class ViewProfileActivity extends DrawerActivity {
             fTrans.commit();
         }
 
-        notifyemail = (CheckBox) findViewById(R.id.emailCheckBox);
-        notifyemail.setClickable(false);
-        notifypush = (CheckBox) findViewById(R.id.pushCheckBox);
-        notifypush.setClickable(false);
-
-        name = (TextView) findViewById(R.id.userName);
-        email = (TextView) findViewById(R.id.userEmail);
-        phone = (TextView) findViewById(R.id.userPhone);
-        address = (TextView) findViewById(R.id.userAddress);
-
-
-        //Set the details
-        name.setText("Elton");
-        email.setText("myEmail");
-        phone.setText("123333");
-        address.setText("Pulau NTU");
-        notifyemail.setChecked(true);
-        notifypush.setChecked(true);
+        getUserDetails();
 
     }
 
 
+    public void getUserDetails(){
+        String accountToken = session.getUserToken();
+        JSONObject obj = new JSONObject();
+        try {
+            obj.put("accountToken", accountToken);
+        } catch (Exception e) {
+            Log.e("HSS", "problem in viewappointment");
+        }
 
+        WebServiceClass svc = new WebServiceClass(){
+            @Override
+            protected void onPostExecute(Object o){
+                //To Override
+                getUserDetailsAsyncReturn(o.toString());
+            }
+        };
+        svc.setServiceLink("viewProfile.php");
+        svc.execute(obj.toString());
+    }
+
+    public void getUserDetailsAsyncReturn(String webResponse){
+        try{
+            JSONObject jsonobj = new JSONObject(webResponse);
+
+            jsonobj.getString("");
+
+            /*
+            $obj["NRIC"] = $row["NRIC"];
+            $obj["First Name"] = $row["FirstName"];
+            $obj["Last Name"] = $row["LastName"];
+            $obj["Address"] = $row["Address"];
+            $obj["Email"] = $row["Email"];
+            $obj["HPno"] = $row["HPno"];
+            $obj["notifySMS"] = $row["notifySMS"];
+            $obj["notifyEmail"] = $row["notifyEmail"];
+            */
+        } catch (Exception e){
+            Toast.makeText(ViewProfileActivity.this, "Web Service Error", Toast.LENGTH_SHORT).show();
+            Log.e("Web Service Error",webResponse);
+        }
+    }
 
 
     public void btnReturn(View view) {
@@ -89,12 +125,13 @@ public class ViewProfileActivity extends DrawerActivity {
         fTrans3.commit();
         title.setText("Change Password");
 
-        currentPasswordBox = (EditText) findViewById(R.id.change_current);
-        newPasswordBox = (EditText) findViewById(R.id.change_new);
-        newPasswordBox2 = (EditText) findViewById(R.id.change_new2);
+
     }
 
     public void btnUpdatePassword(View view) {
+        currentPasswordBox = (EditText) findViewById(R.id.change_current);
+        newPasswordBox = (EditText) findViewById(R.id.change_new);
+        newPasswordBox2 = (EditText) findViewById(R.id.change_new2);
 
         String currentPassword = currentPasswordBox.getText()+"";
         String newPassword = newPasswordBox.getText()+"";
