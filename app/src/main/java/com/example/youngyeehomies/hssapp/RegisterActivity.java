@@ -1,13 +1,16 @@
 package com.example.youngyeehomies.hssapp;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.LinearLayout;
@@ -20,10 +23,8 @@ import org.json.JSONObject;
 
 public class RegisterActivity extends Activity {
 
-    //private LinearLayout linearLayout;
-    //private RadioGroup rg;
     EditText usernameBox, passwordBox, passwordBox2, tokenBox;
-    CheckBox email, sms;
+    CheckBox email, push;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,10 +36,9 @@ public class RegisterActivity extends Activity {
         passwordBox2 = (EditText) findViewById(R.id.reg_password2);
         tokenBox = (EditText) findViewById(R.id.reg_token);
 
-        /*Populate RadioGroup
-        linearLayout = (LinearLayout) findViewById(R.id.defaultClinicLayout);
-        PopulateClinicManager pcm = new PopulateClinicManager(this);
-        rg = pcm.addRadioGroup(linearLayout);*/
+        push = (CheckBox) findViewById(R.id.pushCheckBox);
+        push.setChecked(true);
+        email = (CheckBox) findViewById(R.id.emailCheckBox);
     }
 
     @Override
@@ -122,5 +122,30 @@ public class RegisterActivity extends Activity {
 
     public void btnReturn(View view) {
         finish();
+    }
+
+
+    //Tap screen to close keyboard
+    @Override
+    public boolean dispatchTouchEvent(MotionEvent event) {
+
+        View v = getCurrentFocus();
+        boolean ret = super.dispatchTouchEvent(event);
+
+        if (v instanceof EditText) {
+            View w = getCurrentFocus();
+            int scrcoords[] = new int[2];
+            w.getLocationOnScreen(scrcoords);
+            float x = event.getRawX() + w.getLeft() - scrcoords[0];
+            float y = event.getRawY() + w.getTop() - scrcoords[1];
+
+            Log.d("Activity", "Touch event " + event.getRawX() + "," + event.getRawY() + " " + x + "," + y + " rect " + w.getLeft() + "," + w.getTop() + "," + w.getRight() + "," + w.getBottom() + " coords " + scrcoords[0] + "," + scrcoords[1]);
+            if (event.getAction() == MotionEvent.ACTION_UP && (x < w.getLeft() || x >= w.getRight() || y < w.getTop() || y > w.getBottom()) ) {
+
+                InputMethodManager imm = (InputMethodManager)getSystemService(Context.INPUT_METHOD_SERVICE);
+                imm.hideSoftInputFromWindow(getWindow().getCurrentFocus().getWindowToken(), 0);
+            }
+        }
+        return ret;
     }
 }

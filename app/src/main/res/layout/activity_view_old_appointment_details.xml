@@ -149,18 +149,7 @@
                 android:layout_alignParentRight="true"
                 android:layout_alignParentEnd="true" />
 
-            <ImageButton
-                android:layout_width="40dp"
-                android:layout_height="40dp"
-                android:id="@+id/delete_appointment_button"
-                android:background="@drawable/trash_ic"
-                android:alpha="0.14"
-                android:layout_alignParentBottom="true"
-                android:layout_below="@+id/appointment_details_notes"
-                android:layout_alignRight="@+id/appointment_details_notes"
-                android:layout_alignEnd="@+id/appointment_details_notes"
-                android:layout_marginTop="24dp"
-                android:onClick="deleteAppointmentConfirm"/>
+
 
 
         </RelativeLayout>

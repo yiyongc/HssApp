@@ -28,7 +28,8 @@ public class ViewAppointmentActivity extends DrawerActivity implements Appointme
     SessionManager session;
     RecyclerView rv;
     View clickedItem;
-    List<AppointmentListItem> AppointmentList;
+    List<AppointmentListItem> appointmentList;
+    boolean isUpcoming = true;
 
     @Override
     protected void onResume() {
@@ -50,6 +51,9 @@ public class ViewAppointmentActivity extends DrawerActivity implements Appointme
         mDrawerList.setSelection(Globals.drawerPosition);
     }
 
+
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -61,15 +65,12 @@ public class ViewAppointmentActivity extends DrawerActivity implements Appointme
         LinearLayoutManager llm = new LinearLayoutManager(getApplicationContext());
         rv.setLayoutManager(llm);
 
-        Resources res = getResources();
-        TypedArray icons = res.obtainTypedArray(R.array.cat_icons);
-        Drawable catIcon = icons.getDrawable(3);
+      //  Resources res = getResources();
+      //  TypedArray icons = res.obtainTypedArray(R.array.cat_icons);
+      //  Drawable catIcon = icons.getDrawable(3);
 
-        AppointmentList = new ArrayList<>();
-        //AppointmentList.add(new AppointmentListItem(catIcon,"Dental clinic appointment","26 Apr 2015","1.00 PM","You are required to abstain from drinking water 12 hours before this appointment"));
-        AppointmentListAdapter adapter = new AppointmentListAdapter(AppointmentList);
-        adapter.SetOnItemClickListener(this);
-        rv.setAdapter(adapter);
+      //  appointmentList = new ArrayList<>();
+
 
         session = new SessionManager(getApplicationContext());
 
@@ -112,8 +113,10 @@ public class ViewAppointmentActivity extends DrawerActivity implements Appointme
         svc.execute(obj.toString());
     }
 
+
+
     public void getAppointmentsAysncReturn(String webResponse){
-        AppointmentList = new ArrayList<>();
+        appointmentList = new ArrayList<>();
 
         try{
             JSONObject jsonobj = new JSONObject(webResponse);
@@ -123,35 +126,74 @@ public class ViewAppointmentActivity extends DrawerActivity implements Appointme
             TypedArray icons = res.obtainTypedArray(R.array.cat_icons);
 
             JSONArray jArray = jsonobj.getJSONArray("list");
+
             for(int i=0;i<jArray.length();i++){
                 JSONObject intO = jArray.getJSONObject(i);
 
                 //datetime formatter
                 String dateTime = intO.getString("DateTime");
                 Date date = dateParser.parse(dateTime);
+                Date nowDate = new Date(); // gets current date
 
                 String day = new SimpleDateFormat("dd MMM yyyy").format(date);
                 String time = new SimpleDateFormat("hh:mm a").format(date);
 
                 Drawable catIcon = icons.getDrawable(intO.getInt("Category ID") - 20);
 
-                AppointmentList.add(new AppointmentListItem(
-                        catIcon,
-                        intO.getString("Appointment Subcategory"),
-                        day,
-                        time,
-                        intO.getString("Instructions"),
-                        intO.getInt("ID")
-                ));
+
+                if (isUpcoming == false ) {
+                    if (date.compareTo(nowDate) < 0) { //date is before currentDate
+                        appointmentList.add(new AppointmentListItem(
+                                catIcon,
+                                intO.getString("Appointment Subcategory"),
+                                day,
+                                time,
+                                intO.getString("Instructions"),
+                                intO.getInt("ID")
+                        ));
+                    }
+                }
+                else {
+                    if (date.compareTo(nowDate) >= 0) { //date is after currentDate
+                        appointmentList.add(new AppointmentListItem(
+                                catIcon,
+                                intO.getString("Appointment Subcategory"),
+                                day,
+                                time,
+                                intO.getString("Instructions"),
+                                intO.getInt("ID")
+                        ));
+                    }
+                }
+
+
             }
+
+
+            if (appointmentList.size() == 0) {
+                AppointmentListAdapter adapter = new AppointmentListAdapter(appointmentList);
+                Drawable catIcon = icons.getDrawable(5);
+                appointmentList.add(new AppointmentListItem(catIcon, "No appointments available", "", "", "You have no appointments.", 0));
+                rv.setAdapter(adapter);
+
+            }
+            else {
+                AppointmentListAdapter adapter;
+                adapter = new AppointmentListAdapter(appointmentList);
+                adapter.SetOnItemClickListener(this);
+                rv.setAdapter(adapter);
+
+            }
+
+
+
         } catch (Exception e){
             Toast.makeText(ViewAppointmentActivity.this, "Web Service Error", Toast.LENGTH_SHORT).show();
             Log.e("Web Service Error",webResponse);
         }
 
-        AppointmentListAdapter adapter = new AppointmentListAdapter(AppointmentList);
-        adapter.SetOnItemClickListener(this);
-        rv.setAdapter(adapter);
+
+
 
     }
 
@@ -162,7 +204,8 @@ public class ViewAppointmentActivity extends DrawerActivity implements Appointme
         //Toast.makeText(ViewAppointmentActivity.this, "You clicked Item No. " + position, Toast.LENGTH_SHORT).show();
         Intent viewDetailsIntent = new Intent(this, ViewAppointmentDetailsActivity.class);
 
-        viewDetailsIntent.putExtra("AppointmentID", AppointmentList.get(position).getApptID()); //Replace weird integer with Appointment ID from json object.  AppointmentList.get(position).getApptID()
+        viewDetailsIntent.putExtra("AppointmentID", appointmentList.get(position).getApptID()); //Replace weird integer with Appointment ID from json object.  appointmentList.get(position).getApptID()
+        viewDetailsIntent.putExtra("isUpcoming", true);
         startActivity(viewDetailsIntent);
         overridePendingTransition(R.anim.pull_in_right, R.anim.push_out_left);
 
