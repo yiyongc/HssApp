@@ -24,7 +24,7 @@ public class LoginManager {
             @Override
             protected void onPostExecute(Object o){
                 //To Override
-                ref.btnLoginReturn((String)o);
+                ref.btnLoginReturn(o.toString());
             }
         };
         svc.setServiceLink("authenticateAccount.php");

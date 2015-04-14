@@ -447,7 +447,7 @@ public class LoginActivity extends Activity{
             @Override
             protected void onPostExecute(Object o){
                 //To Override
-                registerGCMAsyncReturn((String)o);
+                registerGCMAsyncReturn(o.toString());
             }
         };
         svc.setServiceLink("registerGCM.php");
