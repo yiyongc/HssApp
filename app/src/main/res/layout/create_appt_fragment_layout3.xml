@@ -7,8 +7,7 @@
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1"
+        android:layout_height="fill_parent"
         android:orientation="vertical">
 
         <TextView
@@ -128,8 +127,7 @@
                 android:layout_alignParentBottom="true"
                 android:layout_alignParentRight="true"
                 android:layout_alignParentEnd="true"
-                android:onClick="createAppointment"
-                />
+                android:onClick="createAppointment"/>
 
             <Button
                 android:layout_width="wrap_content"
@@ -139,28 +137,23 @@
                 android:layout_alignParentLeft="true"
                 android:layout_alignParentStart="true"
                 android:onClick="btnPrev"
-                android:id="@+id/button" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="New Text"
-            android:id="@+id/textView33"
-            android:layout_below="@+id/referralCheckBox"
-            android:layout_alignLeft="@+id/timeSlotSelection"
-            android:layout_alignStart="@+id/timeSlotSelection"
-            android:layout_marginTop="30dp" />
+                android:id="@+id/button"/>
 
         <CheckBox
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Is Referral"
             android:id="@+id/referralCheckBox"
-            android:layout_below="@+id/textView_availableTime"
-            android:layout_alignLeft="@+id/timeSlotSelection"
-            android:layout_alignStart="@+id/timeSlotSelection"
             android:textColor="#325b56"
-            android:layout_marginTop="20dp"/>
+            android:layout_below="@+id/textView_availableTime"
+            android:layout_marginTop="10dp"
+            android:layout_centerHorizontal="true"/>
+
+        <View
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:layout_below="@+id/referralCheckBox"
+            android:layout_centerHorizontal="true"></View>
 
 
     </RelativeLayout>

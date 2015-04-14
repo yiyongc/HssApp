@@ -59,7 +59,9 @@
 
         <activity
             android:name=".LoginActivity"
-            android:label="@string/title_login_activity" >
+            android:label="@string/title_login_activity"
+            android:screenOrientation="portrait"
+            android:configChanges="keyboardHidden|orientation|screenSize">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -70,39 +72,56 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
         <activity
             android:name=".RegisterActivity"
             android:label="HSS - Register"
-            android:theme="@style/AppTheme" >
+            android:theme="@style/AppTheme"
+            android:screenOrientation="portrait"
+            android:configChanges="keyboardHidden|orientation|screenSize">
         </activity>
         <activity
             android:name=".CreateAppointmentActivity"
-            android:label="@string/createApptLabel" >
+            android:label="@string/createApptLabel"
+            android:screenOrientation="portrait"
+            android:configChanges="keyboardHidden|orientation|screenSize">
         </activity>
         <activity
             android:name=".ViewAppointmentActivity"
             android:label="@string/title_activity_view_appts"
-            android:theme="@style/AppTheme" >
+            android:theme="@style/AppTheme"
+            android:screenOrientation="portrait"
+            android:configChanges="keyboardHidden|orientation|screenSize">
         </activity>
         <activity
-            android:name=".EditProfileActivity"
-            android:label="HSS - Edit Profile" >
+            android:name=".ViewProfileActivity"
+            android:label="HSS - Edit Profile"
+            android:screenOrientation="portrait"
+            android:configChanges="keyboardHidden|orientation|screenSize">
         </activity>
         <activity
             android:name=".ViewNotificationsActivity"
-            android:label="HSS - View Notifications" >
+            android:label="HSS - View Notifications"
+            android:screenOrientation="portrait"
+            android:configChanges="keyboardHidden|orientation|screenSize">
         </activity>
         <activity
             android:name=".ForgotPasswordActivity"
-            android:label="HSS - View Notifications" >
+            android:label="HSS - View Notifications"
+            android:screenOrientation="portrait"
+            android:configChanges="keyboardHidden|orientation|screenSize">
         </activity>
         <activity
             android:name=".ViewAppointmentDetailsActivity"
-            android:label="HSS - View Appointment Details" >
+            android:label="HSS - View Appointment Details"
+            android:screenOrientation="portrait"
+            android:configChanges="keyboardHidden|orientation|screenSize">
         </activity>
         <activity
             android:name=".ViewOldAppointmentsActivity"
-            android:label="@string/title_activity_view_old_appointments" >
+            android:label="@string/title_activity_view_old_appointments"
+            android:screenOrientation="portrait"
+            android:configChanges="keyboardHidden|orientation|screenSize">
         </activity>
 
         <!-- GCM -->

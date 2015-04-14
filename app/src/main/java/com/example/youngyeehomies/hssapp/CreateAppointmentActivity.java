@@ -77,11 +77,8 @@ public class CreateAppointmentActivity extends DrawerActivity {
         selectedTime = selectedTimeSpinner.getSelectedItem().toString();
 
         dateTimeObject = new CustomStringConverter().convertDateAndTime(selectedDate, selectedTime);
-        
-        TextView test = (TextView) findViewById(R.id.textView33);
-        test.setText(dateTimeObject);
 
-        Intent completedCreationIntent = new Intent(this, ViewAppointmentActivity.class);
+
         CheckBox referralCheckBox = (CheckBox) findViewById(R.id.referralCheckBox);
         int referralValue = (referralCheckBox.isChecked() ? 1:0);
         //Declare and trigger web service
@@ -116,8 +113,9 @@ public class CreateAppointmentActivity extends DrawerActivity {
             JSONObject jsonobj = new JSONObject(webResponse);
             if(jsonobj.getInt("errorCode")==0) {
                 Toast.makeText(CreateAppointmentActivity.this, "Appointment has been created! A reminder notification will be sent one day before the day of the appointment!", Toast.LENGTH_LONG).show();
-                //startActivity(completedCreationIntent);
-                //finish();
+                Intent completedCreationIntent = new Intent(this, ViewAppointmentActivity.class);
+                startActivity(completedCreationIntent);
+                finish();
             }
             else {
                 Toast.makeText(CreateAppointmentActivity.this, jsonobj.getString("errorMsg"), Toast.LENGTH_SHORT).show();

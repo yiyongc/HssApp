@@ -204,8 +204,9 @@
                 <CheckBox
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:id="@+id/smsCheckBox"
-                    android:text="SMS Notification"/>
+                    android:id="@+id/pushCheckBox"
+                    android:text="Push Notification"
+                    />
             </LinearLayout>
 
         </LinearLayout>
