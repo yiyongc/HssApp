@@ -33,6 +33,7 @@ public class CreateAppointmentFragment3 extends Fragment {
 
         View v = inflater.inflate(R.layout.create_appt_fragment_layout3, container, false);
 
+        //Display details of appointment creation
         TextView selectedApptTypeTV = (TextView) v.findViewById(R.id.apptTypeSelected);
         selectedApptTypeTV.setText(selectedApptType);
         selectedApptTypeTV.setTypeface(null, Typeface.ITALIC);
@@ -45,10 +46,7 @@ public class CreateAppointmentFragment3 extends Fragment {
         selectedDateTV.setText(selectedDate);
         selectedDateTV.setTypeface(null, Typeface.ITALIC);
 
-        //Populate Spinner
-        timeSlotSpinner = (Spinner) v.findViewById(R.id.timeSlotSelection);
-        CustomSpinnerAdapter customAdapter = new CustomSpinnerAdapter(v.getContext(), R.layout.custom_spinner_layout, timeSlotsAvailable);
-        timeSlotSpinner.setAdapter(customAdapter);
+
 
         return v;
     }

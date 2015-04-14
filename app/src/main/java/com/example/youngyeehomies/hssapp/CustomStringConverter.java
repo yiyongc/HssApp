@@ -1,9 +1,9 @@
 package com.example.youngyeehomies.hssapp;
 
 
-public class DateTimeConverter {
+public class CustomStringConverter {
 
-    public DateTimeConverter(){}
+    public CustomStringConverter(){}
 
     public String convertDateAndTime(String date, String time) {
 
@@ -77,5 +77,64 @@ public class DateTimeConverter {
         convertedDate = date.substring(6, 10) + "-" + date.substring(3, 5) + "-" + date.substring(0, 2);
 
         return convertedDate;
+    }
+
+    public String convertTimeForSpinner (String time) {
+        String convertedTime="";
+
+        switch (time) {
+            case ("1000"):
+                convertedTime = "10:00 A.M.";
+                break;
+            case ("1030"):
+                convertedTime = "10:30 A.M.";
+                break;
+            case ("1100"):
+                convertedTime = "11:00 A.M.";
+                break;
+            case ("1130"):
+                convertedTime = "11:30 A.M.";
+                break;
+            case ("1200"):
+                convertedTime = "12:00 P.M.";
+                break;
+            case ("1230"):
+                convertedTime = "12:30 P.M.";
+                break;
+            case ("1300"):
+                convertedTime = "01:00 P.M.";
+                break;
+            case ("1330"):
+                convertedTime = "01:30 P.M.";
+                break;
+            case ("1400"):
+                convertedTime = "02:00 P.M.";
+                break;
+            case ("1430"):
+                convertedTime = "02:30 P.M.";
+                break;
+            case ("1500"):
+                convertedTime = "03:00 P.M.";
+                break;
+            case ("1530"):
+                convertedTime = "03:30 P.M.";
+                break;
+            case ("1600"):
+                convertedTime = "04:00 P.M.";
+                break;
+            case ("1630"):
+                convertedTime = "04:30 P.M.";
+                break;
+            case ("1700"):
+                convertedTime = "05:00 P.M.";
+                break;
+            case ("1730"):
+                convertedTime = "05:30 P.M.";
+                break;
+            default:
+                break;
+        }
+
+        return convertedTime;
     }
 }

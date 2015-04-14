@@ -1,7 +1,6 @@
 package com.example.youngyeehomies.hssapp;
 
 
-import android.app.DialogFragment;
 import android.app.Fragment;
 import android.app.FragmentTransaction;
 import android.content.Intent;
@@ -9,8 +8,6 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
-import android.widget.LinearLayout;
-import android.widget.RadioGroup;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -18,7 +15,8 @@ import android.widget.Toast;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
-import java.util.Calendar;
+import java.util.ArrayList;
+import java.util.HashMap;
 
 
 public class CreateAppointmentActivity extends DrawerActivity {
@@ -28,11 +26,13 @@ public class CreateAppointmentActivity extends DrawerActivity {
     FragmentTransaction fTrans;
     android.app.FragmentManager fragmentManager;
 
-    Spinner typeSpinner, clinicSpinner;
+    Spinner typeSpinner, clinicSpinner, timeSpinner;
     int typeID;
     String apptType, clinic, date;
-    int day, month, year;
-    String[] clinics;
+    String[] timeSlotsForSpinner;
+    ArrayList<String> clinicArrayList = new ArrayList<String>();
+    ArrayList<String> timeSlotArrayList = new ArrayList<String> ();
+    HashMap<String, Integer> clinicIDPair = new HashMap<String, Integer>();
 
     @Override
     protected void onResume() {
@@ -75,7 +75,7 @@ public class CreateAppointmentActivity extends DrawerActivity {
         selectedDate = selectedDateTV.getText().toString();
         selectedTime = selectedTimeSpinner.getSelectedItem().toString();
 
-        dateTimeObject = new DateTimeConverter().convertDateAndTime(selectedDate, selectedTime);
+        dateTimeObject = new CustomStringConverter().convertDateAndTime(selectedDate, selectedTime);
         
         TextView test = (TextView) findViewById(R.id.textView33);
         test.setText(dateTimeObject);
@@ -89,7 +89,7 @@ public class CreateAppointmentActivity extends DrawerActivity {
         try {
             //YIYONG PUT YOUR ITEMS HEREEEEE
             obj.put("accountToken", accountToken);
-            obj.put("clinicID", (1+clinicSpinner.getSelectedItemPosition()));
+            obj.put("clinicID", ((clinicIDPair.get(clinic))));
             obj.put("apptSubcategoryID", typeID);
             obj.put("dateTime", dateTimeObject);
             obj.put("isReferral", referralValue);
@@ -163,28 +163,43 @@ public class CreateAppointmentActivity extends DrawerActivity {
                 getWebSvcClinicsAsyncReturn(jsonobj);
             }
         };
-        svc.setServiceLink("createAppt.php");
-        //svc.execute(obj.toString());
+        svc.setServiceLink("getApptClinics.php");
+        svc.execute(obj.toString());
     }
 
     public void getWebSvcClinicsAsyncReturn(JSONObject jsonobj){
+
+        String clinicItem;
+        int clinicID;
+
+
         try{
             if(jsonobj.getInt("errorCode")!=0){
                Toast.makeText(CreateAppointmentActivity.this, jsonobj.getString("errorMsg"), Toast.LENGTH_SHORT).show();
                return;
             }
 
+            if(!clinicArrayList.isEmpty())
+                clinicArrayList.clear();
+
             //Set spinner content with return results
             JSONArray jArray = jsonobj.getJSONArray("list");
             for(int i=0;i<jArray.length();i++){
                 JSONObject intObj = jArray.getJSONObject(i);
 
-                intObj.getString("ID");
-                intObj.getString("Name");
+                clinicID = intObj.getInt("ID");
+                clinicItem = intObj.getString("Name");
                 //Populate list
+
+                clinicIDPair.put(clinicItem, clinicID);
+                clinicArrayList.add(clinicItem);
+
             }
 
-            //Populate Spinner
+            Globals.clinicsInSpinner = clinicArrayList.toArray(new String[clinicArrayList.size()]);
+            clinicSpinner = (Spinner) findViewById(R.id.clinicSelection);
+            CustomSpinnerAdapter customAdapter = new CustomSpinnerAdapter(this, R.layout.custom_spinner_layout, Globals.clinicsInSpinner);
+            clinicSpinner.setAdapter(customAdapter);
 
         } catch (Exception e){
 
@@ -218,8 +233,8 @@ public class CreateAppointmentActivity extends DrawerActivity {
             //YIYONG PUT YOUR ITEMS HEREEEEE
             obj.put("accountToken", accountToken);
             obj.put("ApptSubcategoryID" , typeID);
-            obj.put("ClinicID" , (1+clinicSpinner.getSelectedItemPosition()));
-            obj.put("Date" , new DateTimeConverter().convertDate(date));
+            obj.put("ClinicID" , (clinicIDPair.get(clinic)));
+            obj.put("Date" , new CustomStringConverter().convertDate(date));
         } catch (Exception e) {
 
         }
@@ -232,28 +247,39 @@ public class CreateAppointmentActivity extends DrawerActivity {
                 getWebSvcTimeslotsAsyncReturn(jsonobj);
             }
         };
-        svc.setServiceLink("createAppt.php");
-        //svc.execute(obj.toString());
+        svc.setServiceLink("getApptTimeSlots.php");
+        svc.execute(obj.toString());
     }
 
     public void getWebSvcTimeslotsAsyncReturn(JSONObject jsonobj){
+
+        String time;
+
         try{
             if(jsonobj.getInt("errorCode")!=0){
                 Toast.makeText(CreateAppointmentActivity.this, jsonobj.getString("errorMsg"), Toast.LENGTH_SHORT).show();
                 return;
             }
+            if (!timeSlotArrayList.isEmpty())
+                timeSlotArrayList.clear();
 
             //Set spinner content with return results
             JSONArray jArray = jsonobj.getJSONArray("list");
             for(int i=0;i<jArray.length();i++){
                 JSONObject intObj = jArray.getJSONObject(i);
 
-                intObj.getString("timeslot");
+                time = intObj.getString("timeslot");
+
                 //Populate list
+                timeSlotArrayList.add(new CustomStringConverter().convertTimeForSpinner(time));
             }
             
-
+            timeSlotsForSpinner = timeSlotArrayList.toArray(new String[timeSlotArrayList.size()]);
             //set spinner contents
+            //Populate Spinner
+            timeSpinner = (Spinner) findViewById(R.id.timeSlotSelection);
+            CustomSpinnerAdapter customAdapter = new CustomSpinnerAdapter(this, R.layout.custom_spinner_layout, timeSlotsForSpinner);
+            timeSpinner.setAdapter(customAdapter);
 
         } catch (Exception e){
 

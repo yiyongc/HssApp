@@ -34,9 +34,11 @@ public class CreateAppointmentFragment2 extends Fragment {
         //textView.setText(Integer.toString(typeID));
 
         //Populate Spinner
-        clinicSpinner = (Spinner) v.findViewById(R.id.clinicSelection);
-        CustomSpinnerAdapter customAdapter = new CustomSpinnerAdapter(v.getContext(), R.layout.custom_spinner_layout, clinicList);
-        clinicSpinner.setAdapter(customAdapter);
+        if (Globals.clinicsInSpinner != null) {
+            clinicSpinner = (Spinner) v.findViewById(R.id.clinicSelection);
+            CustomSpinnerAdapter customAdapter = new CustomSpinnerAdapter(v.getContext(), R.layout.custom_spinner_layout, Globals.clinicsInSpinner);
+            clinicSpinner.setAdapter(customAdapter);
+        }
 
         //Initialize current date value on button
         final Calendar c = Calendar.getInstance();
