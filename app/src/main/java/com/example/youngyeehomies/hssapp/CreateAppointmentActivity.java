@@ -5,6 +5,7 @@ import android.app.Fragment;
 import android.app.FragmentTransaction;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
@@ -99,10 +100,9 @@ public class CreateAppointmentActivity extends DrawerActivity {
 
         WebServiceClass svc = new WebServiceClass(){
             @Override
-            protected void onPostExecute(Object o){
+            protected void onPostExecute(String webResponse){
                 //To Override
-                JSONObject jsonobj = (JSONObject)o;
-                createAppointmentAsyncReturn(jsonobj);
+                createAppointmentAsyncReturn(webResponse);
             }
         };
         svc.setServiceLink("createAppt.php");
@@ -111,18 +111,20 @@ public class CreateAppointmentActivity extends DrawerActivity {
 
     }
 
-    public void createAppointmentAsyncReturn(JSONObject jsonobj){
+    public void createAppointmentAsyncReturn(String webResponse){
         try{
+            JSONObject jsonobj = new JSONObject(webResponse);
             if(jsonobj.getInt("errorCode")==0) {
                 Toast.makeText(CreateAppointmentActivity.this, "Appointment has been created! A reminder notification will be sent one day before the day of the appointment!", Toast.LENGTH_LONG).show();
                 //startActivity(completedCreationIntent);
                 //finish();
             }
             else {
-                Toast.makeText(CreateAppointmentActivity.this, "Appointment Creation Failed.", Toast.LENGTH_SHORT).show();
+                Toast.makeText(CreateAppointmentActivity.this, jsonobj.getString("errorMsg"), Toast.LENGTH_SHORT).show();
             }
         } catch (Exception e){
-
+            Toast.makeText(CreateAppointmentActivity.this, "Web Service Error", Toast.LENGTH_SHORT).show();
+            Log.e("Web Service Error",webResponse);
         }
     }
 
@@ -157,23 +159,22 @@ public class CreateAppointmentActivity extends DrawerActivity {
 
         WebServiceClass svc = new WebServiceClass(){
             @Override
-            protected void onPostExecute(Object o){
+            protected void onPostExecute(String webResponse){
                 //To Override
-                JSONObject jsonobj = (JSONObject)o;
-                getWebSvcClinicsAsyncReturn(jsonobj);
+                getWebSvcClinicsAsyncReturn(webResponse);
             }
         };
         svc.setServiceLink("getApptClinics.php");
         svc.execute(obj.toString());
     }
 
-    public void getWebSvcClinicsAsyncReturn(JSONObject jsonobj){
+    public void getWebSvcClinicsAsyncReturn(String webResponse){
 
         String clinicItem;
         int clinicID;
 
-
         try{
+            JSONObject jsonobj = new JSONObject(webResponse);
             if(jsonobj.getInt("errorCode")!=0){
                Toast.makeText(CreateAppointmentActivity.this, jsonobj.getString("errorMsg"), Toast.LENGTH_SHORT).show();
                return;
@@ -202,7 +203,8 @@ public class CreateAppointmentActivity extends DrawerActivity {
             clinicSpinner.setAdapter(customAdapter);
 
         } catch (Exception e){
-
+            Toast.makeText(CreateAppointmentActivity.this, "Web Service Error", Toast.LENGTH_SHORT).show();
+            Log.e("Web Service Error",webResponse);
         }
     }
 
@@ -241,21 +243,21 @@ public class CreateAppointmentActivity extends DrawerActivity {
 
         WebServiceClass svc = new WebServiceClass(){
             @Override
-            protected void onPostExecute(Object o){
+            protected void onPostExecute(String webResponse){
                 //To Override
-                JSONObject jsonobj = (JSONObject)o;
-                getWebSvcTimeslotsAsyncReturn(jsonobj);
+                getWebSvcTimeslotsAsyncReturn(webResponse);
             }
         };
         svc.setServiceLink("getApptTimeSlots.php");
         svc.execute(obj.toString());
     }
 
-    public void getWebSvcTimeslotsAsyncReturn(JSONObject jsonobj){
+    public void getWebSvcTimeslotsAsyncReturn(String webResponse){
 
         String time;
 
         try{
+            JSONObject jsonobj = new JSONObject(webResponse);
             if(jsonobj.getInt("errorCode")!=0){
                 Toast.makeText(CreateAppointmentActivity.this, jsonobj.getString("errorMsg"), Toast.LENGTH_SHORT).show();
                 return;
@@ -282,7 +284,8 @@ public class CreateAppointmentActivity extends DrawerActivity {
             timeSpinner.setAdapter(customAdapter);
 
         } catch (Exception e){
-
+            Toast.makeText(CreateAppointmentActivity.this, "Web Service Error", Toast.LENGTH_SHORT).show();
+            Log.e("Web Service Error",webResponse);
         }
     }
 

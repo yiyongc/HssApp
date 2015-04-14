@@ -16,7 +16,7 @@ public class EditProfileActivity extends DrawerActivity {
     SessionManager session;
     EditText currentPasswordBox, newPasswordBox, newPasswordBox2;
 
-
+    //TODO EDITPROFILE
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

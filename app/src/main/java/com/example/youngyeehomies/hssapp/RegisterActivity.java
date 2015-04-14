@@ -3,6 +3,7 @@ package com.example.youngyeehomies.hssapp;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -101,8 +102,9 @@ public class RegisterActivity extends Activity {
 
     }
 
-    public void onSendRegDataAsyncReturn(JSONObject jsonobj){
+    public void onSendRegDataAsyncReturn(String webResponse){
         try{
+            JSONObject jsonobj = new JSONObject(webResponse);
             if(jsonobj.getInt("errorCode")==0) {
                 Toast.makeText(RegisterActivity.this, "Account has been registered successfully!", Toast.LENGTH_SHORT).show();
                 finish();
@@ -112,7 +114,8 @@ public class RegisterActivity extends Activity {
             }
 
         } catch (Exception e){
-
+            Toast.makeText(RegisterActivity.this, "Web Service Error", Toast.LENGTH_SHORT).show();
+            Log.e("Web Service Error", webResponse);
         }
     }
 

@@ -16,6 +16,8 @@ public class ForgotPasswordActivity extends Activity {
     EditText nricBox, passwordBox, passwordBox2, tokenBox;
     AlertDialogManager alert = new AlertDialogManager();
 
+    //TODO FORGOTPASSWORD
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

@@ -105,20 +105,19 @@ public class ViewAppointmentDetailsActivity extends Activity {
 
         WebServiceClass svc = new WebServiceClass(){
             @Override
-            protected void onPostExecute(Object o){
+            protected void onPostExecute(String webResponse){
                 //To Override
-                JSONObject jsonobj = (JSONObject)o;
-                getAppointmentAsyncReturn(jsonobj);
+                getAppointmentAsyncReturn(webResponse);
             }
         };
         svc.setServiceLink("viewAppt.php");
         svc.execute(obj.toString());
     }
 
-    public void getAppointmentAsyncReturn(JSONObject jsonobj){
+    public void getAppointmentAsyncReturn(String webResponse){
 
         try{
-
+            JSONObject jsonobj = new JSONObject(webResponse);
             if(jsonobj.getInt("errorCode")==0){
 
                 String dateTime = jsonobj.getString("DateTime");
@@ -147,7 +146,8 @@ public class ViewAppointmentDetailsActivity extends Activity {
 
             }
         } catch (Exception e){
-            Log.e("tagtag",e.toString());
+            Toast.makeText(ViewAppointmentDetailsActivity.this, "Web Service Error", Toast.LENGTH_SHORT).show();
+            Log.e("Web Service Error",webResponse);
         }
     }
 
@@ -196,10 +196,9 @@ public class ViewAppointmentDetailsActivity extends Activity {
 
         WebServiceClass svc = new WebServiceClass(){
             @Override
-            protected void onPostExecute(Object o){
+            protected void onPostExecute(String webResponse){
                 //To Override
-                JSONObject jsonobj = (JSONObject)o;
-                deleteAppointmentAsyncReturn(jsonobj);
+                deleteAppointmentAsyncReturn(webResponse);
             }
         };
         svc.setServiceLink("deleteAppt.php");
@@ -207,8 +206,9 @@ public class ViewAppointmentDetailsActivity extends Activity {
 
     }
 
-    public void deleteAppointmentAsyncReturn(JSONObject jsonobj){
+    public void deleteAppointmentAsyncReturn(String webResponse){
         try{
+            JSONObject jsonobj = new JSONObject(webResponse);
             if (jsonobj.getInt("errorCode")==0) {
                 Toast.makeText(this, "Deleted Appointment Object", Toast.LENGTH_SHORT).show();
                 finish();
@@ -217,7 +217,10 @@ public class ViewAppointmentDetailsActivity extends Activity {
                 ImageButton deleteButton = (ImageButton)findViewById(R.id.delete_appointment_button);
                 deleteButton.setEnabled(true);
             }
-        } catch (Exception e) {}
+        } catch (Exception e) {
+            Toast.makeText(ViewAppointmentDetailsActivity.this, "Web Service Error", Toast.LENGTH_SHORT).show();
+            Log.e("Web Service Error",webResponse);
+        }
 
 
     }

@@ -35,14 +35,14 @@ public class WebServiceClass extends AsyncTask<String, Void, Object> {
             String resultstring = convertStreamToString(inputstream);
             inputstream.close();
             Log.e("Web Service Output",resultstring);
-            JSONObject recvdjson = new JSONObject(resultstring);
-            return recvdjson;
+            //JSONObject recvdjson = new JSONObject(resultstring);
+            return resultstring;
         } catch (Exception e) {
             return e;
         }
     }
 
-    protected void onPostExecute(Object o){
+    protected void onPostExecute(String webResponse){
         //To Override
     }
 

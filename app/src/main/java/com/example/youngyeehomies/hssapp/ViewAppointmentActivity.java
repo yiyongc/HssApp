@@ -88,20 +88,20 @@ public class ViewAppointmentActivity extends DrawerActivity implements Appointme
 
         WebServiceClass svc = new WebServiceClass(){
             @Override
-            protected void onPostExecute(Object o){
+            protected void onPostExecute(String webResponse){
                 //To Override
-                JSONObject jsonobj = (JSONObject)o;
-                getAppointmentsAysncReturn(jsonobj);
+                getAppointmentsAysncReturn(webResponse);
             }
         };
         svc.setServiceLink("viewAppts.php");
         svc.execute(obj.toString());
     }
 
-    public void getAppointmentsAysncReturn(JSONObject jsonobj){
+    public void getAppointmentsAysncReturn(String webResponse){
         AppointmentList = new ArrayList<>();
 
         try{
+            JSONObject jsonobj = new JSONObject(webResponse);
             SimpleDateFormat dateParser = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.ENGLISH);
 
             Resources res = getResources();
@@ -130,7 +130,8 @@ public class ViewAppointmentActivity extends DrawerActivity implements Appointme
                 ));
             }
         } catch (Exception e){
-            Log.e("tagtag",e.toString());
+            Toast.makeText(ViewAppointmentActivity.this, "Web Service Error", Toast.LENGTH_SHORT).show();
+            Log.e("Web Service Error",webResponse);
         }
 
         AppointmentListAdapter adapter = new AppointmentListAdapter(AppointmentList);
@@ -143,9 +144,9 @@ public class ViewAppointmentActivity extends DrawerActivity implements Appointme
     public void onItemClick(View view, int position) {
         clickedItem = view;
         view.setEnabled(false);
-        Toast.makeText(ViewAppointmentActivity.this, "You clicked Item No. " + position, Toast.LENGTH_SHORT).show();
+        //Toast.makeText(ViewAppointmentActivity.this, "You clicked Item No. " + position, Toast.LENGTH_SHORT).show();
         Intent viewDetailsIntent = new Intent(this, ViewAppointmentDetailsActivity.class);
-        //TODO pass in the appointmentID to be displayed
+
         viewDetailsIntent.putExtra("AppointmentID", AppointmentList.get(position).getApptID()); //Replace weird integer with Appointment ID from json object.  AppointmentList.get(position).getApptID()
         startActivity(viewDetailsIntent);
         overridePendingTransition(R.anim.pull_in_right, R.anim.push_out_left);
