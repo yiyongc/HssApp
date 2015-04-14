@@ -5,7 +5,6 @@ import android.content.res.Resources;
 import android.content.res.TypedArray;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
-import android.support.v7.internal.view.menu.MenuView;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -37,29 +36,30 @@ public class ViewAppointmentDetailsActivity extends Activity {
     TextView AppointmentDetailsTime;
     TextView AppointmentDetailsDate;
     TextView AppointmentDetailsClinic;
+    boolean isUpcoming;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_view_appointment_details);
+        Bundle extras = getIntent().getExtras();
+
+        isUpcoming = extras.getBoolean("isUpcoming");
+        if(isUpcoming)
+            setContentView(R.layout.activity_view_appointment_details);
+        else
+            setContentView(R.layout.activity_view_old_appointment_details);
+
+
+
+
 
         session = new SessionManager(getApplicationContext());
 
-        Bundle extras = getIntent().getExtras();
         if(extras !=null) {
             AppointmentID = extras.getInt("AppointmentID");
             //Log.e("tagtag",""+ AppointmentID);
-            //populate text views and image views with data method
-
             getAppointment(session.getUserToken());
-
-            //populateAppointmentDetails(value);
-            //displayAppointmentDetails();
-
-        }
-        else{
-            //populate text view and image view with Error Message
         }
     }
 
@@ -155,10 +155,9 @@ public class ViewAppointmentDetailsActivity extends Activity {
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_view_appointment_details, menu);
+        getMenuInflater().inflate(R.menu.menu_view_appointment, menu);
         return true;
     }
-
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         // Handle action bar item clicks here. The action bar will
