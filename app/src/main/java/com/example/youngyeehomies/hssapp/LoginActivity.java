@@ -90,6 +90,7 @@ public class LoginActivity extends Activity{
     Context context;
 
     String regid;
+    int toDetails = -1;
     // GCM END
 
     @Override
@@ -113,6 +114,18 @@ public class LoginActivity extends Activity{
             passwordBox.setText(storedpassword);
             rememberMeCheckBox.setChecked(true);
         }
+
+        // GCM REDIRECT
+        toDetails = -1;
+        Bundle extras = getIntent().getExtras();
+        if(extras !=null) {
+            String AppointmentID = extras.getString("AppointmentID", "none");
+            Log.i("HSS", "Login onCreate appointmentID: "+ AppointmentID);
+            if(!AppointmentID.equals("none")) {
+                toDetails = Integer.parseInt(AppointmentID);
+            }
+        }
+        // END GCM
 
         Log.e(TAG, "created login activity.");
     }
@@ -194,7 +207,22 @@ public class LoginActivity extends Activity{
             JSONObject obj = new JSONObject(webResponse);
             if(obj.getInt("errorCode")==0){
                 Log.e(TAG, "btnLoginReturn errorCode is 0.");
+
                 Intent loggedInIntent = new Intent(this, ViewAppointmentActivity.class);
+                if(toDetails != -1) {
+                    Log.i("HSS", "Login Redirecting to details of ID: " + toDetails);
+                    loggedInIntent.putExtra("AppointmentID", Integer.toString(toDetails));
+                }
+                /*
+                Intent viewAppts = new Intent(this, ViewAppointmentActivity.class);
+                if(toDetails != -1) {
+                    Log.i("HSS", "Redirecting to details of ID: " + toDetails);
+                    loggedInIntent = new Intent(this, ViewAppointmentDetailsActivity.class);
+                    loggedInIntent.putExtra("AppointmentID", toDetails);
+                }
+                else
+                    loggedInIntent = new Intent(this, ViewAppointmentActivity.class);*/
+
 
                 session.createLoginSession(obj.getString("accountToken"), obj.getString("firstName")); //This should be in loginManager when logic is done
                 //session.createLoginSession("",""); //This should be in loginManager when logic is done
@@ -239,7 +267,7 @@ public class LoginActivity extends Activity{
         } catch (Exception e) {
             Toast.makeText(LoginActivity.this, "Web Service Error", Toast.LENGTH_SHORT).show();
             Log.e("Web Service Error", webResponse);
-            Log.e(TAG, "btnLoginReturn exception :(");
+            Log.e(TAG, "btnLoginReturn exception :( e.message: " + e.getMessage());
         }
         loginButton.setEnabled(true);
     }

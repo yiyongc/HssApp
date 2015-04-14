@@ -60,8 +60,18 @@ public class ViewAppointmentDetailsActivity extends Activity {
 
         if(extras !=null) {
             AppointmentID = extras.getInt("AppointmentID");
-            //Log.e("tagtag",""+ AppointmentID);
+            Log.i("HSS", "ViwAppointmentDetails onCreate appointmentID: "+ AppointmentID);
+            //populate text views and image views with data method
+
             getAppointment(session.getUserToken());
+
+            //populateAppointmentDetails(value);
+            //displayAppointmentDetails();
+
+        }
+        else{
+            //populate text view and image view with Error Message
+            Log.e("HSS", "problem in viewappointmentdetails oncreate else");
         }
     }
 
@@ -93,16 +103,18 @@ public class ViewAppointmentDetailsActivity extends Activity {
             AppointmentDetailsClinic.setText(appointmentDetails.getApptClinic());
 
         }
+        Log.i("HSS", "ViwAppointmentDetails displayAppointmentDetails appointmentID: "+ AppointmentID);
 
     }
 
     public void getAppointment(String accountToken){
+        Log.i("HSS", "ViwAppointmentDetails getAppointment appointmentID: "+ AppointmentID);
         JSONObject obj = new JSONObject();
         try {
             obj.put("accountToken", accountToken);
             obj.put("ID", AppointmentID);
         } catch (Exception e) {
-
+            Log.e("HSS", "problem in viewappointmentdetails");
         }
 
         WebServiceClass svc = new WebServiceClass(){
@@ -145,7 +157,7 @@ public class ViewAppointmentDetailsActivity extends Activity {
 
                 displayAppointmentDetails();
             } else {
-
+                Log.e("HSS", "problem in viewappointmentdetails, error from web");
             }
         } catch (Exception e){
             Toast.makeText(ViewAppointmentDetailsActivity.this, "Web Service Error", Toast.LENGTH_SHORT).show();
@@ -191,7 +203,7 @@ public class ViewAppointmentDetailsActivity extends Activity {
             obj.put("accountToken", accountToken);
             obj.put("ID", AppointmentID);
         } catch (Exception e) {
-
+            Log.e("HSS", "problem in viewappointmentdetails deleteappointment");
         }
 
         WebServiceClass svc = new WebServiceClass(){

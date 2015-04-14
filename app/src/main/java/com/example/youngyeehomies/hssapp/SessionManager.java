@@ -25,7 +25,7 @@ public class SessionManager {
     // NAME (make variable public to access from outside)
     public static final String KEY_NAME = "name";
 
-    public static String KEY_TOKEN = "token";
+    public static String KEY_TOKEN = "notLoggedIn";
 
     // Constructor
     public SessionManager(Context c){
