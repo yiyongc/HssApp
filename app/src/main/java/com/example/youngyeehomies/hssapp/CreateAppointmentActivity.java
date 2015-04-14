@@ -34,6 +34,7 @@ public class CreateAppointmentActivity extends DrawerActivity {
     ArrayList<String> clinicArrayList = new ArrayList<String>();
     ArrayList<String> timeSlotArrayList = new ArrayList<String> ();
     HashMap<String, Integer> clinicIDPair = new HashMap<String, Integer>();
+    Intent completedCreationIntent;
 
     @Override
     protected void onResume() {
@@ -113,7 +114,7 @@ public class CreateAppointmentActivity extends DrawerActivity {
             JSONObject jsonobj = new JSONObject(webResponse);
             if(jsonobj.getInt("errorCode")==0) {
                 Toast.makeText(CreateAppointmentActivity.this, "Appointment has been created! A reminder notification will be sent one day before the day of the appointment!", Toast.LENGTH_LONG).show();
-                Intent completedCreationIntent = new Intent(this, ViewAppointmentActivity.class);
+                completedCreationIntent = new Intent(this, ViewAppointmentActivity.class);
                 startActivity(completedCreationIntent);
                 finish();
             }

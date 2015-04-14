@@ -5,6 +5,7 @@ import android.app.FragmentManager;
 import android.app.FragmentTransaction;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -16,7 +17,8 @@ public class ViewProfileActivity extends DrawerActivity {
     FragmentTransaction fTrans;
     FragmentManager fragmentManager;
     EditText currentPasswordBox, newPasswordBox, newPasswordBox2;
-    TextView title;
+    TextView title, address, email, name, phone;
+    CheckBox notifyemail, notifypush;
     //TODO EDITPROFILE
 
     @Override
@@ -41,9 +43,24 @@ public class ViewProfileActivity extends DrawerActivity {
             fTrans.commit();
         }
 
-        currentPasswordBox = (EditText) findViewById(R.id.change_current);
-        newPasswordBox = (EditText) findViewById(R.id.change_new);
-        newPasswordBox2 = (EditText) findViewById(R.id.change_new2);
+        notifyemail = (CheckBox) findViewById(R.id.emailCheckBox);
+        notifyemail.setClickable(false);
+        notifypush = (CheckBox) findViewById(R.id.pushCheckBox);
+        notifypush.setClickable(false);
+
+        name = (TextView) findViewById(R.id.userName);
+        email = (TextView) findViewById(R.id.userEmail);
+        phone = (TextView) findViewById(R.id.userPhone);
+        address = (TextView) findViewById(R.id.userAddress);
+
+
+        //Set the details
+        name.setText("Elton");
+        email.setText("myEmail");
+        phone.setText("123333");
+        address.setText("Pulau NTU");
+        notifyemail.setChecked(true);
+        notifypush.setChecked(true);
 
     }
 
@@ -71,6 +88,10 @@ public class ViewProfileActivity extends DrawerActivity {
         fTrans3.addToBackStack(null);
         fTrans3.commit();
         title.setText("Change Password");
+
+        currentPasswordBox = (EditText) findViewById(R.id.change_current);
+        newPasswordBox = (EditText) findViewById(R.id.change_new);
+        newPasswordBox2 = (EditText) findViewById(R.id.change_new2);
     }
 
     public void btnUpdatePassword(View view) {
@@ -114,5 +135,8 @@ public class ViewProfileActivity extends DrawerActivity {
         else
             fragmentManager.popBackStack();
         title.setText("View Profile");
+    }
+
+    public void btnUpdateProfile(View view) {
     }
 }
