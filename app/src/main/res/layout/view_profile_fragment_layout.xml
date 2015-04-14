@@ -22,6 +22,7 @@
             android:layout_alignRight="@+id/addressTV"
             android:layout_alignEnd="@+id/addressTV"
             android:layout_marginTop="20dp"/>
+
         <TextView
             android:id="@+id/userName"
             android:layout_width="200dp"

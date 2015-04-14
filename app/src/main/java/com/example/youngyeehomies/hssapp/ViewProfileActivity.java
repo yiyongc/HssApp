@@ -11,6 +11,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.CheckBox;
 import android.widget.EditText;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -30,8 +31,10 @@ public class ViewProfileActivity extends DrawerActivity {
     FragmentTransaction fTrans;
     FragmentManager fragmentManager;
     EditText currentPasswordBox, newPasswordBox, newPasswordBox2;
-    TextView title, address, email, name, phone;
-    CheckBox notifyemail, notifypush;
+    TextView title;
+    static String address, email, firstname, phone, lastname, fullname;
+    int notifyemail, notifypush;
+    Bundle args;
     //TODO EDITPROFILE
 
     @Override
@@ -47,16 +50,11 @@ public class ViewProfileActivity extends DrawerActivity {
 
         title = (TextView) findViewById(R.id.viewProfileTitle);
 
+        args = new Bundle();
+        getUserDetails();
+
         fragmentManager = getFragmentManager();
         fTrans = fragmentManager.beginTransaction();
-
-        if (savedInstanceState == null) {
-            Fragment fragment1 = new ViewProfileFragment();
-            fTrans.add(R.id.editProfileSpace, fragment1);
-            fTrans.commit();
-        }
-
-        getUserDetails();
 
     }
 
@@ -85,18 +83,25 @@ public class ViewProfileActivity extends DrawerActivity {
         try{
             JSONObject jsonobj = new JSONObject(webResponse);
 
-            jsonobj.getString("");
+            firstname = jsonobj.getString("First Name");
+            lastname = jsonobj.getString("Last Name");
+            fullname = firstname +" "+ lastname;
+            Log.e("tagyo", fullname);
+            args.putString("name", fullname);
+            args.putString("address", jsonobj.getString("Address"));
+            args.putString("email", jsonobj.getString("Email"));
+            args.putString("phone", jsonobj.getString("HPno"));
+            args.putInt("notifypush", jsonobj.getInt("notifySMS"));
+            args.putInt("notifyemail", jsonobj.getInt("notifyEmail"));
 
-            /*
-            $obj["NRIC"] = $row["NRIC"];
-            $obj["First Name"] = $row["FirstName"];
-            $obj["Last Name"] = $row["LastName"];
-            $obj["Address"] = $row["Address"];
-            $obj["Email"] = $row["Email"];
-            $obj["HPno"] = $row["HPno"];
-            $obj["notifySMS"] = $row["notifySMS"];
-            $obj["notifyEmail"] = $row["notifyEmail"];
-            */
+
+
+            Fragment fragment1 = new ViewProfileFragment();
+            fragment1.setArguments(args);
+            fTrans.add(R.id.editProfileSpace, fragment1);
+            fTrans.commit();
+
+
         } catch (Exception e){
             Toast.makeText(ViewProfileActivity.this, "Web Service Error", Toast.LENGTH_SHORT).show();
             Log.e("Web Service Error",webResponse);
@@ -160,10 +165,35 @@ public class ViewProfileActivity extends DrawerActivity {
             return;
         }
 
-        //Insert into server
-        Toast.makeText(ViewProfileActivity.this, "Password has been changed! Please login with your new password!", Toast.LENGTH_SHORT).show();
-        session.logoutUser();
+
+        //Json
+        JSONObject obj = new JSONObject();
+        try {
+            obj.put("accountToken", session.getUserToken());
+            obj.put("mode", "2");
+            obj.put("Password", newPassword);
+            obj.put("Password2", newPassword2);
+            obj.put("PasswordOld", currentPassword);
+        } catch (Exception e) {
+
+        }
+
+
+
+        WebServiceClass svc = new WebServiceClass(){
+            @Override
+            protected void onPostExecute(Object o){
+                //To Override
+                btnUpdatePasswordReturn(o.toString());
+            }
+        };
+        svc.setServiceLink("editProfile.php");
+        svc.execute(obj.toString());
+
+
     }
+
+
 
     @Override
     public void onBackPressed() {
@@ -175,5 +205,75 @@ public class ViewProfileActivity extends DrawerActivity {
     }
 
     public void btnUpdateProfile(View view) {
+        EditText newEmail, newAddress, newPhone;
+        CheckBox newPushNotif, newEmailNotif;
+        String theEmail, theAddress, thePhone, thePushNotif, theEmailNotif;
+
+        newEmail = (EditText) findViewById(R.id.editTextEmail);
+        newAddress = (EditText) findViewById(R.id.editTextAddress);
+        newPhone = (EditText) findViewById(R.id.editTextPhone);
+        newPushNotif = (CheckBox) findViewById(R.id.editPushCheckBox);
+        newEmailNotif = (CheckBox) findViewById(R.id.editEmailCheckBox);
+
+        theEmail = newEmail.getText().toString();
+        theAddress = newAddress.getText().toString();
+        thePhone = newPhone.getText().toString();
+        thePushNotif = ((newPushNotif.isChecked())? "1":"0");
+        theEmailNotif = ((newEmailNotif.isChecked())? "1":"0");
+
+        JSONObject obj = new JSONObject();
+        try {
+            obj.put("accountToken", session.getUserToken());
+            obj.put("mode", "1");
+            obj.put("address", theAddress);
+            obj.put("email", theEmail);
+            obj.put("HPno", thePhone);
+            obj.put("notifySMS", thePushNotif);
+            obj.put("notifyEmail", theEmailNotif);
+        } catch (Exception e) {
+
+        }
+
+        WebServiceClass svc = new WebServiceClass(){
+            @Override
+            protected void onPostExecute(Object o){
+                //To Override
+                btnUpdateProfileReturn(o.toString());
+            }
+        };
+        svc.setServiceLink("editProfile.php");
+        svc.execute(obj.toString());
+    }
+
+    public void btnUpdateProfileReturn(String webResponse) {
+        try{
+            JSONObject jsonobj = new JSONObject(webResponse);
+            if(jsonobj.getInt("errorCode")==0){
+                Toast.makeText(ViewProfileActivity.this, "Profile details are updated!", Toast.LENGTH_SHORT).show();
+                finish();
+                return;
+            }
+
+        } catch (Exception e){
+            Toast.makeText(ViewProfileActivity.this, "Error Updating Profile", Toast.LENGTH_SHORT).show();
+            Log.e("Web Service Error",webResponse);
+        }
+    }
+
+    public void btnUpdatePasswordReturn(String webResponse) {
+
+        try{
+            JSONObject jsonobj = new JSONObject(webResponse);
+            if(jsonobj.getInt("errorCode")==0){
+                Toast.makeText(ViewProfileActivity.this, "Password has been changed! Please login with your new password!", Toast.LENGTH_SHORT).show();
+                session.logoutUser();
+                return;
+            }
+
+        } catch (Exception e){
+            Toast.makeText(ViewProfileActivity.this, "Error Changing Password", Toast.LENGTH_SHORT).show();
+            Log.e("Web Service Error",webResponse);
+        }
+
     }
 }

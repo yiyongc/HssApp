@@ -308,4 +308,12 @@ public class CreateAppointmentActivity extends DrawerActivity {
     public void btnPrev(View view) {
         fragmentManager.popBackStackImmediate();
     }
+
+    @Override
+    public void onBackPressed() {
+        if (fragmentManager.getBackStackEntryCount() == 0)
+            super.onBackPressed();
+        else
+            fragmentManager.popBackStack();
+    }
 }
