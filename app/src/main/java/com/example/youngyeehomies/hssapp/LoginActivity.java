@@ -7,6 +7,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.EditText;
 
 import org.json.JSONArray;
@@ -57,6 +58,9 @@ public class LoginActivity extends Activity{
     AlertDialogManager alert = new AlertDialogManager();
     SessionManager session;
     Button loginButton;
+    SecurePreferences preferences;
+    CheckBox rememberMeCheckBox;
+    String username, password;
 
     // GCM
     public static final String EXTRA_MESSAGE = "message";
@@ -93,6 +97,17 @@ public class LoginActivity extends Activity{
         usernameBox = (EditText) findViewById(R.id.usernameBox);
         passwordBox = (EditText) findViewById(R.id.passwordBox);
         loginButton = (Button) findViewById(R.id.btnLogin);
+        rememberMeCheckBox = (CheckBox) findViewById(R.id.rememberCheckBox);
+
+        preferences = new SecurePreferences(this, "user-info",  "youngyeehomies", true);
+        String storedusername = preferences.getString("username");
+        String storedpassword = preferences.getString("password");
+
+        if (storedusername != null && storedpassword != null) {
+            usernameBox.setText(storedusername);
+            passwordBox.setText(storedpassword);
+            rememberMeCheckBox.setChecked(true);
+        }
 
         Log.e(TAG, "created login activity.");
     }
@@ -130,8 +145,8 @@ public class LoginActivity extends Activity{
     public void btnLogin(View view) {
         loginButton.setEnabled(false);
 
-        String username = usernameBox.getText()+"";
-        String password = passwordBox.getText()+"";
+        username = usernameBox.getText()+"";
+        password = passwordBox.getText()+"";
 
         Log.e(TAG, "login button pressed user: " + username + " pass: " + password);
 
@@ -147,6 +162,8 @@ public class LoginActivity extends Activity{
         }
 
         LoginManager loginManager = new LoginManager(this);
+
+
         //loginManager.execute("url", loginManager.NETWORK_STATE_LOGIN);
 
         //AUTO SUCCESS LOGIN; DELETE WHEN SUBMITTING
@@ -168,11 +185,19 @@ public class LoginActivity extends Activity{
     public void btnLoginReturn(JSONObject obj){
         Log.e(TAG, "btnLoginReturn callback called.");
         try{
+
             if(obj.getInt("errorCode")==0){
                 Log.e(TAG, "btnLoginReturn errorCode is 0.");
                 Intent loggedInIntent = new Intent(this, ViewAppointmentActivity.class);
-                session.createLoginSession(obj.getString("accountToken")); //This should be in loginManager when logic is done
+
+                session.createLoginSession(obj.getString("accountToken"), obj.getString("firstName")); //This should be in loginManager when logic is done
                 //session.createLoginSession("",""); //This should be in loginManager when logic is done
+
+                if (rememberMeCheckBox.isChecked()) {
+                    preferences.put("username", username);
+                    preferences.put("password", password);
+                }
+
                 startActivity(loggedInIntent);
                 finish();
 
@@ -198,6 +223,7 @@ public class LoginActivity extends Activity{
                     Log.i(TAG, "No valid Google Play Services APK found.");
                 }
                 // END GCM
+
 
 
             } else {

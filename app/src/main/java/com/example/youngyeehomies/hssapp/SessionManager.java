@@ -22,10 +22,8 @@ public class SessionManager {
     private static final String PREF_NAME = "HSSAppPref";
     // All Shared Preferences Keys
     private static final String IS_LOGIN = "IsLoggedIn";
-    // User name (make variable public to access from outside)
-    public static final String KEY_PASSWORD = "password";
-    // NRIC (make variable public to access from outside)
-    public static final String KEY_NRIC = "nric";
+    // NAME (make variable public to access from outside)
+    public static final String KEY_NAME = "name";
 
     public static String KEY_TOKEN = "token";
 
@@ -37,20 +35,13 @@ public class SessionManager {
     }
 
     //Create login session
-    public void createLoginSession(String nric, String password) {
 
-        editor.putBoolean(IS_LOGIN, true);
-        editor.putString(KEY_NRIC, nric);
-        editor.putString(KEY_PASSWORD, password);
 
-        editor.commit();
-    }
-
-    public void createLoginSession(String token) {
+    public void createLoginSession(String token, String name) {
         KEY_TOKEN = token;
         editor.putBoolean(IS_LOGIN, true);
         editor.putString(KEY_TOKEN, token);
-
+        editor.putString(KEY_NAME, name);
         editor.commit();
     }
 
@@ -77,10 +68,8 @@ public class SessionManager {
 
         HashMap<String, String> user = new HashMap<String, String>();
 
-        // user NRIC
-        user.put(KEY_NRIC, pref.getString(KEY_NRIC, null));
-        // user name
-        user.put(KEY_PASSWORD, pref.getString(KEY_PASSWORD, null));
+        // user NAME
+        user.put(KEY_NAME, pref.getString(KEY_NAME, null));
 
         return user;
     }

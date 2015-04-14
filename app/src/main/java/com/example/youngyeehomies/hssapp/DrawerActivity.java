@@ -49,10 +49,10 @@ public class DrawerActivity extends ActionBarActivity {
         mDrawerList.setSelection(1);
 
         HashMap<String, String> user = session.getUserDetails();
-        final String nric = user.get(SessionManager.KEY_NRIC);
+        String name = user.get(SessionManager.KEY_NAME);
 
 
-        sessionTextView.setText(Html.fromHtml("Hello <b>" + nric + "</b>!"));
+        sessionTextView.setText(Html.fromHtml("Hello <b>" + name + "</b>!"));
 
         mDrawerList.setOnItemClickListener(
                 new AdapterView.OnItemClickListener() {

@@ -40,17 +40,17 @@ public class EditProfileActivity extends DrawerActivity {
         String currentPassword = currentPasswordBox.getText()+"";
         String newPassword = newPasswordBox.getText()+"";
         String newPassword2 = newPasswordBox2.getText()+"";
-        HashMap<String, String> user = session.getUserDetails();
-        final String password = user.get(SessionManager.KEY_PASSWORD);
+        //HashMap<String, String> user = session.getUserDetails();
 
         if (currentPassword.length() == 0 || newPassword.length() == 0 || newPassword2.length() == 0){
             Toast.makeText(EditProfileActivity.this, "Enter all fields!", Toast.LENGTH_SHORT).show();
             return;
         }
+        /*
         if (!currentPassword.equals(password)){
             Toast.makeText(EditProfileActivity.this, "Incorrect Password!", Toast.LENGTH_SHORT).show();
             return;
-        }
+        } */
         if (!newPassword.equals(newPassword2)) {
             Toast.makeText(EditProfileActivity.this, "New passwords do not match!", Toast.LENGTH_SHORT).show();
             return;
