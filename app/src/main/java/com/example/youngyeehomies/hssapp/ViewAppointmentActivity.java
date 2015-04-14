@@ -75,6 +75,21 @@ public class ViewAppointmentActivity extends DrawerActivity implements Appointme
 
         getAppointments();
 
+        // GCM REDIRECT
+        Bundle extras = getIntent().getExtras();
+        if(extras != null) {
+            String AppointmentID = extras.getString("AppointmentID", "none");
+            Log.i("HSS", "ViewAppointment onCreate appointmentID: "+ AppointmentID);
+            if(!AppointmentID.equals("none")) {
+                Log.i("HSS", "ViewAppointment Redirecting to details of ID: " + AppointmentID);
+                Intent viewDetailsIntent = new Intent(this, ViewAppointmentDetailsActivity.class);
+                viewDetailsIntent.putExtra("AppointmentID", Integer.parseInt(AppointmentID));
+                startActivity(viewDetailsIntent);
+                overridePendingTransition(R.anim.pull_in_right, R.anim.push_out_left);
+            }
+        }
+        // END GCM
+
     }
 
     public void getAppointments(){
@@ -83,7 +98,7 @@ public class ViewAppointmentActivity extends DrawerActivity implements Appointme
         try {
             obj.put("accountToken", accountToken);
         } catch (Exception e) {
-
+            Log.e("HSS", "problem in viewappointment");
         }
 
         WebServiceClass svc = new WebServiceClass(){

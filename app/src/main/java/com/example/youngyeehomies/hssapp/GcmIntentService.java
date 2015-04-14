@@ -23,6 +23,7 @@ package com.example.youngyeehomies.hssapp;
         import com.google.android.gms.gcm.GoogleCloudMessaging;
 
         import android.app.IntentService;
+        import android.app.Notification;
         import android.app.NotificationManager;
         import android.app.PendingIntent;
         import android.content.Context;
@@ -40,9 +41,11 @@ package com.example.youngyeehomies.hssapp;
  * wake lock.
  */
 public class GcmIntentService extends IntentService {
-    public static final int NOTIFICATION_ID = 1;
+    public static final int NOTIFICATION_ID = 0;
     private NotificationManager mNotificationManager;
     NotificationCompat.Builder builder;
+
+    SessionManager session;
 
     public GcmIntentService() {
         super("GcmIntentService");
@@ -65,9 +68,9 @@ public class GcmIntentService extends IntentService {
              * not interested in, or that you don't recognize.
              */
             if (GoogleCloudMessaging.MESSAGE_TYPE_SEND_ERROR.equals(messageType)) {
-                sendNotification("Send error: " + extras.toString());
+                sendNotification("Send error: " + extras.toString(), extras);
             } else if (GoogleCloudMessaging.MESSAGE_TYPE_DELETED.equals(messageType)) {
-                sendNotification("Deleted messages on server: " + extras.toString());
+                sendNotification("Deleted messages on server: " + extras.toString(), extras);
                 // If it's a regular GCM message, do some work.
             } else if (GoogleCloudMessaging.MESSAGE_TYPE_MESSAGE.equals(messageType)) {
                 // This loop represents the service doing some work.
@@ -84,7 +87,7 @@ public class GcmIntentService extends IntentService {
                 */
                 // Post notification of received message.
                 //sendNotification("Received: " + extras.toString());
-                sendNotification("You have a new appointment instruction to check!");
+                sendNotification(extras.getString("message", "No message set :("), extras);
                 Log.i(TAG, "Received: " + extras.toString());
             }
         }
@@ -95,12 +98,56 @@ public class GcmIntentService extends IntentService {
     // Put the message into a notification and post it.
     // This is just one simple example of what you might choose to do with
     // a GCM message.
-    private void sendNotification(String msg) {
+    private void sendNotification(String msg, Bundle extras) {
         mNotificationManager = (NotificationManager)
                 this.getSystemService(Context.NOTIFICATION_SERVICE);
 
-        PendingIntent contentIntent = PendingIntent.getActivity(this, 0,
-                new Intent(this, LoginActivity.class), 0);
+        int uniqueID = extras.getInt("android.support.content.wakelockid", NOTIFICATION_ID);
+        PendingIntent contentIntent;
+
+        if(session == null) {
+            session = new SessionManager(getApplicationContext());
+        }
+
+        String accountToken = session.getUserToken();
+
+        if(accountToken.equals("notLoggedIn") && extras.getString("type", "").equals("reminder")) {
+            Intent loginIntent = new Intent(this, LoginActivity.class);
+            loginIntent.putExtra("AppointmentID", extras.getString("apptID", "1"));
+            contentIntent = PendingIntent.getActivity(getApplicationContext(), uniqueID,
+                    loginIntent, PendingIntent.FLAG_UPDATE_CURRENT);
+        }
+        else if(accountToken.equals("notLoggedIn") && extras.getString("type", "").equals("instructions")) {
+            Intent loginIntent = new Intent(this, LoginActivity.class);
+            loginIntent.putExtra("AppointmentID", extras.getString("apptID", "1"));
+            contentIntent = PendingIntent.getActivity(getApplicationContext(), uniqueID,
+                    loginIntent, PendingIntent.FLAG_UPDATE_CURRENT);
+        }
+        else if(accountToken.equals("notLoggedIn")) {
+            contentIntent = PendingIntent.getActivity(this, 0,
+                    new Intent(this, LoginActivity.class), 0);
+        }
+        else if(extras.getString("type", "").equals("reminder")) {
+            Intent viewDetailsIntent = new Intent(this, ViewAppointmentDetailsActivity.class);
+            Log.i(TAG, "reminder apptID is " + extras.getString("apptID"));
+            int parsed = Integer.parseInt(extras.getString("apptID", "1"));
+            Log.i(TAG, "parsed is " + extras.getString("apptID"));
+            viewDetailsIntent.putExtra("AppointmentID", parsed);
+            contentIntent = PendingIntent.getActivity(getApplicationContext(), uniqueID,
+                    viewDetailsIntent, PendingIntent.FLAG_UPDATE_CURRENT);
+        }
+        else if(extras.getString("type", "").equals("instructions")) {
+            Intent viewDetailsIntent = new Intent(this, ViewAppointmentDetailsActivity.class);
+            Log.i(TAG, "instruction apptID is " + extras.getString("apptID"));
+            viewDetailsIntent.putExtra("AppointmentID", Integer.parseInt(extras.getString("apptID", "1")));
+            contentIntent = PendingIntent.getActivity(getApplicationContext(), uniqueID,
+                    viewDetailsIntent, PendingIntent.FLAG_UPDATE_CURRENT);
+        }
+        else {
+            contentIntent = PendingIntent.getActivity(this, 0,
+                    new Intent(this, LoginActivity.class), 0);
+        }
+        //Log.i(TAG, "contentIntent done");
 
         NotificationCompat.Builder mBuilder =
                 new NotificationCompat.Builder(this)
@@ -109,8 +156,14 @@ public class GcmIntentService extends IntentService {
                         .setStyle(new NotificationCompat.BigTextStyle()
                                 .bigText(msg))
                         .setContentText(msg);
-
+        //Log.i(TAG, "foo");
         mBuilder.setContentIntent(contentIntent);
-        mNotificationManager.notify(NOTIFICATION_ID, mBuilder.build());
+        //Log.i(TAG, "contentIntent set");
+        //Log.e(TAG, "unique int: " + extras.getInt("android.support.content.wakelockid", NOTIFICATION_ID));
+
+        Notification nf = mBuilder.build();
+        nf.flags |= Notification.FLAG_ONLY_ALERT_ONCE | Notification.FLAG_AUTO_CANCEL;
+        mNotificationManager.notify(uniqueID, nf);
+        //Log.i(TAG, "notification set");
     }
 }
