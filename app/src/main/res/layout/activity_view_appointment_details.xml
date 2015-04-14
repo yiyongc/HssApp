@@ -160,7 +160,7 @@
                 android:layout_alignRight="@+id/appointment_details_notes"
                 android:layout_alignEnd="@+id/appointment_details_notes"
                 android:layout_marginTop="24dp"
-                android:onClick="deleteAppointment"/>
+                android:onClick="deleteAppointmentConfirm"/>
 
 
         </RelativeLayout>

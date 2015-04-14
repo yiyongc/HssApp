@@ -1,6 +1,8 @@
 package com.example.youngyeehomies.hssapp;
 
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.res.Resources;
 import android.content.res.TypedArray;
 import android.graphics.drawable.Drawable;
@@ -178,10 +180,9 @@ public class ViewAppointmentDetailsActivity extends Activity {
         overridePendingTransition(R.anim.pull_in_left, R.anim.push_out_right);
     }
 
-    public void deleteAppointment(View view) {
+    public void deleteAppointment() {
         //TODO Delete Appointment JSON
-        ImageButton deleteButton = (ImageButton)findViewById(R.id.delete_appointment_button);
-        deleteButton.setEnabled(false);
+
 
         //TWeb Service
         String accountToken = session.getUserToken();
@@ -204,6 +205,40 @@ public class ViewAppointmentDetailsActivity extends Activity {
         svc.execute(obj.toString());
 
     }
+
+    public void deleteAppointmentConfirm(View view){
+        ImageButton deleteButton = (ImageButton)findViewById(R.id.delete_appointment_button);
+        deleteButton.setEnabled(false);
+
+        createConfirmationDialog();
+        deleteButton.setEnabled(true);
+
+    }
+
+    public void createConfirmationDialog(){
+        final AlertDialog.Builder confirmDialog = new AlertDialog.Builder(this);
+        confirmDialog.setMessage("Do you really want to delete this appointment?");
+        confirmDialog.setCancelable(false);
+
+        confirmDialog.setNegativeButton("Yes",new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                deleteAppointment();
+            }
+        });
+
+        confirmDialog.setPositiveButton("No",new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.cancel();
+            }
+        });
+
+        confirmDialog.create().show();
+
+    }
+
+
 
     public void deleteAppointmentAsyncReturn(String webResponse){
         try{
