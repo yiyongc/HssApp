@@ -100,9 +100,9 @@ public class CreateAppointmentActivity extends DrawerActivity {
 
         WebServiceClass svc = new WebServiceClass(){
             @Override
-            protected void onPostExecute(String webResponse){
+            protected void onPostExecute(Object o){
                 //To Override
-                createAppointmentAsyncReturn(webResponse);
+                createAppointmentAsyncReturn((String)o);
             }
         };
         svc.setServiceLink("createAppt.php");
@@ -159,9 +159,9 @@ public class CreateAppointmentActivity extends DrawerActivity {
 
         WebServiceClass svc = new WebServiceClass(){
             @Override
-            protected void onPostExecute(String webResponse){
+            protected void onPostExecute(Object o){
                 //To Override
-                getWebSvcClinicsAsyncReturn(webResponse);
+                getWebSvcClinicsAsyncReturn((String)o);
             }
         };
         svc.setServiceLink("getApptClinics.php");
@@ -243,9 +243,9 @@ public class CreateAppointmentActivity extends DrawerActivity {
 
         WebServiceClass svc = new WebServiceClass(){
             @Override
-            protected void onPostExecute(String webResponse){
+            protected void onPostExecute(Object o){
                 //To Override
-                getWebSvcTimeslotsAsyncReturn(webResponse);
+                getWebSvcTimeslotsAsyncReturn((String)o);
             }
         };
         svc.setServiceLink("getApptTimeSlots.php");

@@ -38,9 +38,9 @@ public class RegistrationManager{
 
         WebServiceClass svc = new WebServiceClass() {
             @Override
-            protected void onPostExecute(String webResponse) {
+            protected void onPostExecute(Object o) {
                 //To Override
-                ref.onSendRegDataAsyncReturn(webResponse);
+                ref.onSendRegDataAsyncReturn((String)o);
             }
         };
         svc.setServiceLink("activateAccount.php");

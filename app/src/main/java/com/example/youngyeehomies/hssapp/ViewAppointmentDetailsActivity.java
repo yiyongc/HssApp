@@ -105,9 +105,9 @@ public class ViewAppointmentDetailsActivity extends Activity {
 
         WebServiceClass svc = new WebServiceClass(){
             @Override
-            protected void onPostExecute(String webResponse){
+            protected void onPostExecute(Object o){
                 //To Override
-                getAppointmentAsyncReturn(webResponse);
+                getAppointmentAsyncReturn((String)o);
             }
         };
         svc.setServiceLink("viewAppt.php");
@@ -196,9 +196,9 @@ public class ViewAppointmentDetailsActivity extends Activity {
 
         WebServiceClass svc = new WebServiceClass(){
             @Override
-            protected void onPostExecute(String webResponse){
+            protected void onPostExecute(Object o){
                 //To Override
-                deleteAppointmentAsyncReturn(webResponse);
+                deleteAppointmentAsyncReturn((String)o);
             }
         };
         svc.setServiceLink("deleteAppt.php");

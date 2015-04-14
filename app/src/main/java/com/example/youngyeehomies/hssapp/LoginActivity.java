@@ -182,10 +182,11 @@ public class LoginActivity extends Activity{
 
     }
 
-    public void btnLoginReturn(JSONObject obj){
+    public void btnLoginReturn(String webResponse){
+
         Log.e(TAG, "btnLoginReturn callback called.");
         try{
-
+            JSONObject obj = new JSONObject(webResponse);
             if(obj.getInt("errorCode")==0){
                 Log.e(TAG, "btnLoginReturn errorCode is 0.");
                 Intent loggedInIntent = new Intent(this, ViewAppointmentActivity.class);
@@ -231,6 +232,8 @@ public class LoginActivity extends Activity{
                 alert.showAlertDialog(LoginActivity.this, "Login Failed!", "Please input valid Username/Password.", false);
             }
         } catch (Exception e) {
+            Toast.makeText(LoginActivity.this, "Web Service Error", Toast.LENGTH_SHORT).show();
+            Log.e("Web Service Error", webResponse);
             Log.e(TAG, "btnLoginReturn exception :(");
         }
         loginButton.setEnabled(true);
@@ -411,8 +414,7 @@ public class LoginActivity extends Activity{
             @Override
             protected void onPostExecute(Object o){
                 //To Override
-                JSONObject jsonobj = (JSONObject)o;
-                registerGCMAsyncReturn(jsonobj);
+                registerGCMAsyncReturn((String)o);
             }
         };
         svc.setServiceLink("registerGCM.php");
@@ -420,9 +422,10 @@ public class LoginActivity extends Activity{
         svc.execute(obj.toString());
     }
 
-    public void registerGCMAsyncReturn(JSONObject jsonobj){
+    public void registerGCMAsyncReturn(String webResponse){
         Log.e(TAG, "registerGCMAsyncReturn.");
         try{
+            JSONObject jsonobj = new JSONObject(webResponse);
             if(jsonobj.getInt("errorCode")==0) {
                 Log.e(TAG, "GCM registered!");
                 if(jsonobj.getInt("success")==1) {
@@ -435,6 +438,8 @@ public class LoginActivity extends Activity{
                 //Toast.makeText(LoginActivity.this, "GCM not registered :(", Toast.LENGTH_SHORT).show();
             }
         } catch (Exception e){
+            Toast.makeText(LoginActivity.this, "Web Service Error", Toast.LENGTH_SHORT).show();
+            Log.e("Web Service Error", webResponse);
             Log.e(TAG, "registerGCMAsyncReturn exception");
         }
     }

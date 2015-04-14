@@ -24,8 +24,7 @@ public class LoginManager {
             @Override
             protected void onPostExecute(Object o){
                 //To Override
-                JSONObject jsonobj = (JSONObject)o;
-                ref.btnLoginReturn(jsonobj);
+                ref.btnLoginReturn((String)o);
             }
         };
         svc.setServiceLink("authenticateAccount.php");

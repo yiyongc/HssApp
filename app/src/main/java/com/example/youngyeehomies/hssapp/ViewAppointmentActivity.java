@@ -88,9 +88,9 @@ public class ViewAppointmentActivity extends DrawerActivity implements Appointme
 
         WebServiceClass svc = new WebServiceClass(){
             @Override
-            protected void onPostExecute(String webResponse){
+            protected void onPostExecute(Object o){
                 //To Override
-                getAppointmentsAysncReturn(webResponse);
+                getAppointmentsAysncReturn((String)o);
             }
         };
         svc.setServiceLink("viewAppts.php");
