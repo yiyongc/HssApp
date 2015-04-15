@@ -95,7 +95,7 @@
         </activity>
         <activity
             android:name=".ViewProfileActivity"
-            android:label="HSS - Edit Profile"
+            android:label="HSS - User Profile"
             android:screenOrientation="portrait"
             android:configChanges="keyboardHidden|orientation|screenSize">
         </activity>
@@ -107,7 +107,7 @@
         </activity>
         <activity
             android:name=".ForgotPasswordActivity"
-            android:label="HSS - View Notifications"
+            android:label="HSS - Forgot Password"
             android:screenOrientation="portrait"
             android:configChanges="keyboardHidden|orientation|screenSize">
         </activity>
@@ -119,7 +119,7 @@
         </activity>
         <activity
             android:name=".ViewOldAppointmentsActivity"
-            android:label="@string/title_activity_view_old_appointments"
+            android:label="HSS - View Appointment History"
             android:screenOrientation="portrait"
             android:configChanges="keyboardHidden|orientation|screenSize">
         </activity>

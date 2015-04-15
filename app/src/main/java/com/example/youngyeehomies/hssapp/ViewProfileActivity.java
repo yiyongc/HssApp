@@ -114,6 +114,7 @@ public class ViewProfileActivity extends DrawerActivity {
     }
 
     public void toEditProfile(View view) {
+
         Fragment fragment = new EditProfileFragment();
         FragmentTransaction fTrans2 = fragmentManager.beginTransaction();
         fTrans2.replace(R.id.editProfileSpace, fragment);
