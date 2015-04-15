@@ -113,15 +113,6 @@ public class ViewProfileActivity extends DrawerActivity {
         finish();
     }
 
-    public void toEditProfile(View view) {
-
-        Fragment fragment = new EditProfileFragment();
-        FragmentTransaction fTrans2 = fragmentManager.beginTransaction();
-        fTrans2.replace(R.id.editProfileSpace, fragment);
-        fTrans2.addToBackStack(null);
-        fTrans2.commit();
-        title.setText("Edit Profile");
-    }
 
     public void toChangePassword(View view) {
         Fragment fragment = new ChangePasswordFragment();

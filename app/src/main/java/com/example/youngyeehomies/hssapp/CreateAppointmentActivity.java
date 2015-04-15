@@ -4,6 +4,7 @@ package com.example.youngyeehomies.hssapp;
 import android.app.AlertDialog;
 import android.app.Fragment;
 import android.app.FragmentTransaction;
+import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
@@ -37,6 +38,8 @@ public class CreateAppointmentActivity extends DrawerActivity {
     ArrayList<String> timeSlotArrayList = new ArrayList<String> ();
     HashMap<String, Integer> clinicIDPair = new HashMap<String, Integer>();
     Intent completedCreationIntent;
+
+    ProgressDialog pdia;
 
     @Override
     protected void onResume() {
@@ -175,9 +178,19 @@ public class CreateAppointmentActivity extends DrawerActivity {
 
         WebServiceClass svc = new WebServiceClass(){
             @Override
+            protected void onPreExecute() {
+                super.onPreExecute();
+                pdia = new ProgressDialog(CreateAppointmentActivity.this);
+                pdia.setMessage("Obtaining Clinics Available...");
+                pdia.show();
+                pdia.setCancelable(false);
+            }
+
+            @Override
             protected void onPostExecute(Object o){
                 //To Override
                 getWebSvcClinicsAsyncReturn(o.toString());
+                pdia.dismiss();
             }
         };
         svc.setServiceLink("getApptClinics.php");

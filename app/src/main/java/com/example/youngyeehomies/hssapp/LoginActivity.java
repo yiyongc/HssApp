@@ -1,6 +1,7 @@
 package com.example.youngyeehomies.hssapp;
 
 import android.app.Activity;
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.gesture.Gesture;
 import android.os.Bundle;
@@ -66,6 +67,7 @@ public class LoginActivity extends Activity{
     SecurePreferences preferences;
     CheckBox rememberMeCheckBox;
     String username, password;
+    ProgressDialog pdia;
 
     // GCM
     public static final String EXTRA_MESSAGE = "message";
@@ -162,6 +164,13 @@ public class LoginActivity extends Activity{
 
     public void btnLogin(View view) {
         loginButton.setEnabled(false);
+
+
+        pdia = new ProgressDialog(LoginActivity.this);
+        pdia.setMessage("Logging In..");
+        pdia.show();
+        pdia.setCancelable(false);
+
 
         username = usernameBox.getText()+"";
         password = passwordBox.getText()+"";
@@ -444,10 +453,13 @@ public class LoginActivity extends Activity{
         }
 
         WebServiceClass svc = new WebServiceClass(){
+
             @Override
             protected void onPostExecute(Object o){
+
                 //To Override
                 registerGCMAsyncReturn(o.toString());
+                pdia.dismiss();
             }
         };
         svc.setServiceLink("registerGCM.php");

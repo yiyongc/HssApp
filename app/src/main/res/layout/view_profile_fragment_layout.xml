@@ -128,7 +128,7 @@
             android:layout_below="@+id/emailCheckBox"
             android:layout_centerHorizontal="true"
             android:layout_marginTop="30dp"
-            android:onClick="toEditProfile"/>
+            />
 
         <Button
             android:layout_width="200dp"
