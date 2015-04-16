@@ -38,6 +38,7 @@ public class WebServiceClass extends AsyncTask<String, Void, Object> {
             //JSONObject recvdjson = new JSONObject(resultstring);
             return resultstring;
         } catch (Exception e) {
+            Log.e("tagto", "excep");
             return e;
         }
     }

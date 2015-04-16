@@ -1,21 +1,9 @@
 package com.example.youngyeehomies.hssapp;
 
 
-import android.os.AsyncTask;
+import android.app.ProgressDialog;
 
-import org.apache.http.HttpResponse;
-import org.apache.http.NameValuePair;
-import org.apache.http.client.HttpClient;
-import org.apache.http.client.entity.UrlEncodedFormEntity;
-import org.apache.http.client.methods.HttpPost;
-import org.apache.http.impl.client.DefaultHttpClient;
-import org.apache.http.message.BasicNameValuePair;
 import org.json.JSONObject;
-
-import java.io.BufferedReader;
-import java.io.InputStreamReader;
-import java.util.ArrayList;
-import java.util.List;
 
 public class RegistrationManager{
 
@@ -38,6 +26,15 @@ public class RegistrationManager{
         }
 
         WebServiceClass svc = new WebServiceClass() {
+            @Override
+            protected void onPreExecute() {
+                super.onPreExecute();
+                Globals.pdia1 = new ProgressDialog(ref);
+                Globals.pdia1.setMessage("Registration in Progress..");
+                Globals.pdia1.show();
+                Globals.pdia1.setCancelable(false);
+            }
+
             @Override
             protected void onPostExecute(Object o) {
                 //To Override

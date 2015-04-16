@@ -1,8 +1,11 @@
 package com.example.youngyeehomies.hssapp;
 
+import android.app.AlertDialog;
 import android.app.Fragment;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
+import android.app.ProgressDialog;
+import android.content.DialogInterface;
 import android.content.res.Resources;
 import android.content.res.TypedArray;
 import android.graphics.drawable.Drawable;
@@ -70,6 +73,15 @@ public class ViewProfileActivity extends DrawerActivity {
 
         WebServiceClass svc = new WebServiceClass(){
             @Override
+            protected void onPreExecute() {
+                super.onPreExecute();
+                Globals.pdia1 = new ProgressDialog(ViewProfileActivity.this);
+                Globals.pdia1.setMessage("Obtaining user profile..");
+                Globals.pdia1.show();
+                Globals.pdia1.setCancelable(false);
+            }
+
+            @Override
             protected void onPostExecute(Object o){
                 //To Override
                 getUserDetailsAsyncReturn(o.toString());
@@ -101,8 +113,9 @@ public class ViewProfileActivity extends DrawerActivity {
             fTrans.add(R.id.editProfileSpace, fragment1);
             fTrans.commit();
 
-
+            Globals.pdia1.dismiss();
         } catch (Exception e){
+            Globals.pdia1.dismiss();
             Toast.makeText(ViewProfileActivity.this, "Web Service Error", Toast.LENGTH_SHORT).show();
             Log.e("Web Service Error",webResponse);
         }
@@ -138,12 +151,6 @@ public class ViewProfileActivity extends DrawerActivity {
             Toast.makeText(ViewProfileActivity.this, "Enter all fields!", Toast.LENGTH_SHORT).show();
             return;
         }
-
-        /*
-        if (!currentPassword.equals(password)){
-            Toast.makeText(EditProfileActivity.this, "Incorrect Password!", Toast.LENGTH_SHORT).show();
-            return;
-        } */
         if (!newPassword.equals(newPassword2)) {
             Toast.makeText(ViewProfileActivity.this, "New passwords do not match!", Toast.LENGTH_SHORT).show();
             return;
@@ -173,6 +180,15 @@ public class ViewProfileActivity extends DrawerActivity {
 
 
         WebServiceClass svc = new WebServiceClass(){
+            @Override
+            protected void onPreExecute() {
+                super.onPreExecute();
+                Globals.pdia2 = new ProgressDialog(ViewProfileActivity.this);
+                Globals.pdia2.setMessage("Processing update..");
+                Globals.pdia2.show();
+                Globals.pdia2.setCancelable(false);
+            }
+
             @Override
             protected void onPostExecute(Object o){
                 //To Override
@@ -228,6 +244,15 @@ public class ViewProfileActivity extends DrawerActivity {
 
         WebServiceClass svc = new WebServiceClass(){
             @Override
+            protected void onPreExecute() {
+                super.onPreExecute();
+                Globals.pdia2 = new ProgressDialog(ViewProfileActivity.this);
+                Globals.pdia2.setMessage("Processing update..");
+                Globals.pdia2.show();
+                Globals.pdia2.setCancelable(false);
+            }
+
+            @Override
             protected void onPostExecute(Object o){
                 //To Override
                 btnUpdateProfileReturn(o.toString());
@@ -245,9 +270,11 @@ public class ViewProfileActivity extends DrawerActivity {
                 finish();
                 return;
             }
-
+            Globals.pdia2.dismiss();
         } catch (Exception e){
-            Toast.makeText(ViewProfileActivity.this, "Error Updating Profile", Toast.LENGTH_SHORT).show();
+            Globals.pdia2.dismiss();
+            new AlertDialogManager().showAlertDialog(ViewProfileActivity.this, "Update Failed", "Failed to update profile.", false);
+            //Toast.makeText(ViewProfileActivity.this, "Error Updating Profile", Toast.LENGTH_SHORT).show();
             Log.e("Web Service Error",webResponse);
         }
     }
@@ -257,13 +284,26 @@ public class ViewProfileActivity extends DrawerActivity {
         try{
             JSONObject jsonobj = new JSONObject(webResponse);
             if(jsonobj.getInt("errorCode")==0){
-                Toast.makeText(ViewProfileActivity.this, "Password has been changed! Please login with your new password!", Toast.LENGTH_SHORT).show();
-                session.logoutUser();
-                return;
+                Globals.pdia2.dismiss();
+                AlertDialog.Builder alertDialog = new AlertDialog.Builder(this);
+                alertDialog.setTitle("Password Changed");
+                alertDialog.setMessage("Your password has been updated! Please login with your new password.");
+                alertDialog.setIcon(R.drawable.success);
+                alertDialog.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int id) {
+                        session.logoutUser();
+                        return;
+                    }
+                });
+                alertDialog.setCancelable(false);
+                AlertDialog alert = alertDialog.create();
+                alert.show();
             }
 
         } catch (Exception e){
-            Toast.makeText(ViewProfileActivity.this, "Error Changing Password", Toast.LENGTH_SHORT).show();
+            Globals.pdia2.dismiss();
+            new AlertDialogManager().showAlertDialog(ViewProfileActivity.this, "Update Failed", "Failed to change password.", false);
+            //Toast.makeText(ViewProfileActivity.this, "Error Changing Password", Toast.LENGTH_SHORT).show();
             Log.e("Web Service Error",webResponse);
         }
 

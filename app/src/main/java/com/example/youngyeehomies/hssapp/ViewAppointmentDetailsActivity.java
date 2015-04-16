@@ -2,7 +2,9 @@ package com.example.youngyeehomies.hssapp;
 
 import android.app.Activity;
 import android.app.AlertDialog;
+import android.app.ProgressDialog;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.content.res.Resources;
 import android.content.res.TypedArray;
 import android.graphics.drawable.Drawable;
@@ -119,6 +121,15 @@ public class ViewAppointmentDetailsActivity extends Activity {
 
         WebServiceClass svc = new WebServiceClass(){
             @Override
+            protected void onPreExecute() {
+                super.onPreExecute();
+                Globals.pdia1 = new ProgressDialog(ViewAppointmentDetailsActivity.this);
+                Globals.pdia1.setMessage("Obtaining Appointment Details..");
+                Globals.pdia1.show();
+                Globals.pdia1.setCancelable(false);
+            }
+
+            @Override
             protected void onPostExecute(Object o){
                 //To Override
                 getAppointmentAsyncReturn(o.toString());
@@ -159,7 +170,9 @@ public class ViewAppointmentDetailsActivity extends Activity {
             } else {
                 Log.e("HSS", "problem in viewappointmentdetails, error from web");
             }
+            Globals.pdia1.dismiss();
         } catch (Exception e){
+            Globals.pdia1.dismiss();
             Toast.makeText(ViewAppointmentDetailsActivity.this, "Web Service Error", Toast.LENGTH_SHORT).show();
             Log.e("Web Service Error",webResponse);
         }
@@ -207,6 +220,15 @@ public class ViewAppointmentDetailsActivity extends Activity {
         }
 
         WebServiceClass svc = new WebServiceClass(){
+            @Override
+            protected void onPreExecute() {
+                super.onPreExecute();
+                Globals.pdia2 = new ProgressDialog(ViewAppointmentDetailsActivity.this);
+                Globals.pdia2.setMessage("Deleting Appointment..");
+                Globals.pdia2.show();
+                Globals.pdia2.setCancelable(false);
+            }
+
             @Override
             protected void onPostExecute(Object o){
                 //To Override
@@ -257,14 +279,28 @@ public class ViewAppointmentDetailsActivity extends Activity {
         try{
             JSONObject jsonobj = new JSONObject(webResponse);
             if (jsonobj.getInt("errorCode")==0) {
-                Toast.makeText(this, "Deleted Appointment Object", Toast.LENGTH_SHORT).show();
-                finish();
+
+                AlertDialog.Builder alertDialog = new AlertDialog.Builder(this);
+                alertDialog.setTitle("Appointment Deleted");
+                alertDialog.setMessage("Your appointment has been deleted!");
+                alertDialog.setIcon(R.drawable.success);
+                alertDialog.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int id) {
+                        dialog.cancel();
+                        finish();
+                    }
+                });
+                alertDialog.setCancelable(false);
+                AlertDialog alert = alertDialog.create();
+                alert.show();
             }
             else {
                 ImageButton deleteButton = (ImageButton)findViewById(R.id.delete_appointment_button);
                 deleteButton.setEnabled(true);
             }
+            Globals.pdia2.dismiss();
         } catch (Exception e) {
+            Globals.pdia2.dismiss();
             Toast.makeText(ViewAppointmentDetailsActivity.this, "Web Service Error", Toast.LENGTH_SHORT).show();
             Log.e("Web Service Error",webResponse);
         }

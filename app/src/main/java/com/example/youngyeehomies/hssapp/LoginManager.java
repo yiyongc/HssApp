@@ -1,5 +1,7 @@
 package com.example.youngyeehomies.hssapp;
 
+import android.util.Log;
+
 import org.json.JSONObject;
 
 public class LoginManager {
@@ -26,6 +28,8 @@ public class LoginManager {
                 //To Override
                 ref.btnLoginReturn(o.toString());
             }
+
+
         };
         svc.setServiceLink("authenticateAccount.php");
         svc.execute(obj.toString());
