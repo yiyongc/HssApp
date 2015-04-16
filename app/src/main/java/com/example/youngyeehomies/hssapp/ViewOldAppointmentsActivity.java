@@ -175,4 +175,10 @@ public class ViewOldAppointmentsActivity extends DrawerActivity implements Appoi
 
     }
 
+    @Override
+    public void onBackPressed() {
+        Intent home = new Intent(this, ViewAppointmentActivity.class);
+        startActivity(home);
+        finish();
+    }
 }

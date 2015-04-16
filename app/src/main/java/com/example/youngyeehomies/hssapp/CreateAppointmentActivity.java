@@ -338,9 +338,14 @@ public class CreateAppointmentActivity extends DrawerActivity {
 
     @Override
     public void onBackPressed() {
-        if (fragmentManager.getBackStackEntryCount() == 0)
-            super.onBackPressed();
+        if (fragmentManager.getBackStackEntryCount() == 0){
+            Intent home = new Intent(this, ViewAppointmentActivity.class);
+            startActivity(home);
+            finish();
+        }
         else
             fragmentManager.popBackStack();
     }
+
+
 }

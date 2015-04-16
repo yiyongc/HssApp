@@ -255,14 +255,14 @@ public class ViewAppointmentDetailsActivity extends Activity {
         confirmDialog.setCancelable(false);
         confirmDialog.setTitle("Confirm Delete?");
         confirmDialog.setIcon(R.drawable.warning);
-        confirmDialog.setNegativeButton("Yes",new DialogInterface.OnClickListener() {
+        confirmDialog.setPositiveButton("Yes",new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 deleteAppointment();
             }
         });
 
-        confirmDialog.setPositiveButton("No",new DialogInterface.OnClickListener() {
+        confirmDialog.setNegativeButton("No",new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 dialog.cancel();
