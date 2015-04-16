@@ -300,8 +300,10 @@ public class CreateAppointmentActivity extends DrawerActivity {
         try{
             JSONObject jsonobj = new JSONObject(webResponse);
             if(jsonobj.getInt("errorCode")!=0){
-                Toast.makeText(CreateAppointmentActivity.this, jsonobj.getString("errorMsg"), Toast.LENGTH_SHORT).show();
                 Globals.pdia1.dismiss();
+                new AlertDialogManager().showAlertDialog(this, "Error in Obtaining Time Slots", jsonobj.getString("errorMsg"), false);
+                fragmentManager.popBackStack();
+                //Toast.makeText(CreateAppointmentActivity.this, jsonobj.getString("errorMsg"), Toast.LENGTH_SHORT).show();
                 return;
             }
             if (!timeSlotArrayList.isEmpty())
@@ -317,8 +319,10 @@ public class CreateAppointmentActivity extends DrawerActivity {
                 //Populate list
                 timeSlotArrayList.add(new CustomStringConverter().convertTimeForSpinner(time));
             }
-            
+
             timeSlotsForSpinner = timeSlotArrayList.toArray(new String[timeSlotArrayList.size()]);
+
+
             //set spinner contents
             //Populate Spinner
             timeSpinner = (Spinner) findViewById(R.id.timeSlotSelection);
@@ -328,6 +332,7 @@ public class CreateAppointmentActivity extends DrawerActivity {
         } catch (Exception e){
             Toast.makeText(CreateAppointmentActivity.this, "Web Service Error", Toast.LENGTH_SHORT).show();
             Log.e("Web Service Error",webResponse);
+            e.printStackTrace();
             Globals.pdia1.dismiss();
         }
     }
