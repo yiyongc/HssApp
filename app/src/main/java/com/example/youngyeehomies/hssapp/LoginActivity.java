@@ -3,10 +3,7 @@ package com.example.youngyeehomies.hssapp;
 import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Intent;
-import android.gesture.Gesture;
 import android.os.Bundle;
-import android.support.v7.app.ActionBarActivity;
-import android.view.GestureDetector;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.MotionEvent;
@@ -16,7 +13,6 @@ import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
 
-import org.json.JSONArray;
 import org.json.JSONObject;
 
 /*
@@ -67,7 +63,6 @@ public class LoginActivity extends Activity{
     SecurePreferences preferences;
     CheckBox rememberMeCheckBox;
     String username, password;
-    ProgressDialog pdia;
 
     // GCM
     public static final String EXTRA_MESSAGE = "message";
@@ -166,10 +161,10 @@ public class LoginActivity extends Activity{
         loginButton.setEnabled(false);
 
 
-        pdia = new ProgressDialog(LoginActivity.this);
-        pdia.setMessage("Logging In..");
-        pdia.show();
-        pdia.setCancelable(false);
+        Globals.pdia1 = new ProgressDialog(LoginActivity.this);
+        Globals.pdia1.setMessage("Logging In..");
+        Globals.pdia1.show();
+        Globals.pdia1.setCancelable(false);
 
 
         username = usernameBox.getText()+"";
@@ -271,14 +266,14 @@ public class LoginActivity extends Activity{
 
             } else {
                 Log.e(TAG, "btnLoginReturn login failed!");
-                alert.showAlertDialog(LoginActivity.this, "Login Failed!", "User/Password combination is wrong or account is not activated.", false);
-                pdia.dismiss();
+                alert.showAlertDialog(LoginActivity.this, "Login Failed!", "Please input valid Username/Password.", false);
             }
+            Globals.pdia1.dismiss();
         } catch (Exception e) {
             Toast.makeText(LoginActivity.this, "Web Service Error", Toast.LENGTH_SHORT).show();
             Log.e("Web Service Error", webResponse);
             Log.e(TAG, "btnLoginReturn exception :( e.message: " + e.getMessage());
-            pdia.dismiss();
+            Globals.pdia1.dismiss();
         }
         loginButton.setEnabled(true);
     }
@@ -407,6 +402,7 @@ public class LoginActivity extends Activity{
                 Log.e("msg",msg);
                 Log.e("==========================","=========================");
             }
+
         }.execute(null, null, null);
     }
 
@@ -461,8 +457,9 @@ public class LoginActivity extends Activity{
 
                 //To Override
                 registerGCMAsyncReturn(o.toString());
-                pdia.dismiss();
+
             }
+
         };
         svc.setServiceLink("registerGCM.php");
         Log.e(TAG, "sending registration query to web interface, accountToken: " + accountToken + " regid: " + regid);
@@ -484,7 +481,9 @@ public class LoginActivity extends Activity{
                 Log.e(TAG, "errorCode: " + jsonobj.getInt("errorCode") + " errorMsg: " + jsonobj.getString("errorMsg"));
                 //Toast.makeText(LoginActivity.this, "GCM not registered :(", Toast.LENGTH_SHORT).show();
             }
+            Globals.pdia1.dismiss();
         } catch (Exception e){
+            Globals.pdia1.dismiss();
             Toast.makeText(LoginActivity.this, "Web Service Error", Toast.LENGTH_SHORT).show();
             Log.e("Web Service Error", webResponse);
             Log.e(TAG, "registerGCMAsyncReturn exception");

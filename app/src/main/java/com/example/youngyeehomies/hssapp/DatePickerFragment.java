@@ -34,7 +34,7 @@ public class DatePickerFragment extends DialogFragment
 
         Button activityButton = (Button) getActivity().findViewById(R.id.dateSlotSelection);
 
-        if(selectedYear < year || selectedMonth < month || ((selectedYear == year) && (selectedMonth == month) && (selectedDay <= day)))
+        if(selectedYear < year || (selectedYear == year && selectedMonth < month) || ((selectedYear == year) && (selectedMonth == month) && (selectedDay <= day)))
             Toast.makeText(getActivity().getApplicationContext(), "Unable to create appointments before current date!", Toast.LENGTH_LONG).show();
         else if(selectedYear > year || selectedMonth > (month+3) ||((selectedMonth == (month+3)) && (selectedDay > day)))
             Toast.makeText(getActivity().getApplicationContext(), "Appointments can only be made up to 3 months in advance!", Toast.LENGTH_LONG).show();

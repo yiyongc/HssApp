@@ -1,6 +1,7 @@
 package com.example.youngyeehomies.hssapp;
 
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.content.res.Resources;
 import android.content.res.TypedArray;
@@ -35,6 +36,10 @@ public class ViewOldAppointmentsActivity extends DrawerActivity implements Appoi
         mDrawerList.setSelection(Globals.drawerPosition);
         if (clickedItem != null)
             clickedItem.setEnabled(true);
+
+        Globals.pdia1.show();
+        Log.e("tagyo", "fourth");
+
         getAppointments();
     }
 
@@ -64,7 +69,11 @@ public class ViewOldAppointmentsActivity extends DrawerActivity implements Appoi
         //  Drawable catIcon = icons.getDrawable(3);
 
         //  appointmentList = new ArrayList<>();
-
+        Globals.pdia1 = new ProgressDialog(ViewOldAppointmentsActivity.this);
+        Globals.pdia1.setMessage("Obtaining appointment history..");
+        Globals.pdia1.show();
+        Globals.pdia1.setCancelable(false);
+        Log.e("tagyo", "third");
 
         session = new SessionManager(getApplicationContext());
 
@@ -144,14 +153,13 @@ public class ViewOldAppointmentsActivity extends DrawerActivity implements Appoi
                 rv.setAdapter(adapter);
 
             }
-
-
+            Globals.pdia1.dismiss();
+            Log.e("tagyo", "dismiss2");
         } catch (Exception e) {
+            Globals.pdia1.dismiss();
             Toast.makeText(ViewOldAppointmentsActivity.this, "Web Service Error", Toast.LENGTH_SHORT).show();
             Log.e("Web Service Error", webResponse);
         }
-
-
     }
 
     @Override

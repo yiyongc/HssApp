@@ -1,24 +1,20 @@
 package com.example.youngyeehomies.hssapp;
 
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.content.Context;
-import android.content.Intent;
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
-import android.view.ViewGroup;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.CheckBox;
 import android.widget.EditText;
-import android.widget.LinearLayout;
-import android.widget.RadioButton;
-import android.widget.RadioGroup;
 import android.widget.Toast;
 
-import org.json.JSONArray;
 import org.json.JSONObject;
 
 public class RegisterActivity extends Activity {
@@ -106,14 +102,26 @@ public class RegisterActivity extends Activity {
         try{
             JSONObject jsonobj = new JSONObject(webResponse);
             if(jsonobj.getInt("errorCode")==0) {
-                Toast.makeText(RegisterActivity.this, "Account has been registered successfully!", Toast.LENGTH_SHORT).show();
-                finish();
+                AlertDialog.Builder alertDialog = new AlertDialog.Builder(this);
+                alertDialog.setTitle("Registration Success!");
+                alertDialog.setMessage("Please proceed to login.");
+                alertDialog.setIcon(R.drawable.success);
+                alertDialog.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int id) {
+                        dialog.cancel();
+                        finish();
+                    }
+                });
+                alertDialog.setCancelable(false);
+                AlertDialog alert = alertDialog.create();
+                alert.show();
             }
             else {
                 Toast.makeText(this, "Activation Failed.", Toast.LENGTH_SHORT).show();
             }
-
+            Globals.pdia1.dismiss();
         } catch (Exception e){
+            Globals.pdia1.dismiss();
             Toast.makeText(RegisterActivity.this, "Web Service Error", Toast.LENGTH_SHORT).show();
             Log.e("Web Service Error", webResponse);
         }

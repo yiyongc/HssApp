@@ -40,7 +40,6 @@ public class CreateAppointmentActivity extends DrawerActivity {
     HashMap<String, Integer> clinicIDPair = new HashMap<String, Integer>();
     Intent completedCreationIntent;
 
-    ProgressDialog pdia;
 
     @Override
     protected void onResume() {
@@ -123,7 +122,7 @@ public class CreateAppointmentActivity extends DrawerActivity {
                 //Toast.makeText(CreateAppointmentActivity.this, "Appointment has been created! A reminder notification will be sent one day before the day of the appointment!", Toast.LENGTH_LONG).show();
                 AlertDialog.Builder alertDialog = new AlertDialog.Builder(this);
                 alertDialog.setTitle("Appointment Created");
-                alertDialog.setMessage("Appointment Created!");
+                alertDialog.setMessage("Your appointment has been created!");
                 alertDialog.setIcon(R.drawable.success);
                 alertDialog.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int id) {
@@ -140,9 +139,11 @@ public class CreateAppointmentActivity extends DrawerActivity {
             else {
                 Toast.makeText(CreateAppointmentActivity.this, jsonobj.getString("errorMsg"), Toast.LENGTH_SHORT).show();
             }
+            Globals.pdia1.dismiss();
         } catch (Exception e){
             Toast.makeText(CreateAppointmentActivity.this, "Web Service Error", Toast.LENGTH_SHORT).show();
             Log.e("Web Service Error",webResponse);
+            Globals.pdia1.dismiss();
         }
     }
 
@@ -181,17 +182,17 @@ public class CreateAppointmentActivity extends DrawerActivity {
             @Override
             protected void onPreExecute() {
                 super.onPreExecute();
-                pdia = new ProgressDialog(CreateAppointmentActivity.this);
-                pdia.setMessage("Obtaining Clinics Available...");
-                pdia.show();
-                pdia.setCancelable(false);
+                Globals.pdia1 = new ProgressDialog(CreateAppointmentActivity.this);
+                Globals.pdia1.setMessage("Obtaining Available Clinics..");
+                Globals.pdia1.show();
+                Globals.pdia1.setCancelable(false);
             }
 
             @Override
             protected void onPostExecute(Object o){
                 //To Override
                 getWebSvcClinicsAsyncReturn(o.toString());
-                pdia.dismiss();
+
             }
         };
         svc.setServiceLink("getApptClinics.php");
@@ -207,6 +208,7 @@ public class CreateAppointmentActivity extends DrawerActivity {
             JSONObject jsonobj = new JSONObject(webResponse);
             if(jsonobj.getInt("errorCode")!=0){
                Toast.makeText(CreateAppointmentActivity.this, jsonobj.getString("errorMsg"), Toast.LENGTH_SHORT).show();
+                Globals.pdia1.dismiss();
                return;
             }
 
@@ -231,10 +233,11 @@ public class CreateAppointmentActivity extends DrawerActivity {
             clinicSpinner = (Spinner) findViewById(R.id.clinicSelection);
             CustomSpinnerAdapter customAdapter = new CustomSpinnerAdapter(this, R.layout.custom_spinner_layout, Globals.clinicsInSpinner);
             clinicSpinner.setAdapter(customAdapter);
-
+            Globals.pdia1.dismiss();
         } catch (Exception e){
             Toast.makeText(CreateAppointmentActivity.this, "Web Service Error", Toast.LENGTH_SHORT).show();
             Log.e("Web Service Error",webResponse);
+            Globals.pdia1.dismiss();
         }
     }
 
@@ -273,6 +276,15 @@ public class CreateAppointmentActivity extends DrawerActivity {
 
         WebServiceClass svc = new WebServiceClass(){
             @Override
+            protected void onPreExecute() {
+                super.onPreExecute();
+                Globals.pdia1 = new ProgressDialog(CreateAppointmentActivity.this);
+                Globals.pdia1.setMessage("Obtaining Available Time Slots..");
+                Globals.pdia1.show();
+                Globals.pdia1.setCancelable(false);
+            }
+
+            @Override
             protected void onPostExecute(Object o){
                 //To Override
                 getWebSvcTimeslotsAsyncReturn(o.toString());
@@ -290,6 +302,7 @@ public class CreateAppointmentActivity extends DrawerActivity {
             JSONObject jsonobj = new JSONObject(webResponse);
             if(jsonobj.getInt("errorCode")!=0){
                 Toast.makeText(CreateAppointmentActivity.this, jsonobj.getString("errorMsg"), Toast.LENGTH_SHORT).show();
+                Globals.pdia1.dismiss();
                 return;
             }
             if (!timeSlotArrayList.isEmpty())
@@ -313,10 +326,11 @@ public class CreateAppointmentActivity extends DrawerActivity {
             timeSpinner = (Spinner) findViewById(R.id.timeSlotSelection);
             CustomSpinnerAdapter customAdapter = new CustomSpinnerAdapter(this, R.layout.custom_spinner_layout, timeSlotsForSpinner);
             timeSpinner.setAdapter(customAdapter);
-
+            Globals.pdia1.dismiss();
         } catch (Exception e){
             Toast.makeText(CreateAppointmentActivity.this, "Web Service Error", Toast.LENGTH_SHORT).show();
             Log.e("Web Service Error",webResponse);
+            Globals.pdia1.dismiss();
         }
     }
 

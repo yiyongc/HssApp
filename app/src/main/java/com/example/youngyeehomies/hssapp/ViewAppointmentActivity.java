@@ -1,11 +1,13 @@
 package com.example.youngyeehomies.hssapp;
 
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.content.res.Resources;
 import android.content.res.TypedArray;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
+import android.os.Message;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -22,6 +24,8 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Locale;
+import java.util.logging.Handler;
+import java.util.logging.LogRecord;
 
 public class ViewAppointmentActivity extends DrawerActivity implements AppointmentListAdapter.OnItemClickListener{
 
@@ -38,6 +42,10 @@ public class ViewAppointmentActivity extends DrawerActivity implements Appointme
         mDrawerList.setSelection(Globals.drawerPosition);
         if (clickedItem!=null)
          clickedItem.setEnabled(true);
+
+        Globals.pdia2.show();
+        Log.e("tagyo", "twice");
+
         getAppointments();
     }
 
@@ -73,6 +81,12 @@ public class ViewAppointmentActivity extends DrawerActivity implements Appointme
 
         session = new SessionManager(getApplicationContext());
 
+        Globals.pdia2 = new ProgressDialog(ViewAppointmentActivity.this);
+        Globals.pdia2.setMessage("Obtaining upcoming appointment(s)..");
+        Globals.pdia2.show();
+        Globals.pdia2.setCancelable(false);
+        Log.e("tagyo", "once");
+
         getAppointments();
 
         // GCM REDIRECT
@@ -94,6 +108,7 @@ public class ViewAppointmentActivity extends DrawerActivity implements Appointme
 
     public void getAppointments(){
         String accountToken = session.getUserToken();
+
         JSONObject obj = new JSONObject();
         try {
             obj.put("accountToken", accountToken);
@@ -101,12 +116,14 @@ public class ViewAppointmentActivity extends DrawerActivity implements Appointme
             Log.e("HSS", "problem in viewappointment");
         }
 
-        WebServiceClass svc = new WebServiceClass(){
+
+
+        WebServiceClass svc = new WebServiceClass() {
             @Override
-            protected void onPostExecute(Object o){
-                //To Override
+            protected void onPostExecute(Object o) {
                 getAppointmentsAysncReturn(o.toString());
             }
+
         };
         svc.setServiceLink("viewAppts.php");
         svc.execute(obj.toString());
@@ -154,6 +171,7 @@ public class ViewAppointmentActivity extends DrawerActivity implements Appointme
                 AppointmentListAdapter adapter = new AppointmentListAdapter(appointmentList);
                 Drawable catIcon = icons.getDrawable(5);
                 appointmentList.add(new AppointmentListItem(catIcon, "No appointments available", "", "", "You have no appointments.", 0));
+
                 rv.setAdapter(adapter);
 
             }
@@ -164,8 +182,11 @@ public class ViewAppointmentActivity extends DrawerActivity implements Appointme
                 rv.setAdapter(adapter);
 
             }
+            Globals.pdia2.dismiss();
+            Log.e("tagyo", "dismiss");
         }
          catch (Exception e){
+            Globals.pdia2.dismiss();
             Toast.makeText(ViewAppointmentActivity.this, "Web Service Error", Toast.LENGTH_SHORT).show();
             Log.e("Web Service Error",webResponse);
         }
