@@ -29,7 +29,6 @@ public class CreateAppointmentFragment3 extends Fragment {
         selectedDate = getArguments().getString("selectedDate");
         selectedApptType = getArguments().getString("selectedApptType");
 
-        timeSlotsAvailable = getResources().getStringArray(R.array.timeslot);
 
         View createAppointmentView3 = inflater.inflate(R.layout.create_appt_fragment_layout3, container, false);
 

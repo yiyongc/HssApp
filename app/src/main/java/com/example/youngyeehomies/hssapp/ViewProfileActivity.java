@@ -6,6 +6,7 @@ import android.app.FragmentManager;
 import android.app.FragmentTransaction;
 import android.app.ProgressDialog;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.content.res.Resources;
 import android.content.res.TypedArray;
 import android.graphics.drawable.Drawable;
@@ -205,8 +206,11 @@ public class ViewProfileActivity extends DrawerActivity {
 
     @Override
     public void onBackPressed() {
-        if (fragmentManager.getBackStackEntryCount() == 0)
-            super.onBackPressed();
+        if (fragmentManager.getBackStackEntryCount() == 0) {
+            Intent home = new Intent(this, ViewAppointmentActivity.class);
+            startActivity(home);
+            finish();
+        }
         else
             fragmentManager.popBackStack();
         title.setText("View Profile");

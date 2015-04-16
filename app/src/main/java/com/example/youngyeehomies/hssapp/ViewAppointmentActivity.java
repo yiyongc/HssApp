@@ -1,7 +1,9 @@
 package com.example.youngyeehomies.hssapp;
 
 
+import android.app.AlertDialog;
 import android.app.ProgressDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.res.Resources;
 import android.content.res.TypedArray;
@@ -24,8 +26,6 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Locale;
-import java.util.logging.Handler;
-import java.util.logging.LogRecord;
 
 public class ViewAppointmentActivity extends DrawerActivity implements AppointmentListAdapter.OnItemClickListener{
 
@@ -207,5 +207,31 @@ public class ViewAppointmentActivity extends DrawerActivity implements Appointme
 
     }
 
+    @Override
+    public void onBackPressed() {
+        final AlertDialog.Builder confirmDialog = new AlertDialog.Builder(this);
+        confirmDialog.setMessage("Do you wish to log out?");
+        confirmDialog.setCancelable(false);
+        confirmDialog.setTitle("Confirm Log Out?");
+        confirmDialog.setIcon(R.drawable.warning);
+        confirmDialog.setNegativeButton("No",new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.cancel();
+            }
 
+        });
+
+        confirmDialog.setPositiveButton("Yes",new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                session.logoutUser();
+                dialog.cancel();
+                Toast.makeText(getApplicationContext(), "Logout Successful!", Toast.LENGTH_SHORT).show();
+                finish();
+            }
+        });
+
+        confirmDialog.create().show();
+    }
 }

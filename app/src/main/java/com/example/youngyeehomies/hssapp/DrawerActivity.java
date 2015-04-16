@@ -1,6 +1,8 @@
 package com.example.youngyeehomies.hssapp;
 
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarDrawerToggle;
@@ -134,9 +136,28 @@ public class DrawerActivity extends ActionBarActivity {
                 startActivity(editProfileIntent);
                 break;
             case 4:
-                session.logoutUser();
-                Toast.makeText(this, "Logout Successful!", Toast.LENGTH_SHORT).show();
-                finish();
+                AlertDialog.Builder confirmDialog = new AlertDialog.Builder(this);
+                confirmDialog.setMessage("Do you wish to log out?");
+                confirmDialog.setCancelable(false);
+                confirmDialog.setTitle("Confirm Log Out?");
+                confirmDialog.setIcon(R.drawable.warning);
+                confirmDialog.setNegativeButton("No",new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.cancel();
+                    }
+                });
+                confirmDialog.setPositiveButton("Yes",new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        session.logoutUser();
+                        dialog.cancel();
+                        Toast.makeText(getApplicationContext(), "Logout Successful!", Toast.LENGTH_SHORT).show();
+                        finish();
+                    }
+                });
+
+                confirmDialog.create().show();
                 break;
             default:
                 break;

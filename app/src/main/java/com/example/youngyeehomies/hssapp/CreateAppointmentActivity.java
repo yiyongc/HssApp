@@ -25,7 +25,6 @@ import java.util.HashMap;
 
 public class CreateAppointmentActivity extends DrawerActivity {
 
-
     SessionManager session;
 
     FragmentTransaction fTrans;
@@ -57,7 +56,6 @@ public class CreateAppointmentActivity extends DrawerActivity {
         Globals.drawerPosition = 0;
         mDrawerList.setItemChecked(Globals.drawerPosition, true);
         mDrawerList.setSelection(Globals.drawerPosition);
-
 
         session = new SessionManager(getApplicationContext());
 
@@ -171,6 +169,7 @@ public class CreateAppointmentActivity extends DrawerActivity {
         String accountToken = session.getUserToken();
         JSONObject obj = new JSONObject();
         try {
+            //YIYONG PUT YOUR ITEMS HEREEEEE
             obj.put("accountToken", accountToken);
             obj.put("ID", typeID);
             //this id is the apptsubcategoryid
@@ -301,8 +300,10 @@ public class CreateAppointmentActivity extends DrawerActivity {
         try{
             JSONObject jsonobj = new JSONObject(webResponse);
             if(jsonobj.getInt("errorCode")!=0){
-                Toast.makeText(CreateAppointmentActivity.this, jsonobj.getString("errorMsg"), Toast.LENGTH_SHORT).show();
                 Globals.pdia1.dismiss();
+                new AlertDialogManager().showAlertDialog(this, "Error in Obtaining Time Slots", jsonobj.getString("errorMsg"), false);
+                fragmentManager.popBackStack();
+                //Toast.makeText(CreateAppointmentActivity.this, jsonobj.getString("errorMsg"), Toast.LENGTH_SHORT).show();
                 return;
             }
             if (!timeSlotArrayList.isEmpty())
@@ -318,8 +319,9 @@ public class CreateAppointmentActivity extends DrawerActivity {
                 //Populate list
                 timeSlotArrayList.add(new CustomStringConverter().convertTimeForSpinner(time));
             }
-            
+
             timeSlotsForSpinner = timeSlotArrayList.toArray(new String[timeSlotArrayList.size()]);
+
 
             //set spinner contents
             //Populate Spinner
@@ -330,6 +332,7 @@ public class CreateAppointmentActivity extends DrawerActivity {
         } catch (Exception e){
             Toast.makeText(CreateAppointmentActivity.this, "Web Service Error", Toast.LENGTH_SHORT).show();
             Log.e("Web Service Error",webResponse);
+            e.printStackTrace();
             Globals.pdia1.dismiss();
         }
     }
@@ -340,9 +343,14 @@ public class CreateAppointmentActivity extends DrawerActivity {
 
     @Override
     public void onBackPressed() {
-        if (fragmentManager.getBackStackEntryCount() == 0)
-            super.onBackPressed();
+        if (fragmentManager.getBackStackEntryCount() == 0){
+            Intent home = new Intent(this, ViewAppointmentActivity.class);
+            startActivity(home);
+            finish();
+        }
         else
             fragmentManager.popBackStack();
     }
+
+
 }
