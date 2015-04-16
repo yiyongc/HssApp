@@ -271,12 +271,14 @@ public class LoginActivity extends Activity{
 
             } else {
                 Log.e(TAG, "btnLoginReturn login failed!");
-                alert.showAlertDialog(LoginActivity.this, "Login Failed!", "Please input valid Username/Password.", false);
+                alert.showAlertDialog(LoginActivity.this, "Login Failed!", "User/Password combination is wrong or account is not activated.", false);
+                pdia.dismiss();
             }
         } catch (Exception e) {
             Toast.makeText(LoginActivity.this, "Web Service Error", Toast.LENGTH_SHORT).show();
             Log.e("Web Service Error", webResponse);
             Log.e(TAG, "btnLoginReturn exception :( e.message: " + e.getMessage());
+            pdia.dismiss();
         }
         loginButton.setEnabled(true);
     }

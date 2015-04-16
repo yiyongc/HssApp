@@ -257,7 +257,7 @@ public class ViewAppointmentDetailsActivity extends Activity {
         try{
             JSONObject jsonobj = new JSONObject(webResponse);
             if (jsonobj.getInt("errorCode")==0) {
-                Toast.makeText(this, "Deleted Appointment Object", Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, "Appointment has been deleted.", Toast.LENGTH_SHORT).show();
                 finish();
             }
             else {

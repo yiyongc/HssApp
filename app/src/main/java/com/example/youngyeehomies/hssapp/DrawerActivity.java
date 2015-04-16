@@ -150,17 +150,12 @@ public class DrawerActivity extends ActionBarActivity {
         mDrawerToggle.syncState();
     }
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_main, menu);
-        return true;
-    }
 
     @Override
     public boolean onPrepareOptionsMenu(Menu menu) {
         boolean drawerOpen = mDrawerLayout.isDrawerOpen(linearDrawer);
-        menu.findItem(R.id.action_settings).setVisible(!drawerOpen);
+    //TODO Yiyong to decide if we actually need this???
+    //    menu.findItem(R.id.action_settings).setVisible(!drawerOpen);
         return super.onPrepareOptionsMenu(menu);
     }
 

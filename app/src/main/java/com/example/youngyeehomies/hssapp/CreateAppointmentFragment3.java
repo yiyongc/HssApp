@@ -31,24 +31,24 @@ public class CreateAppointmentFragment3 extends Fragment {
 
         timeSlotsAvailable = getResources().getStringArray(R.array.timeslot);
 
-        View v = inflater.inflate(R.layout.create_appt_fragment_layout3, container, false);
+        View createAppointmentView3 = inflater.inflate(R.layout.create_appt_fragment_layout3, container, false);
 
         //Display details of appointment creation
-        TextView selectedApptTypeTV = (TextView) v.findViewById(R.id.apptTypeSelected);
+        TextView selectedApptTypeTV = (TextView) createAppointmentView3.findViewById(R.id.apptTypeSelected);
         selectedApptTypeTV.setText(selectedApptType);
         selectedApptTypeTV.setTypeface(null, Typeface.ITALIC);
 
-        TextView selectedClinicTV = (TextView) v.findViewById(R.id.clinicSelected);
+        TextView selectedClinicTV = (TextView) createAppointmentView3.findViewById(R.id.clinicSelected);
         selectedClinicTV.setText(selectedClinic);
         selectedClinicTV.setTypeface(null, Typeface.ITALIC);
 
-        TextView selectedDateTV = (TextView) v.findViewById(R.id.dateSelected);
+        TextView selectedDateTV = (TextView) createAppointmentView3.findViewById(R.id.dateSelected);
         selectedDateTV.setText(selectedDate);
         selectedDateTV.setTypeface(null, Typeface.ITALIC);
 
 
 
-        return v;
+        return createAppointmentView3;
     }
 
 }

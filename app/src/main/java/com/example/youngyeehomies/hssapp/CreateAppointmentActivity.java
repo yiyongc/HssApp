@@ -25,6 +25,7 @@ import java.util.HashMap;
 
 public class CreateAppointmentActivity extends DrawerActivity {
 
+
     SessionManager session;
 
     FragmentTransaction fTrans;
@@ -57,6 +58,7 @@ public class CreateAppointmentActivity extends DrawerActivity {
         Globals.drawerPosition = 0;
         mDrawerList.setItemChecked(Globals.drawerPosition, true);
         mDrawerList.setSelection(Globals.drawerPosition);
+
 
         session = new SessionManager(getApplicationContext());
 
@@ -168,7 +170,6 @@ public class CreateAppointmentActivity extends DrawerActivity {
         String accountToken = session.getUserToken();
         JSONObject obj = new JSONObject();
         try {
-            //YIYONG PUT YOUR ITEMS HEREEEEE
             obj.put("accountToken", accountToken);
             obj.put("ID", typeID);
             //this id is the apptsubcategoryid
@@ -306,6 +307,7 @@ public class CreateAppointmentActivity extends DrawerActivity {
             }
             
             timeSlotsForSpinner = timeSlotArrayList.toArray(new String[timeSlotArrayList.size()]);
+
             //set spinner contents
             //Populate Spinner
             timeSpinner = (Spinner) findViewById(R.id.timeSlotSelection);

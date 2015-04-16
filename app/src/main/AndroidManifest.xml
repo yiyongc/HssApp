@@ -75,7 +75,7 @@
 
         <activity
             android:name=".RegisterActivity"
-            android:label="HSS - Register"
+            android:label="@string/register_title"
             android:theme="@style/AppTheme"
             android:screenOrientation="portrait"
             android:configChanges="keyboardHidden|orientation|screenSize">
@@ -95,31 +95,25 @@
         </activity>
         <activity
             android:name=".ViewProfileActivity"
-            android:label="HSS - User Profile"
-            android:screenOrientation="portrait"
-            android:configChanges="keyboardHidden|orientation|screenSize">
-        </activity>
-        <activity
-            android:name=".ViewNotificationsActivity"
-            android:label="HSS - View Notifications"
+            android:label="@string/title_user_profile"
             android:screenOrientation="portrait"
             android:configChanges="keyboardHidden|orientation|screenSize">
         </activity>
         <activity
             android:name=".ForgotPasswordActivity"
-            android:label="HSS - Forgot Password"
+            android:label="@string/title_forgot_password"
             android:screenOrientation="portrait"
             android:configChanges="keyboardHidden|orientation|screenSize">
         </activity>
         <activity
             android:name=".ViewAppointmentDetailsActivity"
-            android:label="HSS - View Appointment Details"
+            android:label="@string/title_view_appointment_details"
             android:screenOrientation="portrait"
             android:configChanges="keyboardHidden|orientation|screenSize">
         </activity>
         <activity
             android:name=".ViewOldAppointmentsActivity"
-            android:label="HSS - View Appointment History"
+            android:label="@string/title_appointment_history"
             android:screenOrientation="portrait"
             android:configChanges="keyboardHidden|orientation|screenSize">
         </activity>
