@@ -119,6 +119,7 @@ public class ViewProfileActivity extends DrawerActivity {
             Globals.pdia1.dismiss();
             Toast.makeText(ViewProfileActivity.this, "Web Service Error", Toast.LENGTH_SHORT).show();
             Log.e("Web Service Error",webResponse);
+            finish();
         }
     }
 

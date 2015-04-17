@@ -8,6 +8,9 @@ import org.apache.http.HttpResponse;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.entity.StringEntity;
 import org.apache.http.impl.client.DefaultHttpClient;
+import org.apache.http.params.BasicHttpParams;
+import org.apache.http.params.HttpConnectionParams;
+import org.apache.http.params.HttpParams;
 import org.json.JSONObject;
 
 import java.io.BufferedReader;
@@ -22,7 +25,16 @@ public class WebServiceClass extends AsyncTask<String, Void, Object> {
 
     protected Object doInBackground(String... params) {
         try {
-            DefaultHttpClient httpclient = new DefaultHttpClient();
+            //Allow timeout while connecting
+            HttpParams httpParams = new BasicHttpParams();
+            //time out for connection try is 10s
+            int timeOutConnection = 10000;
+            HttpConnectionParams.setConnectionTimeout(httpParams, timeOutConnection);
+            //time out for waiting for data is 10s
+            int timeOutSocket = 10000;
+            HttpConnectionParams.setSoTimeout(httpParams, timeOutSocket);
+
+            DefaultHttpClient httpclient = new DefaultHttpClient(httpParams);
             HttpPost httppostreq = new HttpPost(Globals.serverURL+serviceLink);
             StringEntity se = new StringEntity(params[0]);
             se.setContentType("application/json;charset=UTF-8");
