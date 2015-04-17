@@ -208,6 +208,7 @@ public class CreateAppointmentActivity extends DrawerActivity {
             if(jsonobj.getInt("errorCode")!=0){
                Toast.makeText(CreateAppointmentActivity.this, jsonobj.getString("errorMsg"), Toast.LENGTH_SHORT).show();
                 Globals.pdia1.dismiss();
+                fragmentManager.popBackStack();
                return;
             }
 
@@ -237,6 +238,7 @@ public class CreateAppointmentActivity extends DrawerActivity {
             Toast.makeText(CreateAppointmentActivity.this, "Web Service Error", Toast.LENGTH_SHORT).show();
             Log.e("Web Service Error",webResponse);
             Globals.pdia1.dismiss();
+            fragmentManager.popBackStack();
         }
     }
 
@@ -332,7 +334,7 @@ public class CreateAppointmentActivity extends DrawerActivity {
         } catch (Exception e){
             Toast.makeText(CreateAppointmentActivity.this, "Web Service Error", Toast.LENGTH_SHORT).show();
             Log.e("Web Service Error",webResponse);
-            e.printStackTrace();
+            fragmentManager.popBackStack();
             Globals.pdia1.dismiss();
         }
     }

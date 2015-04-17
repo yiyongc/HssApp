@@ -13,8 +13,10 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -47,29 +49,21 @@ public class ViewAppointmentDetailsActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         Bundle extras = getIntent().getExtras();
+        setContentView(R.layout.activity_view_appointment_details);
 
         isUpcoming = extras.getBoolean("isUpcoming");
-        if(isUpcoming)
-            setContentView(R.layout.activity_view_appointment_details);
-        else
-            setContentView(R.layout.activity_view_old_appointment_details);
-
-
-
-
+        if(!isUpcoming) {
+            ImageButton btn = (ImageButton) findViewById(R.id.delete_appointment_button);
+            btn.setVisibility(View.GONE);
+        }
 
         session = new SessionManager(getApplicationContext());
 
         if(extras !=null) {
             AppointmentID = extras.getInt("AppointmentID");
             Log.i("HSS", "ViwAppointmentDetails onCreate appointmentID: "+ AppointmentID);
-            //populate text views and image views with data method
 
             getAppointment(session.getUserToken());
-
-            //populateAppointmentDetails(value);
-            //displayAppointmentDetails();
-
         }
         else{
             //populate text view and image view with Error Message
@@ -78,13 +72,6 @@ public class ViewAppointmentDetailsActivity extends Activity {
     }
 
 //This method tags xml to java
-
-    public void populateAppointmentDetails(int value){
-        //test item, to add Json Object code when working
-     //   appointmentDetails = new AppointmentDetailsItem(R.drawable.women_ic,"Women's Clinic" + i, "Breast Scan", "Gibson Gynaecology","89 Feb 2035","1.00 PM","You are required to abstain from drinking water 12 hours before this appointment");
-
-    }
-
 
     public void displayAppointmentDetails() {
         AppointmentCatIcon = (ImageView) findViewById(R.id.appointment_details_cat_icon);
