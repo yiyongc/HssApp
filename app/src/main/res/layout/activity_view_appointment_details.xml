@@ -5,7 +5,7 @@
     android:paddingRight="10dp"
     android:paddingTop="10dp"
     android:paddingBottom="10dp"
-    tools:context="com.example.youngyeehomies.hssapp.ViewAppointmentDetailsActivity"
+    tools:context="com.example.youngyeehomies.hssapp.Boundary.ViewAppointmentDetailsActivity"
     android:id="@+id/appointment_details_layout">
 
 
