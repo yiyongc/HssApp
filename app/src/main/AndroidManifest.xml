@@ -58,7 +58,7 @@
         <!-- END GCM -->
 
         <activity
-            android:name=".LoginActivity"
+            android:name=".Boundary.LoginActivity"
             android:label="@string/title_login_activity"
             android:screenOrientation="portrait"
             android:configChanges="keyboardHidden|orientation|screenSize">
@@ -74,46 +74,46 @@
         </activity>
 
         <activity
-            android:name=".RegisterActivity"
-            android:label="@string/register_title"
+            android:name=".Boundary.RegisterActivity"
+            android:label="HSS - Register"
             android:theme="@style/AppTheme"
             android:screenOrientation="portrait"
             android:configChanges="keyboardHidden|orientation|screenSize">
         </activity>
         <activity
-            android:name=".CreateAppointmentActivity"
+            android:name=".Boundary.CreateAppointmentActivity"
             android:label="@string/createApptLabel"
             android:screenOrientation="portrait"
             android:configChanges="keyboardHidden|orientation|screenSize">
         </activity>
         <activity
-            android:name=".ViewAppointmentActivity"
+            android:name=".Boundary.ViewAppointmentActivity"
             android:label="@string/title_activity_view_appts"
             android:theme="@style/AppTheme"
             android:screenOrientation="portrait"
             android:configChanges="keyboardHidden|orientation|screenSize">
         </activity>
         <activity
-            android:name=".ViewProfileActivity"
-            android:label="@string/title_user_profile"
+            android:name=".Boundary.ViewProfileActivity"
+            android:label="HSS - User Profile"
             android:screenOrientation="portrait"
             android:configChanges="keyboardHidden|orientation|screenSize">
         </activity>
         <activity
-            android:name=".ForgotPasswordActivity"
-            android:label="@string/title_forgot_password"
+            android:name=".Boundary.ForgotPasswordActivity"
+            android:label="HSS - Forgot Password"
             android:screenOrientation="portrait"
             android:configChanges="keyboardHidden|orientation|screenSize">
         </activity>
         <activity
-            android:name=".ViewAppointmentDetailsActivity"
-            android:label="@string/title_view_appointment_details"
+            android:name=".Boundary.ViewAppointmentDetailsActivity"
+            android:label="HSS - View Appointment Details"
             android:screenOrientation="portrait"
             android:configChanges="keyboardHidden|orientation|screenSize">
         </activity>
         <activity
-            android:name=".ViewOldAppointmentsActivity"
-            android:label="@string/title_appointment_history"
+            android:name=".Boundary.ViewOldAppointmentsActivity"
+            android:label="HSS - View Appointment History"
             android:screenOrientation="portrait"
             android:configChanges="keyboardHidden|orientation|screenSize">
         </activity>
@@ -127,7 +127,7 @@
           so only GCM services can send data messages for the app.
         -->
         <receiver
-            android:name=".GcmBroadcastReceiver"
+            android:name=".Control.GcmBroadcastReceiver"
             android:permission="com.google.android.c2dm.permission.SEND" >
             <intent-filter>
                 <!-- Receives the actual messages. -->
@@ -136,7 +136,7 @@
                 <category android:name="com.example.youngyeehomies.hssapp" />
             </intent-filter>
         </receiver>
-        <service android:name=".GcmIntentService" />
+        <service android:name=".Control.GcmIntentService" />
         <!-- END GCM -->
     </application>
 
