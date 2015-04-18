@@ -141,7 +141,7 @@ public class LoginActivity extends Activity{
     }
 
     // Initiate the registration activity
-    public void btnReg(View view) {
+    public void onClickRegister(View view) {
 
         Intent getRegScreenIntent = new Intent(this, RegisterActivity.class);
         startActivity(getRegScreenIntent);

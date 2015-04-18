@@ -119,7 +119,7 @@
         </activity>
 
         <activity
-            android:name="Boundary.DrawerActivity"
+            android:name=".Boundary.DrawerActivity"
             android:screenOrientation="portrait"
             android:configChanges="keyboardHidden|orientation|screenSize"
             android:theme="@style/AppTheme">
