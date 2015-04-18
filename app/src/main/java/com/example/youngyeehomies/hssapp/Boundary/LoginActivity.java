@@ -49,7 +49,7 @@ public class LoginActivity extends Activity{
     Button loginButton;
     SecurePreferences preferences;
     CheckBox rememberMeCheckBox;
-    String username, password;
+    String username, password, storedusername, storedpassword;
 
     // GCM
     public static final String EXTRA_MESSAGE = "message";
@@ -91,12 +91,13 @@ public class LoginActivity extends Activity{
 
         // Remember login history function
         preferences = new SecurePreferences(this, "user-info",  "youngyeehomies", true);
-        String storedusername = preferences.getString("username");
-        String storedpassword = preferences.getString("password");
+        storedusername = preferences.getString("username");
+        storedpassword = preferences.getString("password");
 
-        if (storedusername != null && storedpassword != null) {
+        if (storedusername != null) {
             usernameBox.setText(storedusername);
-            passwordBox.setText(storedpassword);
+            if (storedpassword != null)
+                passwordBox.setText(storedpassword);
             rememberMeCheckBox.setChecked(true);
         }
 
@@ -114,6 +115,8 @@ public class LoginActivity extends Activity{
 
         Log.e(TAG, "created login activity.");
     }
+
+
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -259,7 +262,13 @@ public class LoginActivity extends Activity{
     @Override
     protected void onResume() {
         super.onResume();
-        // Check device for Play Services APK.
+
+        storedpassword = preferences.getString("password");
+
+        if (storedpassword == null) {
+            passwordBox.setText("");
+        }
+
         checkPlayServices();
     }
 

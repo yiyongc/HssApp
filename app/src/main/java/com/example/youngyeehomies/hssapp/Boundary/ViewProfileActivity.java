@@ -19,6 +19,7 @@ import com.example.youngyeehomies.hssapp.Control.AlertDialogManager;
 import com.example.youngyeehomies.hssapp.Control.SessionManager;
 import com.example.youngyeehomies.hssapp.Control.WebServiceClass;
 import com.example.youngyeehomies.hssapp.Entity.Globals;
+import com.example.youngyeehomies.hssapp.Entity.SecurePreferences;
 import com.example.youngyeehomies.hssapp.R;
 
 import org.json.JSONObject;
@@ -153,9 +154,9 @@ public class ViewProfileActivity extends DrawerActivity {
         newPasswordBox = (EditText) findViewById(R.id.change_new);
         newPasswordBox2 = (EditText) findViewById(R.id.change_new2);
 
-        String currentPassword = currentPasswordBox.getText()+"";
-        String newPassword = newPasswordBox.getText()+"";
-        String newPassword2 = newPasswordBox2.getText()+"";
+        final String currentPassword = currentPasswordBox.getText()+"";
+        final String newPassword = newPasswordBox.getText()+"";
+        final String newPassword2 = newPasswordBox2.getText()+"";
 
         // Some pre-checking before allowing password changes
         if (currentPassword.length() == 0 || newPassword.length() == 0 || newPassword2.length() == 0){
@@ -186,50 +187,49 @@ public class ViewProfileActivity extends DrawerActivity {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 dialog.cancel();
-                return; // stop the remaining code from running
             }
         });
         confirmDialog.setPositiveButton("Yes",new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 dialog.cancel();
+
+                // Creates a JSON object to interact with php & database
+                JSONObject obj = new JSONObject();
+                try {
+                    obj.put("accountToken", session.getUserToken());
+                    obj.put("mode", "2");
+                    obj.put("Password", newPassword);
+                    obj.put("Password2", newPassword2);
+                    obj.put("PasswordOld", currentPassword);
+                } catch (Exception e) {
+
+                }
+
+                // Initiate web service
+                WebServiceClass svc = new WebServiceClass(){
+                    @Override
+                    protected void onPreExecute() {
+                        super.onPreExecute();
+                        Globals.pdia2 = new ProgressDialog(ViewProfileActivity.this);
+                        Globals.pdia2.setMessage("Processing update..");
+                        Globals.pdia2.show();
+                        Globals.pdia2.setCancelable(false);
+                    }
+
+                    @Override
+                    protected void onPostExecute(Object o){
+                        // Call async method to receive data from server
+                        btnUpdatePasswordReturn(o.toString());
+                    }
+                };
+                svc.setServiceLink("editProfile.php");
+                svc.execute(obj.toString());
+
             }
         });
 
         confirmDialog.create().show();
-
-        // Creates a JSON object to interact with php & database
-        JSONObject obj = new JSONObject();
-        try {
-            obj.put("accountToken", session.getUserToken());
-            obj.put("mode", "2");
-            obj.put("Password", newPassword);
-            obj.put("Password2", newPassword2);
-            obj.put("PasswordOld", currentPassword);
-        } catch (Exception e) {
-
-        }
-
-        // Initiate web service
-        WebServiceClass svc = new WebServiceClass(){
-            @Override
-            protected void onPreExecute() {
-                super.onPreExecute();
-                Globals.pdia2 = new ProgressDialog(ViewProfileActivity.this);
-                Globals.pdia2.setMessage("Processing update..");
-                Globals.pdia2.show();
-                Globals.pdia2.setCancelable(false);
-            }
-
-            @Override
-            protected void onPostExecute(Object o){
-                // Call async method to receive data from server
-                btnUpdatePasswordReturn(o.toString());
-            }
-        };
-        svc.setServiceLink("editProfile.php");
-        svc.execute(obj.toString());
-
 
     }
 
@@ -237,6 +237,7 @@ public class ViewProfileActivity extends DrawerActivity {
     public void btnUpdatePasswordReturn(String webResponse) {
 
         try{
+            // Receive JSON object
             JSONObject jsonobj = new JSONObject(webResponse);
             // No errors in changing password
             if(jsonobj.getInt("errorCode")==0){
@@ -248,6 +249,8 @@ public class ViewProfileActivity extends DrawerActivity {
                 alertDialog.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int id) {
                         session.logoutUser();
+                        SecurePreferences preferences = new SecurePreferences(ViewProfileActivity.this, "user-info",  "youngyeehomies", true);
+                        preferences.removeValue("password");
                         return;
                     }
                 });

@@ -1,7 +1,11 @@
 package com.example.youngyeehomies.hssapp.Boundary;
 
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.app.ProgressDialog;
 import android.content.Context;
+import android.content.DialogInterface;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
@@ -13,14 +17,23 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.example.youngyeehomies.hssapp.Control.AlertDialogManager;
+import com.example.youngyeehomies.hssapp.Control.WebServiceClass;
+import com.example.youngyeehomies.hssapp.Entity.Globals;
+import com.example.youngyeehomies.hssapp.Entity.SecurePreferences;
 import com.example.youngyeehomies.hssapp.R;
+
+import org.json.JSONObject;
+
+/*
+** This activity allows a user to reset his password by providing the same security token
+** used during registration. He may request for a new one at the nearby clinic.
+ */
 
 public class ForgotPasswordActivity extends Activity {
 
     EditText nricBox, passwordBox, passwordBox2, tokenBox;
     AlertDialogManager alert = new AlertDialogManager();
 
-    //TODO FORGOTPASSWORD
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,6 +44,8 @@ public class ForgotPasswordActivity extends Activity {
         passwordBox = (EditText) findViewById(R.id.forgot_password);
         passwordBox2 = (EditText) findViewById(R.id.forgot_password2);
         tokenBox = (EditText) findViewById(R.id.forgot_token);
+
+
     }
 
     @Override
@@ -79,19 +94,80 @@ public class ForgotPasswordActivity extends Activity {
             alert.showAlertDialog(ForgotPasswordActivity.this,"Reset Password Failed!", "The new passwords do not match!", false);
             return;
         }
-        //Server Checking
-        if (!nric.equals("S9292929Z")/*nric is not in database*/) {
-            alert.showAlertDialog(ForgotPasswordActivity.this,"Reset Password Failed!", "Your NRIC is not in our database. Please register at a clinic before using the app!", false);
-            return;
-        }
-        if (!token.equals("12345")/*check token fail*/) {
-            alert.showAlertDialog(ForgotPasswordActivity.this,"Reset Password Failed!", "You have provided an incorrect security token.", false);
-            return;
+
+        // Create a JSON object to communicate with php and database
+        JSONObject obj = new JSONObject();
+        try {
+            obj.put("nric", nric);
+            obj.put("password", newPass1);
+            obj.put("password2", newPass2);
+            obj.put("token", token);
+        } catch (Exception e) {
+
         }
 
-        //Send data to server to change password
-        btnReturn(view);
+        // Initiate web service
+        WebServiceClass svc = new WebServiceClass() {
+            @Override
+            protected void onPreExecute() {
+                super.onPreExecute();
+                // Prevent user from interacting with the app while communicating to server.
+                Globals.pdia1 = new ProgressDialog(ForgotPasswordActivity.this);
+                Globals.pdia1.setMessage("Attempting to reset password..");
+                Globals.pdia1.show();
+                Globals.pdia1.setCancelable(false);
+            }
+
+            @Override
+            protected void onPostExecute(Object o) {
+                // Call async method to receive data from server
+                btnResetDataAsyncReturn(o.toString());
+            }
+        };
+        svc.setServiceLink("resetAccountPw.php");
+        svc.execute(obj.toString());
     }
+
+    // Async method to receive data from server
+    public void btnResetDataAsyncReturn(String webResponse){
+        try{
+            Log.e("taggy", webResponse);
+            // Receive JSON object
+            JSONObject jsonobj = new JSONObject(webResponse);
+
+            // No errors on resetting password for account
+            if(jsonobj.getInt("errorCode")==0) {
+                // Lets user know that reset succeeded
+                AlertDialog.Builder alertDialog = new AlertDialog.Builder(this);
+                alertDialog.setTitle("Reset Success!");
+                alertDialog.setMessage("Please proceed to login.");
+                alertDialog.setIcon(R.drawable.success);
+                alertDialog.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int id) {
+                        dialog.cancel();
+                        //Remove any previous stored password
+                        SecurePreferences preferences = new SecurePreferences(ForgotPasswordActivity.this, "user-info",  "youngyeehomies", true);
+                        preferences.removeValue("password");
+                        finish();
+                    }
+                });
+                alertDialog.setCancelable(false);
+                AlertDialog alert = alertDialog.create();
+                alert.show();
+            }
+            else {
+                Toast.makeText(this, "Password Reset Failed.", Toast.LENGTH_SHORT).show();
+            }
+            Globals.pdia1.dismiss();
+        } catch (Exception e){
+            Globals.pdia1.dismiss();
+            e.printStackTrace();
+            Toast.makeText(ForgotPasswordActivity.this, "Web Service Error", Toast.LENGTH_SHORT).show();
+            Log.e("Web Service Error", webResponse);
+        }
+    }
+
+
 
     public void btnReturn(View view) {
         finish();
