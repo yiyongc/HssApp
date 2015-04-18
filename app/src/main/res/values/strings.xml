@@ -16,14 +16,13 @@
     <string name="login">Login</string>
     <string name="reg_text">Please fill in all fields.</string>
     <string name="email_add">Email Address:</string>
-    <string name="title_activity_view_appts">HSS - View Appointments</string>
-    <string name="title_activity_user">HSS - Home</string>
-    <string name="view_appts">View Appointments</string>
+    <string name="title_activity_view_appts">Upcoming Appointments</string>
+    <string name="title_activity_user">Home</string>
     <string name="title_login_activity">HSS</string>
     <string name="drawer_open">Open Navigation Drawer</string>
     <string name="drawer_close">Close Navigation Drawer</string>
     <string name="token">Security Token:</string>
-    <string name="createApptLabel">HSS - Create Appointment</string>
+    <string name="createApptLabel">Create New Appointment</string>
     <string name="forgotpassword"><u>Forgot your password?</u></string>
     <string name="rememberme">Remember me</string>
     <string name="changePassword"><u>Change Password</u></string>
@@ -80,7 +79,10 @@
     </string-array>
 
     <string name="title_activity_view_appointment_details">ViewAppointmentDetailsActivity</string>
-    <string name="title_activity_view_old_appointments">ViewOldAppointmentsActivity</string>
-    <string name="hello_world">Hello world!</string>
+    <string name="register_title">Register</string>
+    <string name="title_user_profile">User Profile</string>
+    <string name="title_forgot_password">Forgot Password</string>
+    <string name="title_view_appointment_details">View Appointment Details</string>
+    <string name="title_appointment_history">Appointment History</string>
 
 </resources>
