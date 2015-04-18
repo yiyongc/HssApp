@@ -281,8 +281,8 @@ public class CreateAppointmentActivity extends DrawerActivity {
             timeSpinner.setAdapter(customAdapter);
             Globals.pdia1.dismiss();
         } catch (Exception e){
-            Toast.makeText(CreateAppointmentActivity.this, "Web Service Error", Toast.LENGTH_SHORT).show();
-            Log.e("Web Service Error",webResponse);
+            Toast.makeText(CreateAppointmentActivity.this, "No time slots available.", Toast.LENGTH_SHORT).show();
+            Log.e("No time slots available",webResponse);
             fragmentManager.popBackStack();
             Globals.pdia1.dismiss();
         }
