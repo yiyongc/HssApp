@@ -43,6 +43,7 @@ public class RegisterActivity extends Activity {
         push = (CheckBox) findViewById(R.id.pushCheckBox);
         // By default allow users to receive push notifications
         push.setChecked(true);
+        push.setEnabled(false);
         email = (CheckBox) findViewById(R.id.emailCheckBox);
     }
 
