@@ -25,7 +25,7 @@ public class DatePickerFragment extends DialogFragment
 
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
-        // Use the current date as the default date in the picker
+        // Use the next date as the default date in the picker
         final Calendar c = Calendar.getInstance();
         c.add(Calendar.DATE,1);
         year = c.get(Calendar.YEAR);
@@ -40,20 +40,21 @@ public class DatePickerFragment extends DialogFragment
     public void onDateSet(DatePicker view, int selectedYear, int selectedMonth, int selectedDay) {
 
         Button activityButton = (Button) getActivity().findViewById(R.id.dateSlotSelection);
+        if (view.isShown()) {
+            // Basic pre-checking logic to prevent incorrect date selection
+            if (selectedYear < year || ((selectedYear == year) && (selectedMonth < month)) || ((selectedYear == year) && (selectedMonth == month) && (selectedDay < day)))
+                Toast.makeText(getActivity().getApplicationContext(), "Unable to create appointments before and on current date!", Toast.LENGTH_LONG).show();
+            else if (selectedYear > year || selectedMonth > (month + 3) || ((selectedMonth == (month + 3)) && (selectedDay >= day)))
+                Toast.makeText(getActivity().getApplicationContext(), "Appointments can only be made up to 3 months in advance!", Toast.LENGTH_LONG).show();
+            else {
+                year = selectedYear;
+                month = selectedMonth;
+                day = selectedDay;
 
-        // Basic pre-checking logic to prevent incorrect date selection
-        if(selectedYear < year || (selectedYear == year && selectedMonth < month) || ((selectedYear == year) && (selectedMonth == month) && (selectedDay <= day)))
-            Toast.makeText(getActivity().getApplicationContext(), "Unable to create appointments before and on current date!", Toast.LENGTH_LONG).show();
-        else if(selectedYear > year || selectedMonth > (month+3) ||((selectedMonth == (month+3)) && (selectedDay > day)))
-            Toast.makeText(getActivity().getApplicationContext(), "Appointments can only be made up to 3 months in advance!", Toast.LENGTH_LONG).show();
-        else {
-            year = selectedYear;
-            month = selectedMonth;
-            day = selectedDay;
+                DecimalFormat twoFormat = new DecimalFormat("00");
 
-            DecimalFormat twoFormat = new DecimalFormat("00");
-
-            activityButton.setText(new StringBuilder().append(twoFormat.format(day)).append("-").append(twoFormat.format(month + 1)).append("-").append(year).append(" "));
+                activityButton.setText(new StringBuilder().append(twoFormat.format(day)).append("-").append(twoFormat.format(month + 1)).append("-").append(year).append(" "));
+            }
         }
     }
 

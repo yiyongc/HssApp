@@ -39,7 +39,7 @@ public class CreateAppointmentFragment2 extends Fragment {
             clinicSpinner.setAdapter(customAdapter);
         }
 
-        //Initialize current date value on button
+        //Initialize next day's date value on button
         final Calendar c = Calendar.getInstance();
         c.add(Calendar.DATE,1);
         int year = c.get(Calendar.YEAR);
