@@ -279,12 +279,23 @@ public class ViewProfileActivity extends DrawerActivity {
         newPushNotif = (CheckBox) findViewById(R.id.editPushCheckBox);
         newEmailNotif = (CheckBox) findViewById(R.id.editEmailCheckBox);
 
-        //Gets the values of the new inputs to be entered into server
+        // Gets the values of the new inputs to be entered into server
         theEmail = newEmail.getText().toString();
         theAddress = newAddress.getText().toString();
         thePhone = newPhone.getText().toString();
         thePushNotif = ((newPushNotif.isChecked())? "1":"0");
         theEmailNotif = ((newEmailNotif.isChecked())? "1":"0");
+
+        // Field checking
+        if (thePhone.length() == 0 || theAddress.length() == 0) {
+            Toast.makeText(ViewProfileActivity.this, "Phone and Address cannot be blank!", Toast.LENGTH_SHORT).show();
+            return;
+        }
+        if (theEmail.length() == 0 && theEmailNotif.equals("1")) {
+            Toast.makeText(ViewProfileActivity.this, "Email is blank! Email Notifications can not be set!", Toast.LENGTH_SHORT).show();
+            newEmailNotif.setChecked(false);
+            return;
+        }
 
         // Creates a JSON object to interact with php & database
         JSONObject obj = new JSONObject();
