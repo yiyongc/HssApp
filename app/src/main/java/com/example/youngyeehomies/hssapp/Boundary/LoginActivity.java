@@ -151,13 +151,6 @@ public class LoginActivity extends Activity{
     public void btnLogin(View view) {
         loginButton.setEnabled(false);
 
-        // Prevent user from interacting with the app while communicating to server
-        Globals.pdia1 = new ProgressDialog(LoginActivity.this);
-        Globals.pdia1.setMessage("Logging In..");
-        Globals.pdia1.show();
-        Globals.pdia1.setCancelable(false);
-
-
         username = usernameBox.getText()+"";
         password = passwordBox.getText()+"";
 
@@ -177,6 +170,12 @@ public class LoginActivity extends Activity{
 
         LoginManager loginManager = new LoginManager(this);
 
+        // Prevent user from interacting with the app while communicating to server
+        Globals.pdia1 = new ProgressDialog(LoginActivity.this);
+        Globals.pdia1.setMessage("Logging In..");
+        Globals.pdia1.show();
+        Globals.pdia1.setCancelable(false);
+        
         Log.e(TAG, "trying to login.");
         loginManager.tryLogin(username,password);
 
