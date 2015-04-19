@@ -38,6 +38,7 @@ public class EditProfileFragment extends Fragment {
         if(getArguments().getInt("notifypush") == 1) pushNotif.setChecked(true);
         if(getArguments().getInt("notifyemail") == 1) emailNotif.setChecked(true);
         pushNotif.setEnabled(false);
+        
         return v;
     }
 
