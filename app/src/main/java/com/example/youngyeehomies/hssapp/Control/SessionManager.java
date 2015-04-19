@@ -1,6 +1,5 @@
 package com.example.youngyeehomies.hssapp.Control;
 
-import java.util.HashMap;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -8,9 +7,14 @@ import android.content.SharedPreferences.Editor;
 import android.widget.Toast;
 
 import com.example.youngyeehomies.hssapp.Boundary.LoginActivity;
+
+import java.util.HashMap;
 /*
 ** This class allows for checking of the sessions and maintaining connection at all times
 ** It stores a token which is used when interacting with the database
+*
+* Created By Cheng Gibson.
+*
  */
 public class SessionManager {
 

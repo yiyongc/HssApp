@@ -33,6 +33,10 @@ import java.util.HashMap;
 /*
 ** This is the activity which incorporates all the fragments related to the appointment creation
 ** It includes selecting type of appointment, date and clinic, followed by time slot of appointment
+*
+* Created by Chee Yi Yong
+*
+*
  */
 
 

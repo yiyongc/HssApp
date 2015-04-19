@@ -24,6 +24,9 @@ import org.json.JSONObject;
 /*
 ** This activity allows the user to register/activate his account with the token received
 ** from the clinic on his/her first visit
+*
+* Created by Tan Jun Qiu.
+*
  */
 public class RegisterActivity extends Activity {
 

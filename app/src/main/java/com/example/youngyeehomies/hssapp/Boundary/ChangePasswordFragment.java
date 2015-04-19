@@ -6,12 +6,14 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Spinner;
 
 import com.example.youngyeehomies.hssapp.R;
 
 /*
 ** This is the fragment class which allows for the user to change his password
+*
+* Created by Tan Jun Qiu.
+*
  */
 
 public class ChangePasswordFragment extends Fragment {

@@ -22,6 +22,7 @@ import com.example.youngyeehomies.hssapp.R;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
+
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -30,6 +31,10 @@ import java.util.Locale;
 
 /*
 ** This activity allows the user to view his appointment history
+*
+*
+* Created by Er Young Yee.
+*
  */
 
 public class ViewOldAppointmentsActivity extends DrawerActivity implements AppointmentListAdapter.OnItemClickListener {

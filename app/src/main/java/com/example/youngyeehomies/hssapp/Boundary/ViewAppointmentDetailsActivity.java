@@ -31,6 +31,10 @@ import java.util.Locale;
 
 /*
 ** This activity allows the user to view the details of the appointment including notes
+*
+* Created by Er Young Yee.
+*
+*
  */
 
 public class ViewAppointmentDetailsActivity extends Activity {

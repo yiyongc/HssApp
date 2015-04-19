@@ -16,7 +16,9 @@ import java.util.List;
 
 /*
 ** This class allows CardViews to be populated into a RecyclerView and
-** used for displaying appointments
+** used for displaying appointments.
+*
+* Created by Er Young Yee.
 */
 
 

@@ -20,6 +20,9 @@ import java.io.InputStreamReader;
 
 /*
  * This is the class which enables the android app to establish connection with the database
+ *
+ * Created by Cheng Gibson
+ *
  */
 
 public class WebServiceClass extends AsyncTask<String, Void, Object> {

@@ -3,7 +3,6 @@ package com.example.youngyeehomies.hssapp.Boundary;
 
 import android.app.Fragment;
 import android.os.Bundle;
-
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,6 +13,8 @@ import com.example.youngyeehomies.hssapp.R;
 
 /*
 ** This is the fragment class which allows for the user select the type of appointment
+*
+* Created by Chee Yi Yong
  */
 
 public class CreateAppointmentFragment extends Fragment {

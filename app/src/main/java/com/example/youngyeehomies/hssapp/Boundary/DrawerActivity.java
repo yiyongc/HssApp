@@ -5,9 +5,9 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarActivity;
+import android.support.v7.app.ActionBarDrawerToggle;
 import android.text.Html;
 import android.util.Log;
 import android.view.Menu;
@@ -31,6 +31,9 @@ import java.util.HashMap;
 
 /*
 ** This is the Drawer Activity which allows the entire app to implement a side drawer menu
+*
+* Created by Elton Quek.
+*
  */
 
 public class DrawerActivity extends ActionBarActivity {
@@ -183,8 +186,6 @@ public class DrawerActivity extends ActionBarActivity {
     @Override
     public boolean onPrepareOptionsMenu(Menu menu) {
         boolean drawerOpen = mDrawerLayout.isDrawerOpen(linearDrawer);
-    //TODO Yiyong to decide if we actually need this???
-    //    menu.findItem(R.id.action_settings).setVisible(!drawerOpen);
         return super.onPrepareOptionsMenu(menu);
     }
 

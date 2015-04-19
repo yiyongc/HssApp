@@ -26,7 +26,11 @@ import org.json.JSONObject;
 
 /*
 ** This is the activity which incorporates all the fragments related to the user's profile
-** It includes, viewing, editing and changing of password
+** It includes, viewing, editing and changing of password.
+*
+* Created by Tan Jun Qiu.
+*
+*
  */
 
 public class ViewProfileActivity extends DrawerActivity {

@@ -12,6 +12,9 @@ import android.widget.TextView;
 ** This class is the custom adapter for use with all the spinners in the app
 ** especially in the create appointment function. It is possible to customize
 ** the look of the spinner objects.
+*
+* Created by Chee Yi Yong.
+*
  */
 
 public class CustomSpinnerAdapter extends ArrayAdapter<String> {

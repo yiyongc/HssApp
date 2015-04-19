@@ -11,7 +11,6 @@ import android.widget.Button;
 import android.widget.Spinner;
 
 import com.example.youngyeehomies.hssapp.Control.CustomSpinnerAdapter;
-import com.example.youngyeehomies.hssapp.Boundary.DatePickerFragment;
 import com.example.youngyeehomies.hssapp.Entity.Globals;
 import com.example.youngyeehomies.hssapp.R;
 
@@ -19,7 +18,10 @@ import java.text.DecimalFormat;
 import java.util.Calendar;
 
 /*
-** This is the fragment class which allows for the user select the date of appointment
+** This is the fragment class which allows for the user select the date of appointment and also the clinic
+*
+*  Created by Chee Yi Yong
+*
  */
 
 public class CreateAppointmentFragment2 extends Fragment {

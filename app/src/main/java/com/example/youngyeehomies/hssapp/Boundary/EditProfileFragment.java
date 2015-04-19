@@ -12,6 +12,9 @@ import com.example.youngyeehomies.hssapp.R;
 
 /*
 ** This is the fragment class which allows for the user to edit his current profile.
+*
+* Created by Tan Jun Qiu.
+*
  */
 
 public class EditProfileFragment extends Fragment {
@@ -38,7 +41,7 @@ public class EditProfileFragment extends Fragment {
         if(getArguments().getInt("notifypush") == 1) pushNotif.setChecked(true);
         if(getArguments().getInt("notifyemail") == 1) emailNotif.setChecked(true);
         pushNotif.setEnabled(false);
-        
+
         return v;
     }
 

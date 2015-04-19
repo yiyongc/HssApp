@@ -5,7 +5,6 @@ import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
-import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
@@ -27,6 +26,10 @@ import org.json.JSONObject;
 /*
 ** This activity allows a user to reset his password by providing the same security token
 ** used during registration. He may request for a new one at the nearby clinic.
+*
+* Created by Elton Quek
+*
+*
  */
 
 public class ForgotPasswordActivity extends Activity {

@@ -3,13 +3,17 @@ package com.example.youngyeehomies.hssapp.Control;
 
 import android.app.ProgressDialog;
 
-import com.example.youngyeehomies.hssapp.Entity.Globals;
 import com.example.youngyeehomies.hssapp.Boundary.RegisterActivity;
+import com.example.youngyeehomies.hssapp.Entity.Globals;
 
 import org.json.JSONObject;
 
 /*
 ** This is the registration logic to communicate with database when registering(activating) account
+*
+* Created by Tan Jun Qiu.
+*
+*
  */
 
 public class RegistrationManager{

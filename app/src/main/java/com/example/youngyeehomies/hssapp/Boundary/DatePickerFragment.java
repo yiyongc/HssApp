@@ -8,7 +8,6 @@ import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.Toast;
 
-
 import com.example.youngyeehomies.hssapp.R;
 
 import java.text.DecimalFormat;
@@ -16,6 +15,9 @@ import java.util.Calendar;
 
 /*
 ** This is a fragment class which creates a Dialog that allows the user to select the date
+*
+* Created by Chee Yi Yong.
+*
  */
 
 public class DatePickerFragment extends DialogFragment

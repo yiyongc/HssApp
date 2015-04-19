@@ -3,7 +3,6 @@ package com.example.youngyeehomies.hssapp.Boundary;
 
 import android.app.Fragment;
 import android.os.Bundle;
-
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,6 +12,9 @@ import com.example.youngyeehomies.hssapp.R;
 
 /*
 ** This is the fragment of the drawer menu
+*
+* Created by Elton Quek
+*
  */
 
 public class MenuFragment extends Fragment {

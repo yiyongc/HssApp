@@ -11,7 +11,10 @@ import android.widget.TextView;
 import com.example.youngyeehomies.hssapp.R;
 
 /*
-** This is the fragment class which allows for the user select the time slot of appointment
+** This is the fragment class which allows for the user select the time slot of appointment.
+*
+* Created by Chee Yi Yong.
+*
  */
 
 public class CreateAppointmentFragment3 extends Fragment {

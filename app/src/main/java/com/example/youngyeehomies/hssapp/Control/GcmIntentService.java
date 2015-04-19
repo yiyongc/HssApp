@@ -16,20 +16,20 @@
 
 package com.example.youngyeehomies.hssapp.Control;
 
-        import com.example.youngyeehomies.hssapp.Boundary.LoginActivity;
-        import com.example.youngyeehomies.hssapp.R;
-        import com.example.youngyeehomies.hssapp.Boundary.ViewAppointmentDetailsActivity;
-        import com.google.android.gms.gcm.GoogleCloudMessaging;
+import android.app.IntentService;
+import android.app.Notification;
+import android.app.NotificationManager;
+import android.app.PendingIntent;
+import android.content.Context;
+import android.content.Intent;
+import android.os.Bundle;
+import android.support.v4.app.NotificationCompat;
+import android.util.Log;
 
-        import android.app.IntentService;
-        import android.app.Notification;
-        import android.app.NotificationManager;
-        import android.app.PendingIntent;
-        import android.content.Context;
-        import android.content.Intent;
-        import android.os.Bundle;
-        import android.support.v4.app.NotificationCompat;
-        import android.util.Log;
+import com.example.youngyeehomies.hssapp.Boundary.LoginActivity;
+import com.example.youngyeehomies.hssapp.Boundary.ViewAppointmentDetailsActivity;
+import com.example.youngyeehomies.hssapp.R;
+import com.google.android.gms.gcm.GoogleCloudMessaging;
 
 /**
  * This {@code IntentService} does the actual handling of the GCM message.
@@ -37,6 +37,8 @@ package com.example.youngyeehomies.hssapp.Control;
  * partial wake lock for this service while the service does its work. When the
  * service is finished, it calls {@code completeWakefulIntent()} to release the
  * wake lock.
+ *
+ * Created by Unto Kuuranne.
  */
 public class GcmIntentService extends IntentService {
     public static final int NOTIFICATION_ID = 0;

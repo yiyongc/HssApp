@@ -15,6 +15,10 @@ import com.example.youngyeehomies.hssapp.R;
 
 /*
 ** This is the fragment class which allows for the user to view his current profile.
+*
+* Created by Tan Jun Qiu
+*
+*
  */
 
 public class ViewProfileFragment extends Fragment {

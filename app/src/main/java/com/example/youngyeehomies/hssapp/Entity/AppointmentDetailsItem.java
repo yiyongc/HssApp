@@ -5,6 +5,8 @@ import android.graphics.drawable.Drawable;
 
 /*
  * This is a class to store the converted Appointment Details JSON object, to be displayed
+ *
+ * Created by Er Young Yee.
  */
 
 public class AppointmentDetailsItem{

@@ -6,6 +6,9 @@ import org.json.JSONObject;
 
 /*
 ** This is the login logic to communicate with database when logging in
+*
+* Created by Chee Yi Yong.
+*
  */
 
 public class LoginManager {

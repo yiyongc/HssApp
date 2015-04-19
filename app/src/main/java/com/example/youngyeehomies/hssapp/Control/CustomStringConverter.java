@@ -4,6 +4,8 @@ package com.example.youngyeehomies.hssapp.Control;
 ** This class is a really simple converter to convert date and time displayed to the
 ** right format for the database. It also reads fields from database and converts it
 ** to a more "display friendly" format for the user.
+*
+* Created by Chee Yi Yong.
 */
 
 public class CustomStringConverter {

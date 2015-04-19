@@ -33,6 +33,9 @@ import java.util.Locale;
 
 /*
 ** This activity allows the user to view his appointment history
+*
+* Created by Er Young Yee.
+*
  */
 
 public class ViewAppointmentActivity extends DrawerActivity implements AppointmentListAdapter.OnItemClickListener{

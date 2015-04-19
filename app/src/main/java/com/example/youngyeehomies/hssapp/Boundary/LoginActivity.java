@@ -39,6 +39,9 @@ import java.util.concurrent.atomic.AtomicInteger;
 
 /*
 ** This activity allows the user to login to the HSS application
+*
+* Created by Chee Yi Yong
+*
  */
 
 public class LoginActivity extends Activity{

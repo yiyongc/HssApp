@@ -1,5 +1,9 @@
 package com.example.youngyeehomies.hssapp.Entity;
 
+import android.content.Context;
+import android.content.SharedPreferences;
+import android.util.Base64;
+
 import java.io.UnsupportedEncodingException;
 import java.security.GeneralSecurityException;
 import java.security.InvalidAlgorithmParameterException;
@@ -11,13 +15,11 @@ import javax.crypto.Cipher;
 import javax.crypto.spec.IvParameterSpec;
 import javax.crypto.spec.SecretKeySpec;
 
-import android.content.Context;
-import android.content.SharedPreferences;
-import android.util.Base64;
-
 /*
 ** Secure preferences allows for remember me function to work by storing the username and password of
 ** the user and encrypting the password to prevent rooted phones from obtaining the password
+*
+* Created by Elton Quek
 */
 
 public class SecurePreferences {
